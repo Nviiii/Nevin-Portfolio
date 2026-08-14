@@ -30,7 +30,7 @@
     
     /* Hero Overlay Variables */
     --hero-bg-layer: linear-gradient(115deg, rgba(3,3,5,.92) 0%, rgba(3,3,5,.72) 48%, rgba(3,3,5,.86) 100%);
-    --hero-grid-filter: blur(10px) brightness(.42) saturate(.72);
+    --hero-grid-filter: blur(4px) brightness(.42) saturate(.72); /* REDUCED BLUR TO 4px */
     --hero-radial-mask: radial-gradient(circle at 50% 45%, transparent 5%, rgba(3,3,5,.28) 52%, rgba(3,3,5,.76) 100%);
     --hero-grid-opacity: 0.56;
     --hero-reveal-shadow: 0 22px 70px rgba(0,0,0,.68), 0 0 0 1px rgba(139,92,246,.16);
@@ -59,7 +59,7 @@
 
     /* Light Mode Hero Fixes */
     --hero-bg-layer: linear-gradient(115deg, rgba(248,249,250,.85) 0%, rgba(248,249,250,.7) 48%, rgba(248,249,250,.9) 100%);
-    --hero-grid-filter: blur(10px) brightness(1.05) saturate(.9);
+    --hero-grid-filter: blur(4px) brightness(1.05) saturate(.9); /* REDUCED BLUR TO 4px */
     --hero-radial-mask: radial-gradient(circle at 50% 45%, transparent 5%, rgba(248,249,250,.1) 52%, rgba(248,249,250,.8) 100%);
     --hero-grid-opacity: 0.8;
     --hero-reveal-shadow: 0 22px 70px rgba(0,0,0,.15), 0 0 0 1px rgba(139,92,246,.3);
@@ -2707,18 +2707,16 @@
 
   // --- 1. Populate the Blurred Background Grid ---
   const heroPhotoField = document.getElementById('heroPhotoField');
-  let gridItems = []; // Array to store positions for the morphing push effect
+  let gridItems = []; 
 
   if (heroPhotoField && heroPhotoSources.length > 0) {
     let gridContent = '';
-    // The CSS defines a 15x10 grid (150 slots). 
     for (let i = 0; i < 150; i++) {
       const photo = heroPhotoSources[i % heroPhotoSources.length];
       gridContent += `<img src="${photo.src}" alt="" loading="lazy">`;
     }
     heroPhotoField.innerHTML = gridContent;
 
-    // Cache the positions of grid images relative to the hero stage for the push effect
     const cacheGridPositions = () => {
       const stageRect = stage.getBoundingClientRect();
       gridItems = Array.from(heroPhotoField.querySelectorAll('img')).map(img => {
@@ -2731,7 +2729,6 @@
       });
     };
 
-    // Wait a brief moment for the grid to paint, then cache
     setTimeout(cacheGridPositions, 150);
     window.addEventListener('resize', cacheGridPositions);
   }
@@ -2756,13 +2753,12 @@
       }
     });
 
-    // Apply the "Squeeze & Push" morphing grid effect to neighbors
     updateGridSqueeze(heroX, heroY);
   }
 
   function updateGridSqueeze(mouseX, mouseY) {
     if (!gridItems.length) return;
-    const maxDist = 350; // Radius of the magnetic squeeze effect
+    const maxDist = 350; 
     
     gridItems.forEach(item => {
       const dx = item.cx - mouseX;
@@ -2770,21 +2766,17 @@
       const dist = Math.sqrt(dx*dx + dy*dy);
       
       if (dist < maxDist) {
-        // Calculate intensity based on closeness (0 to 1)
         const intensity = 1 - (dist / maxDist);
-        // Ease the intensity for a smoother fluid push
         const ease = 1 - Math.pow(1 - intensity, 3);
         
-        // Shrink nearby items 
         const scale = 1 - (0.45 * ease); 
         
-        // Push items outwards away from the cursor to make room
         const pushForce = ease * 70; 
         const pushX = dist === 0 ? 0 : (dx / dist) * pushForce;
         const pushY = dist === 0 ? 0 : (dy / dist) * pushForce;
         
         item.el.style.transform = `translate3d(${pushX}px, ${pushY}px, 0) scale(${scale})`;
-        item.el.style.opacity = 0.82 - (ease * 0.5); // Dim out squeezed items slightly
+        item.el.style.opacity = 0.82 - (ease * 0.5); 
       } else {
         item.el.style.transform = `translate3d(0, 0, 0) scale(1)`;
         item.el.style.opacity = 0.82;
@@ -2801,7 +2793,6 @@
 
   function revealHeroPhoto() {
     if (!heroPhotoSources.length || !heroReveal || !heroRevealImg) return;
-    // Cycle to the next photo
     lastHeroPhoto = (lastHeroPhoto + 1) % heroPhotoSources.length;
     const photo = heroPhotoSources[lastHeroPhoto];
     heroRevealImg.src = photo.src;
@@ -2811,7 +2802,6 @@
   function glideHero(clientX, clientY) {
     placeHeroEffect(clientX, clientY);
 
-    // Calculate mouse speed
     const now = Date.now();
     const dt = Math.max(1, now - lastTime);
     const dx = lastX === -1 ? 0 : clientX - lastX;
@@ -2823,7 +2813,6 @@
     lastY = clientY;
     lastTime = now;
 
-    // Swap the image to a new one every 100px of mouse travel
     moveDistance += dist;
     if (moveDistance > 100 || !heroRevealImg.src) { 
       revealHeroPhoto();
@@ -2836,7 +2825,6 @@
     liquidRipple.classList.remove('is-resting');
     heroReveal.style.setProperty('--reveal-scale', dynamicScale);
 
-    // Detect when the mouse stops moving to make the photo pop out larger
     clearTimeout(stopTimer);
     stopTimer = setTimeout(() => {
       heroReveal.style.setProperty('--reveal-scale', '1.15'); 
@@ -2858,7 +2846,7 @@
         clearTimeout(stopTimer);
         heroReveal.classList.remove('is-visible');
         liquidRipple.classList.remove('is-resting');
-        resetGridSqueeze(); // Snap grid back to normal
+        resetGridSqueeze(); 
       });
     }
   }
