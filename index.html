@@ -689,9 +689,6 @@
   }
 
   /* ---------- DYNAMIC MULTI-ROW MASONRY TRACK ---------- */
-  /* Rows are packed by real content aspect ratio via JS (see packMasonryRows),
-     not by a rigid grid, so items sit flush against each other with no
-     leftover whitespace from column-pairing. */
   .masonry-track {
     display: flex;
     flex-direction: column;
@@ -708,7 +705,6 @@
   }
   .masonry-row::-webkit-scrollbar { display: none; }
 
-  /* Quick Look strictly overrides to 1 row dynamically scaled */
   #featuredTrack.masonry-track { flex-direction: row; height: clamp(280px, 45vh, 450px); }
 
   @media (max-width: 768px) {
@@ -1159,7 +1155,7 @@
     overflow: hidden;
     opacity: .56;
     pointer-events: none;
-    filter: blur(4px) brightness(.42) saturate(.72);
+    filter: blur(10px) brightness(.42) saturate(.72);
     transform: translate3d(var(--field-x, 0px), var(--field-y, 0px), 0) scale(1.08);
     transition: transform .52s cubic-bezier(.16,1,.3,1), filter .55s ease;
     will-change: transform;
@@ -1207,7 +1203,9 @@
   .hero-reveal.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(var(--reveal-scale, .72)); }
   .hero-reveal img { display: block; width: 100%; height: auto; max-height: min(48vh, 440px); object-fit: contain; background: #09090c; }
   .hero-reveal::after { content: ""; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.48), transparent 44%); }
+  
   .liquid-ripple {
+    display: none; /* <-- Added to hide the ripple circle */
     position: absolute;
     z-index: 5;
     width: clamp(150px, 18vw, 270px);
@@ -1221,6 +1219,7 @@
     box-shadow: inset 0 0 28px rgba(125,175,255,.15), 0 0 42px rgba(124,100,255,.20);
   }
   .liquid-ripple.is-resting { transform: translate(-50%, -50%) scale(1.16); opacity: .32; border-radius: 58% 42% 62% 38% / 42% 58% 38% 62%; }
+  
   .hero-content { z-index: 10; }
   .hero-content .lede { text-shadow: 0 2px 18px rgba(0,0,0,.9); }
   /* Bootstrap's carousel component hides .carousel-item by default; these
@@ -2649,27 +2648,45 @@
     });
   }
 
-  // --- Water-glide hero: movement makes ripples; pausing reveals a photo ---
+  // --- Water-reveal hero & responsive refinements ---
   const stage = document.getElementById('heroStage');
   const fluidBlob = document.getElementById('fluidCursor');
   const liquidRipple = document.getElementById('liquidRipple');
   const heroReveal = document.getElementById('heroReveal');
   const heroRevealImg = document.getElementById('heroRevealImg');
-  // A masonry item has no intrinsic width until its image decodes. Loading the
-  // complete local photography set up front prevents the browser's lazy-load
-  // viewport heuristic from leaving every tile at 0px wide on first visit.
+  
+  // Eager load for the photography track to ensure we have images
   document.querySelectorAll('#photographyTrack img[loading="lazy"]').forEach(img => {
     img.loading = 'eager';
   });
+  
   const heroPhotoSources = Array.from(document.querySelectorAll('#photographyTrack .carousel-item img')).map(img => ({
     src: img.currentSrc || img.src,
     alt: img.alt || 'Portfolio photograph'
   }));
+  
   let lastHeroPhoto = -1;
-  let revealTimer;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- 1. Populate the Blurred Background Grid ---
+  const heroPhotoField = document.getElementById('heroPhotoField');
+  if (heroPhotoField && heroPhotoSources.length > 0) {
+    let gridContent = '';
+    // The CSS defines a 15x10 grid (150 slots). Fill it by looping through your photos.
+    for (let i = 0; i < 150; i++) {
+      const photo = heroPhotoSources[i % heroPhotoSources.length];
+      gridContent += `<img src="${photo.src}" alt="" loading="lazy">`;
+    }
+    heroPhotoField.innerHTML = gridContent;
+  }
+
+  // --- 2. Velocity & Instant Reveal Logic ---
+  let lastX = -1, lastY = -1;
+  let lastTime = Date.now();
+  let moveDistance = 0;
+  let stopTimer;
   let heroX = window.innerWidth / 2;
   let heroY = window.innerHeight / 2;
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function placeHeroEffect(clientX, clientY) {
     const rect = stage.getBoundingClientRect();
@@ -2685,20 +2702,51 @@
 
   function revealHeroPhoto() {
     if (!heroPhotoSources.length || !heroReveal || !heroRevealImg) return;
-    lastHeroPhoto = (lastHeroPhoto + 1 + Math.floor(Math.random() * Math.max(1, heroPhotoSources.length - 1))) % heroPhotoSources.length;
+    // Cycle to the next photo in the array cleanly
+    lastHeroPhoto = (lastHeroPhoto + 1) % heroPhotoSources.length;
     const photo = heroPhotoSources[lastHeroPhoto];
     heroRevealImg.src = photo.src;
     heroRevealImg.alt = photo.alt;
-    heroReveal.classList.add('is-visible');
-    liquidRipple.classList.add('is-resting');
   }
 
   function glideHero(clientX, clientY) {
     placeHeroEffect(clientX, clientY);
-    clearTimeout(revealTimer);
-    heroReveal.classList.remove('is-visible');
+
+    // Calculate mouse speed (pixels per millisecond)
+    const now = Date.now();
+    const dt = Math.max(1, now - lastTime);
+    const dx = lastX === -1 ? 0 : clientX - lastX;
+    const dy = lastY === -1 ? 0 : clientY - lastY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const speed = dist / dt; 
+
+    lastX = clientX;
+    lastY = clientY;
+    lastTime = now;
+
+    // Swap the image to a new one every 100px of mouse travel
+    moveDistance += dist;
+    if (moveDistance > 100 || !heroRevealImg.src) { 
+      revealHeroPhoto();
+      moveDistance = 0;
+    }
+
+    // Calculate scale dynamically based on speed:
+    // Fast movement shrinks it to a minimum of 0.4. Normal movement hovers around 0.8.
+    let dynamicScale = Math.max(0.4, 0.8 - (speed * 0.15));
+
+    // Pop the photo instantly
+    heroReveal.classList.add('is-visible');
     liquidRipple.classList.remove('is-resting');
-    if (!reduceMotion) revealTimer = setTimeout(revealHeroPhoto, 560);
+    heroReveal.style.setProperty('--reveal-scale', dynamicScale);
+
+    // Detect when the mouse stops moving to make the photo pop out larger
+    clearTimeout(stopTimer);
+    stopTimer = setTimeout(() => {
+      heroReveal.style.setProperty('--reveal-scale', '1.15'); // Pops out more when resting
+      liquidRipple.classList.add('is-resting');
+      lastX = -1; lastY = -1; // Reset for the next movement calculation
+    }, 50); // 50ms without movement registers as "staying in position"
   }
 
   if (stage && fluidBlob && liquidRipple) {
@@ -2709,8 +2757,10 @@
         const touch = e.touches[0];
         if (touch) glideHero(touch.clientX, touch.clientY);
       }, { passive: true });
+      
+      // Hide completely only when the mouse leaves the entire hero area
       stage.addEventListener('mouseleave', () => {
-        clearTimeout(revealTimer);
+        clearTimeout(stopTimer);
         heroReveal.classList.remove('is-visible');
         liquidRipple.classList.remove('is-resting');
       });
@@ -2809,13 +2859,6 @@
   sections.forEach(sec => observer.observe(sec));
 
   // --- Generic Filtering Logic for All Categorized Sections ---
-  // --- Masonry Row Packing (real aspect ratio, no grid gaps) ---
-  // Packs items from each 2-row masonry track into two ".masonry-row"
-  // strips. Each item's on-screen width is left to CSS (height:100% + width:auto
-  // on the <img>, driven by its real intrinsic aspect ratio) so there's never a
-  // forced column width creating whitespace. Very wide/panoramic items (aspect
-  // ratio beyond LONG_ITEM_RATIO) are pushed to the end of the sequence instead
-  // of breaking up the packing in the middle.
   const LONG_ITEM_RATIO = 2;
 
   function getAspectRatio(item) {
@@ -2828,9 +2871,6 @@
   }
 
   function packMasonryRows(track, originalItems) {
-    // Row count is configurable per-track via data-rows (defaults to 2, the
-    // original behavior). Photography uses data-rows="6" for a taller,
-    // denser grid given its larger item count.
     const numRows = Math.max(1, parseInt(track.dataset.rows, 10) || 2);
 
     const rows = [];
@@ -2843,7 +2883,6 @@
       }
       rows.push(row);
     }
-    // Remove any stale extra rows left over from a previous, larger data-rows value.
     let extra = track.querySelector(`.masonry-row:nth-child(${numRows + 1})`);
     while (extra) {
       const next = extra.nextElementSibling;
@@ -2854,15 +2893,14 @@
     const visible = originalItems.filter(item => !item.classList.contains('hide'));
     const normal = visible.filter(item => getAspectRatio(item) <= LONG_ITEM_RATIO);
     const long = visible.filter(item => getAspectRatio(item) > LONG_ITEM_RATIO);
-    const orderedItems = normal.concat(long); // lengthy items pushed to the end
+    const orderedItems = normal.concat(long); 
 
-    const REF_HEIGHT = 280; // arbitrary common unit, only used to balance the rows
+    const REF_HEIGHT = 280; 
     const GAP = 24;
     const widths = new Array(numRows).fill(0);
 
     orderedItems.forEach(item => {
       const estWidth = getAspectRatio(item) * REF_HEIGHT + GAP;
-      // Place into whichever row currently has the least accumulated width.
       let minIdx = 0;
       for (let i = 1; i < numRows; i++) {
         if (widths[i] < widths[minIdx]) minIdx = i;
@@ -2873,22 +2911,17 @@
   }
 
   document.querySelectorAll('.masonry-track').forEach(track => {
-    if (track.id === 'featuredTrack') return; // single-row track, leave as-is
+    if (track.id === 'featuredTrack') return; 
 
     const originalItems = Array.from(track.querySelectorAll('.carousel-item'));
     const images = originalItems.map(item => item.querySelector('img')).filter(Boolean);
 
     const repack = () => packMasonryRows(track, originalItems);
-    // Pack immediately using the fallback aspect ratio.  Photography images are
-    // lazy-loaded, so waiting for every one would leave the first image as a
-    // full-width strip on the initial visit.
     repack();
 
     let loaded = 0;
     const onImgReady = () => {
       loaded++;
-      // Repack as real dimensions arrive; this preserves every image's native
-      // aspect ratio without blocking the initial grid.
       repack();
     };
     if (images.length === 0) {
@@ -2904,8 +2937,6 @@
       });
     }
 
-    // Stash the repack function on the track so the filter handler below can
-    // call it AFTER it toggles the .hide classes (order matters here).
     track._repackMasonry = repack;
   });
 
@@ -2945,10 +2976,6 @@
   });
 
   // --- Generic Next/Prev Carousel Navigation ---
-  // Click = quick nudge. Hovering the arrow = continuous smooth scroll for
-  // as long as the cursor stays over it (no repeated clicking needed).
-  // Multi-row masonry tracks scroll each ".masonry-row" in lockstep so they
-  // stay visually aligned as one carousel.
   function getScrollTargets(track) {
     const rows = track.querySelectorAll(':scope > .masonry-row');
     return rows.length ? Array.from(rows) : [track];
@@ -2961,8 +2988,6 @@
 
     if (!track || !prevBtn || !nextBtn) return;
 
-    // Keep rows of the same track mirrored if the user scrolls one directly
-    // (trackpad / touch on a specific row).
     let syncing = false;
     getScrollTargets(track).forEach(row => {
       row.addEventListener('scroll', () => {
@@ -2975,7 +3000,7 @@
       });
     });
 
-    const HOVER_SPEED = 2.5; // px per animation frame
+    const HOVER_SPEED = 2.5; 
     let rafId = null;
 
     function autoScroll(direction) {
@@ -3001,7 +3026,6 @@
     nextBtn.addEventListener('blur', stopAutoScroll);
     prevBtn.addEventListener('focus', () => startAutoScroll(-1));
     prevBtn.addEventListener('blur', stopAutoScroll);
-    // Still support a plain click (e.g. touch devices without hover) as a nudge.
     nextBtn.addEventListener('click', () => {
       const delta = Math.min(window.innerWidth * 0.5, 450);
       getScrollTargets(track).forEach(row => row.scrollBy({ left: delta, behavior: 'smooth' }));
@@ -3012,10 +3036,6 @@
     });
   });
 
-  // Quick Look is a single, directly scrollable strip. Give it dedicated
-  // pointer controls rather than relying on the shared multi-row controller.
-  // Cloning removes the earlier generic listeners so there is only one scroll
-  // loop active while either arrow is hovered.
   const quickLookTrack = document.getElementById('featuredTrack');
   const quickLookWrapper = quickLookTrack?.closest('.carousel-wrapper');
   if (quickLookTrack && quickLookWrapper) {
@@ -3034,8 +3054,6 @@
     };
     const startQuickLookScroll = direction => {
       stopQuickLookScroll();
-      // Mandatory snapping cancels 4px animation steps before they accumulate.
-      // Turn it off only for the duration of the glide.
       quickLookTrack.style.scrollSnapType = 'none';
       const glide = () => {
         quickLookTrack.scrollLeft += direction * 4;
@@ -3086,9 +3104,7 @@
 
   const clickableImages = document.querySelectorAll('.carousel-item img:not(.no-lightbox), .g-item img:not(.no-lightbox)');
 
-  // Hover-to-open: resting the cursor on a tile for a moment opens it full
-  // size, same as a click. Moving away before the delay cancels it.
-  const HOVER_OPEN_DELAY = 3000; // ms
+  const HOVER_OPEN_DELAY = 3000; 
 
   clickableImages.forEach(img => {
     img.addEventListener('click', () => openLightbox(img.src));
@@ -3109,13 +3125,11 @@
 
   closeBtn.addEventListener('click', closeLightbox);
 
-  // About poster: click to view full screen
   const aboutPosterImg = document.getElementById('aboutPosterImg');
   if (aboutPosterImg) {
     aboutPosterImg.addEventListener('click', () => openLightbox(aboutPosterImg.src));
   }
 
-  // Rig & gadgets setup photo: click to view full screen
   const gearSetupImg = document.querySelector('#setupImageCard .gear-setup-img');
   if (gearSetupImg) {
     gearSetupImg.addEventListener('click', () => openLightbox(gearSetupImg.src));
@@ -3127,7 +3141,6 @@
     }
   });
 
-  // Scroll-to-zoom while the lightbox is open.
   lightbox.addEventListener('wheel', (e) => {
     if (!lightbox.classList.contains('active')) return;
     e.preventDefault();
@@ -3143,8 +3156,6 @@
       closeLightbox();
     }
   });
-
 </script>
-
 </body>
 </html>
