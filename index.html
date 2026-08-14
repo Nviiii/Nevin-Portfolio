@@ -28,6 +28,13 @@
     --carousel-bg: #111111;
     --lens-bg: rgba(255, 255, 255, 0.02);
     
+    /* Hero Overlay Variables */
+    --hero-bg-layer: linear-gradient(115deg, rgba(3,3,5,.92) 0%, rgba(3,3,5,.72) 48%, rgba(3,3,5,.86) 100%);
+    --hero-grid-filter: blur(10px) brightness(.42) saturate(.72);
+    --hero-radial-mask: radial-gradient(circle at 50% 45%, transparent 5%, rgba(3,3,5,.28) 52%, rgba(3,3,5,.76) 100%);
+    --hero-grid-opacity: 0.56;
+    --hero-reveal-shadow: 0 22px 70px rgba(0,0,0,.68), 0 0 0 1px rgba(139,92,246,.16);
+
     --radius-lg: 24px;
     --radius-md: 16px;
     --radius-sm: 8px;
@@ -49,6 +56,13 @@
     --hero-gradient-end: #555555;
     --carousel-bg: #EAEAEA;
     --lens-bg: rgba(0, 0, 0, 0.03);
+
+    /* Light Mode Hero Fixes */
+    --hero-bg-layer: linear-gradient(115deg, rgba(248,249,250,.85) 0%, rgba(248,249,250,.7) 48%, rgba(248,249,250,.9) 100%);
+    --hero-grid-filter: blur(10px) brightness(1.05) saturate(.9);
+    --hero-radial-mask: radial-gradient(circle at 50% 45%, transparent 5%, rgba(248,249,250,.1) 52%, rgba(248,249,250,.8) 100%);
+    --hero-grid-opacity: 0.8;
+    --hero-reveal-shadow: 0 22px 70px rgba(0,0,0,.15), 0 0 0 1px rgba(139,92,246,.3);
   }
 
   /* Light Mode Specific Element Adjustments */
@@ -1134,7 +1148,8 @@
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(115deg, rgba(3,3,5,.92) 0%, rgba(3,3,5,.72) 48%, rgba(3,3,5,.86) 100%);
+    background: var(--hero-bg-layer);
+    transition: background 0.5s ease;
   }
   .fluid-bg {
     inset: 0;
@@ -1153,18 +1168,19 @@
     grid-template-rows: repeat(10, minmax(0, 1fr));
     gap: 5px;
     overflow: hidden;
-    opacity: .56;
+    opacity: var(--hero-grid-opacity);
     pointer-events: none;
-    filter: blur(10px) brightness(.42) saturate(.72);
+    filter: var(--hero-grid-filter);
     transform: translate3d(var(--field-x, 0px), var(--field-y, 0px), 0) scale(1.08);
-    transition: transform .52s cubic-bezier(.16,1,.3,1), filter .55s ease;
+    transition: transform .52s cubic-bezier(.16,1,.3,1), filter 0.5s ease, opacity 0.5s ease;
     will-change: transform;
   }
   .hero-photo-field::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 45%, transparent 5%, rgba(3,3,5,.28) 52%, rgba(3,3,5,.76) 100%);
+    background: var(--hero-radial-mask);
+    transition: background 0.5s ease;
   }
   .hero-photo-field img {
     width: 100%;
@@ -1172,6 +1188,9 @@
     min-width: 0;
     object-fit: cover;
     opacity: .82;
+    /* This makes the grid photos morph/spring back smoothly */
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+    will-change: transform, opacity;
   }
   .cb-1, .cb-2 { animation: none; opacity: .22; }
   .cb-1 { transform: translate(-10%, -16%); }
@@ -1186,26 +1205,46 @@
     filter: blur(5px);
   }
   .liquid-lens { display: none; }
+  
   .hero-reveal {
     position: absolute;
     z-index: 4;
-    width: min(34vw, 390px);
+    width: max-content; /* Dynamic width hug */
+    height: max-content;
+    max-width: min(34vw, 390px);
     max-height: min(48vh, 440px);
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,.24);
+    border: none;
     border-radius: 18px;
+    background: transparent;
     opacity: 0;
     pointer-events: none;
     transform: translate(-50%, -50%) scale(var(--reveal-scale, .72));
-    box-shadow: 0 22px 70px rgba(0,0,0,.68), 0 0 0 1px rgba(139,92,246,.16);
-    transition: opacity .12s ease, transform .42s cubic-bezier(.16,1,.3,1);
+    box-shadow: var(--hero-reveal-shadow);
+    transition: opacity .12s ease, transform .42s cubic-bezier(.16,1,.3,1), box-shadow 0.5s ease;
   }
   .hero-reveal.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(var(--reveal-scale, .72)); }
-  .hero-reveal img { display: block; width: 100%; height: auto; max-height: min(48vh, 440px); object-fit: contain; background: #09090c; }
-  .hero-reveal::after { content: ""; position:absolute; inset:0; background: linear-gradient(to top, rgba(0,0,0,.48), transparent 44%); }
+  .hero-reveal img { 
+    display: block; 
+    width: auto; 
+    height: auto; 
+    max-width: min(34vw, 390px); 
+    max-height: min(48vh, 440px); 
+    object-fit: contain; /* Exact aspect ratio hug */
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.24);
+  }
+  .hero-reveal::after { 
+    content: ""; 
+    position:absolute; 
+    inset:0; 
+    background: linear-gradient(to top, rgba(0,0,0,.48), transparent 44%); 
+    border-radius: 18px; 
+    pointer-events: none;
+  }
   
   .liquid-ripple {
-    display: none; /* <-- Added to hide the ripple circle */
+    display: none; /* Hide ripple circle as requested */
     position: absolute;
     z-index: 5;
     width: clamp(150px, 18vw, 270px);
@@ -2637,10 +2676,9 @@
     };
     avatarTrigger.addEventListener('mouseenter', () => {
       clearTimeout(avatarHoverTimer);
-      avatarHoverTimer = setTimeout(showAvatarPopup, 1100); // reveal after ~1.1s
+      avatarHoverTimer = setTimeout(showAvatarPopup, 1100); 
     });
     avatarTrigger.addEventListener('mouseleave', hideAvatarPopup);
-    // Click opens a full-screen view of the About poster
     avatarTrigger.addEventListener('click', (e) => {
       e.preventDefault();
       hideAvatarPopup();
@@ -2655,7 +2693,6 @@
   const heroReveal = document.getElementById('heroReveal');
   const heroRevealImg = document.getElementById('heroRevealImg');
   
-  // Eager load for the photography track to ensure we have images
   document.querySelectorAll('#photographyTrack img[loading="lazy"]').forEach(img => {
     img.loading = 'eager';
   });
@@ -2670,17 +2707,36 @@
 
   // --- 1. Populate the Blurred Background Grid ---
   const heroPhotoField = document.getElementById('heroPhotoField');
+  let gridItems = []; // Array to store positions for the morphing push effect
+
   if (heroPhotoField && heroPhotoSources.length > 0) {
     let gridContent = '';
-    // The CSS defines a 15x10 grid (150 slots). Fill it by looping through your photos.
+    // The CSS defines a 15x10 grid (150 slots). 
     for (let i = 0; i < 150; i++) {
       const photo = heroPhotoSources[i % heroPhotoSources.length];
       gridContent += `<img src="${photo.src}" alt="" loading="lazy">`;
     }
     heroPhotoField.innerHTML = gridContent;
+
+    // Cache the positions of grid images relative to the hero stage for the push effect
+    const cacheGridPositions = () => {
+      const stageRect = stage.getBoundingClientRect();
+      gridItems = Array.from(heroPhotoField.querySelectorAll('img')).map(img => {
+        const rect = img.getBoundingClientRect();
+        return {
+          el: img,
+          cx: (rect.left - stageRect.left) + rect.width / 2,
+          cy: (rect.top - stageRect.top) + rect.height / 2
+        };
+      });
+    };
+
+    // Wait a brief moment for the grid to paint, then cache
+    setTimeout(cacheGridPositions, 150);
+    window.addEventListener('resize', cacheGridPositions);
   }
 
-  // --- 2. Velocity & Instant Reveal Logic ---
+  // --- 2. Velocity & Morphing Reveal Logic ---
   let lastX = -1, lastY = -1;
   let lastTime = Date.now();
   let moveDistance = 0;
@@ -2692,17 +2748,60 @@
     const rect = stage.getBoundingClientRect();
     heroX = Math.max(0, Math.min(rect.width, clientX - rect.left));
     heroY = Math.max(0, Math.min(rect.height, clientY - rect.top));
+    
     [fluidBlob, liquidRipple, heroReveal].forEach(element => {
       if (element) {
         element.style.left = `${heroX}px`;
         element.style.top = `${heroY}px`;
       }
     });
+
+    // Apply the "Squeeze & Push" morphing grid effect to neighbors
+    updateGridSqueeze(heroX, heroY);
+  }
+
+  function updateGridSqueeze(mouseX, mouseY) {
+    if (!gridItems.length) return;
+    const maxDist = 350; // Radius of the magnetic squeeze effect
+    
+    gridItems.forEach(item => {
+      const dx = item.cx - mouseX;
+      const dy = item.cy - mouseY;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      
+      if (dist < maxDist) {
+        // Calculate intensity based on closeness (0 to 1)
+        const intensity = 1 - (dist / maxDist);
+        // Ease the intensity for a smoother fluid push
+        const ease = 1 - Math.pow(1 - intensity, 3);
+        
+        // Shrink nearby items 
+        const scale = 1 - (0.45 * ease); 
+        
+        // Push items outwards away from the cursor to make room
+        const pushForce = ease * 70; 
+        const pushX = dist === 0 ? 0 : (dx / dist) * pushForce;
+        const pushY = dist === 0 ? 0 : (dy / dist) * pushForce;
+        
+        item.el.style.transform = `translate3d(${pushX}px, ${pushY}px, 0) scale(${scale})`;
+        item.el.style.opacity = 0.82 - (ease * 0.5); // Dim out squeezed items slightly
+      } else {
+        item.el.style.transform = `translate3d(0, 0, 0) scale(1)`;
+        item.el.style.opacity = 0.82;
+      }
+    });
+  }
+
+  function resetGridSqueeze() {
+    gridItems.forEach(item => {
+      item.el.style.transform = `translate3d(0, 0, 0) scale(1)`;
+      item.el.style.opacity = 0.82;
+    });
   }
 
   function revealHeroPhoto() {
     if (!heroPhotoSources.length || !heroReveal || !heroRevealImg) return;
-    // Cycle to the next photo in the array cleanly
+    // Cycle to the next photo
     lastHeroPhoto = (lastHeroPhoto + 1) % heroPhotoSources.length;
     const photo = heroPhotoSources[lastHeroPhoto];
     heroRevealImg.src = photo.src;
@@ -2712,7 +2811,7 @@
   function glideHero(clientX, clientY) {
     placeHeroEffect(clientX, clientY);
 
-    // Calculate mouse speed (pixels per millisecond)
+    // Calculate mouse speed
     const now = Date.now();
     const dt = Math.max(1, now - lastTime);
     const dx = lastX === -1 ? 0 : clientX - lastX;
@@ -2731,11 +2830,8 @@
       moveDistance = 0;
     }
 
-    // Calculate scale dynamically based on speed:
-    // Fast movement shrinks it to a minimum of 0.4. Normal movement hovers around 0.8.
     let dynamicScale = Math.max(0.4, 0.8 - (speed * 0.15));
 
-    // Pop the photo instantly
     heroReveal.classList.add('is-visible');
     liquidRipple.classList.remove('is-resting');
     heroReveal.style.setProperty('--reveal-scale', dynamicScale);
@@ -2743,10 +2839,10 @@
     // Detect when the mouse stops moving to make the photo pop out larger
     clearTimeout(stopTimer);
     stopTimer = setTimeout(() => {
-      heroReveal.style.setProperty('--reveal-scale', '1.15'); // Pops out more when resting
+      heroReveal.style.setProperty('--reveal-scale', '1.15'); 
       liquidRipple.classList.add('is-resting');
-      lastX = -1; lastY = -1; // Reset for the next movement calculation
-    }, 50); // 50ms without movement registers as "staying in position"
+      lastX = -1; lastY = -1; 
+    }, 50); 
   }
 
   if (stage && fluidBlob && liquidRipple) {
@@ -2758,11 +2854,11 @@
         if (touch) glideHero(touch.clientX, touch.clientY);
       }, { passive: true });
       
-      // Hide completely only when the mouse leaves the entire hero area
       stage.addEventListener('mouseleave', () => {
         clearTimeout(stopTimer);
         heroReveal.classList.remove('is-visible');
         liquidRipple.classList.remove('is-resting');
+        resetGridSqueeze(); // Snap grid back to normal
       });
     }
   }
@@ -2776,25 +2872,17 @@
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
-    
-    // Calculate if we have reached the 3D Visualization section
     const isAtVisSection = visSection && currentScrollY >= (visSection.offsetTop - window.innerHeight / 2);
-
-    // Calculate if we've hit the very end of the page (bottom of the site)
     const isNearBottom = (window.innerHeight + currentScrollY) >= (document.documentElement.scrollHeight - 40);
     
-    // Once scrolled past the hero section (but bounce back to the top dock at the end of the page)
     if (currentScrollY > 120 && !isNearBottom) {
       if (!nav.classList.contains('nav-bottom')) {
         nav.classList.add('nav-bottom');
         triggerLiquid('down');
-        
-        // Trigger right progression bar animation
         progBar.classList.remove('hidden-up');
         progBar.classList.add('active');
       }
 
-      // Check if we hit the 3D Visualization section to re-expand the nav bar
       if (isAtVisSection) {
         nav.classList.add('nav-bottom-expanded');
       } else {
@@ -2806,8 +2894,6 @@
         nav.classList.remove('nav-bottom');
         nav.classList.remove('nav-bottom-expanded'); 
         triggerLiquid('up');
-
-        // Hide progression bar by sliding back up
         progBar.classList.remove('active');
         progBar.classList.add('hidden-up');
       }
@@ -2824,7 +2910,6 @@
     }, 500); 
   }
 
-  // Allow clicking the Droplet "Nv" logo to scroll back to top smoothly
   const navLogo = document.querySelector('.nav-logo');
   navLogo.addEventListener('click', (e) => {
     if (nav.classList.contains('nav-bottom') && !nav.classList.contains('nav-bottom-expanded')) {
@@ -2836,12 +2921,7 @@
   // --- Scroll Spy for Progression Dots ---
   const sections = document.querySelectorAll('section');
   const progDots = document.querySelectorAll('.prog-dot');
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.4 
-  };
+  const observerOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -2867,7 +2947,7 @@
     if (img.naturalWidth && img.naturalHeight) {
       return img.naturalWidth / img.naturalHeight;
     }
-    return 1.4; // sane fallback until the image finishes loading
+    return 1.4; 
   }
 
   function packMasonryRows(track, originalItems) {
