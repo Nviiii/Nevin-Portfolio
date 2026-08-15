@@ -1672,8 +1672,10 @@
     
     <div class="filter-group">
       <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="living">Living Rooms</button>
+      <button class="filter-btn" data-filter="living">Living & Dining</button>
+      <button class="filter-btn" data-filter="bedroom">Bedrooms</button>
       <button class="filter-btn" data-filter="kitchen">Kitchens</button>
+      <button class="filter-btn" data-filter="bathroom">Bathrooms</button>
       <button class="filter-btn" data-filter="commercial">Commercial</button>
     </div>
 
@@ -1682,36 +1684,324 @@
         <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
 
-      <div class="carousel-track masonry-track">
-        
-        <div class="carousel-item" data-category="living">
-          <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&q=80&w=800" alt="Living & Dining Space">
-          <div class="g-overlay">
-            <div class="g-title">Living & Dining Space</div>
-            <div class="g-tag">SketchUp · V-Ray</div>
-          </div>
-        </div>
-        
-        <div class="carousel-item" data-category="living">
-          <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=700" alt="Bathroom Detail">
-          <div class="g-overlay">
-            <div class="g-title">Bathroom Detail</div>
-            <div class="g-tag">SketchUp · V-Ray</div>
-          </div>
-        </div>
-        
+      <div class="carousel-track masonry-track" id="visualizationTrack" data-rows="2">
+
         <div class="carousel-item" data-category="kitchen">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200" alt="Modern Kitchen">
+          <img src="images/viz/akulam-kitchen-1.jpg" alt="Modular Kitchen – Overview" loading="lazy">
           <div class="g-overlay">
-            <div class="g-title">Modern Kitchen</div>
+            <div class="g-title">Modular Kitchen – Overview</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-2.jpg" alt="Modular Kitchen – Parallel Layout" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Modular Kitchen – Parallel Layout</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-3.jpg" alt="Kitchen Hob & Chimney" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Kitchen Hob & Chimney</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-4.jpg" alt="Kitchen Loft & Glass Cabinet" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Kitchen Loft & Glass Cabinet</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-5.jpg" alt="Kitchen Hob Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Kitchen Hob Detail</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom1-1.jpg" alt="Master Bedroom – Bed Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Master Bedroom – Bed Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom1-2.jpg" alt="Master Bedroom – TV & Wardrobe Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Master Bedroom – TV & Wardrobe Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom1-3.jpg" alt="Master Bedroom – Alternate View" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Master Bedroom – Alternate View</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom1-4.jpg" alt="Master Bedroom – Walk-in Wardrobe" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Master Bedroom – Walk-in Wardrobe</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom2-1.jpg" alt="Bedroom Two – Bed Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom Two – Bed Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom2-2.jpg" alt="Bedroom Two – TV & Wardrobe Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom Two – TV & Wardrobe Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom2-3.jpg" alt="Bedroom Two – Alternate View" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom Two – Alternate View</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom2-4.jpg" alt="Bedroom Two – Wardrobe & Dresser" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom Two – Wardrobe & Dresser</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/akulam-living-1.jpg" alt="Living Room – TV Unit" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room – TV Unit</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/akulam-living-2.jpg" alt="Living & Dining Layout" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living & Dining Layout</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-1.jpg" alt="Dining Area & Staircase" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Dining Area & Staircase</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-2.jpg" alt="Dining & Powder Nook" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Dining & Powder Nook</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-3.jpg" alt="Living Room TV Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room TV Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-4.jpg" alt="Living Room TV Wall – Alt View" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room TV Wall – Alt View</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-5.jpg" alt="Living Room with Staircase" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room with Staircase</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-pooja-1.jpg" alt="Pooja Unit" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Pooja Unit</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-pooja-2.jpg" alt="Pooja Unit – Close Up" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Pooja Unit – Close Up</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-staircase.jpg" alt="Floating Staircase" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Floating Staircase</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-study.jpg" alt="Home Office / Study Nook" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Home Office / Study Nook</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-1.jpg" alt="Bathroom – Shower Niche" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Shower Niche</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-2.jpg" alt="Bathroom – Patterned Floor Shower" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Patterned Floor Shower</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-3.jpg" alt="Bathroom – Toilet & Mosaic Floor" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Toilet & Mosaic Floor</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-4.jpg" alt="Bathroom – Shower Fitting Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Shower Fitting Detail</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-b-1.jpg" alt="Bathroom – Vanity & Wood Niche" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Vanity & Wood Niche</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-b-2.jpg" alt="Bathroom – Vanity Close Up" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Vanity Close Up</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-b-3.jpg" alt="Bathroom – Shower Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Shower Detail</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-c-1.jpg" alt="Bathroom – Seafoam Tile Vanity" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Seafoam Tile Vanity</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-c-2.jpg" alt="Bathroom – Seafoam Toilet Area" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Seafoam Toilet Area</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-c-3.jpg" alt="Bathroom – Seafoam Shower Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Seafoam Shower Detail</div>
             <div class="g-tag">SketchUp · V-Ray</div>
           </div>
         </div>
 
         <div class="carousel-item" data-category="commercial">
-          <img src="https://images.unsplash.com/photo-1562663474-6cbb3eaa4d14?auto=format&fit=crop&q=80&w=1000" alt="Beauty Parlour">
+          <img src="images/viz/parlour-1.jpg" alt="Reception Desk" loading="lazy">
           <div class="g-overlay">
-            <div class="g-title">Beauty Parlour</div>
+            <div class="g-title">Reception Desk</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-2.jpg" alt="Wash Station" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Wash Station</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-3.jpg" alt="Pedicure Station" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Pedicure Station</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-4.jpg" alt="Waiting Lounge" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Waiting Lounge</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-5.jpg" alt="Styling Chairs & Reception" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Styling Chairs & Reception</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-6.jpg" alt="Salon Styling Row" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Salon Styling Row</div>
             <div class="g-tag">SketchUp · V-Ray</div>
           </div>
         </div>
