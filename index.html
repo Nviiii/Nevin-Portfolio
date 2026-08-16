@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nevin Prabhakar S — Graphic Design & Cinematic Visuals</title>
 <meta name="description" content="Portfolio of Nevin Prabhakar S — Graphic design, 3D interior visualization, print shop fabrication, and cinematic photography.">
 <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
@@ -71,6 +71,10 @@
   }
 
   /* Light Mode Specific Element Adjustments */
+  body.light-mode .nav.nav-bottom {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 0 20px rgba(139, 92, 246, 0.1);
+  }
   body.light-mode .filter-btn:hover { background: rgba(0, 0, 0, 0.05); color: var(--ink); }
   body.light-mode .filter-btn.active { color: #fff; }
   body.light-mode .carousel-btn { background: rgba(255, 255, 255, 0.9); color: #111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
@@ -140,8 +144,34 @@
     border: 1px solid var(--surface-border);
     transform-origin: center center;
     overflow: hidden;
-    transition: background 0.5s ease, box-shadow 0.5s ease;
+    transition: top 0.8s cubic-bezier(0.68, -0.2, 0.265, 1.2), 
+                max-width 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2),
+                padding 0.7s ease,
+                border-radius 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2), 
+                background 0.5s ease,
+                transform 0.5s ease,
+                box-shadow 0.5s ease;
   }
+  
+  .nav.nav-bottom {
+    top: calc(100vh - 84px);
+    max-width: 56px;
+    padding: 0;
+    gap: 0;
+    background: rgba(15, 10, 25, 0.95);
+    border-radius: 50% 50% 8px 50%; 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+
+  .nav.nav-bottom.nav-bottom-expanded {
+    max-width: 900px;
+    padding: 0 8px;
+    gap: 24px;
+    border-radius: 100px; 
+  }
+
+  .nav.nav-liquid-down { transform: translateX(-50%) scale(0.8, 1.4); border-radius: 100px; }
+  .nav.nav-liquid-up { transform: translateX(-50%) scale(0.8, 1.4); border-radius: 100px; }
 
   .nav-logo {
     display: flex;
@@ -156,7 +186,7 @@
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    transition: color 0.5s ease;
+    transition: width 0.7s ease, height 0.7s ease, color 0.5s ease;
     cursor: pointer;
   }
   .nav-logo-img {
@@ -167,6 +197,9 @@
     display: block;
   }
 
+  .nav.nav-bottom .nav-logo { width: 56px; height: 56px; color: #fff; }
+  .nav.nav-bottom.nav-bottom-expanded .nav-logo { width: 40px; height: 40px; color: var(--ink); }
+
   .nav-links { 
     display: flex; 
     align-items: center; 
@@ -174,6 +207,19 @@
     max-width: 800px;
     opacity: 1;
     white-space: nowrap;
+    transition: opacity 0.4s ease, max-width 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2);
+  }
+
+  .nav.nav-bottom .nav-links {
+    max-width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav.nav-bottom.nav-bottom-expanded .nav-links {
+    max-width: 800px;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .nav-links a { 
@@ -223,19 +269,7 @@
   body.light-mode .sun-icon { display: none; }
   body.light-mode .moon-icon { display: block; }
 
-  /* Tablet & desktop: keep the floating hotbar, but on space-constrained
-     tablet widths drop the secondary section links and keep only the
-     avatar, About, Contact and theme toggle so it still fits. */
-  @media (min-width: 768px) and (max-width: 960px) {
-    .nav-link-extra { display: none; }
-    .nav { gap: 14px; max-width: calc(100vw - 24px); }
-    .nav-links { gap: 10px; }
-  }
-
-  /* Mobile phones: the top hotbar is not shown at all. */
-  @media (max-width: 767.98px) {
-    .nav { display: none; }
-  }
+  @media (max-width:960px){ .nav{ display:none; } }
 
   /* ---------- Progression Hotbar (Right) ---------- */
   .progression-bar {
@@ -640,7 +674,6 @@
     scrollbar-width: none; 
     -ms-overflow-style: none; 
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
   }
   .carousel-track::-webkit-scrollbar { display: none; } 
   
@@ -688,7 +721,6 @@
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    -webkit-overflow-scrolling: touch;
   }
   .masonry-row::-webkit-scrollbar { display: none; }
 
@@ -1243,6 +1275,8 @@
   .carousel-btn.next { right: 0; }
   @media (max-width: 991.98px) {
     .wrap { padding-left: 24px; padding-right: 24px; }
+    .nav { max-width: calc(100vw - 32px); }
+    .nav-links { gap: 12px; }
     .carousel-wrapper { padding-inline: 0; }
   }
   @media (max-width: 767.98px) {
@@ -1260,12 +1294,6 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-reveal, .liquid-ripple { transition: none; }
   }
-
-  @media (max-width: 480px) {
-    .lightbox-close { top: 16px; right: 20px; font-size: 32px; }
-    .lightbox-img { max-width: 94vw; max-height: 82vh; }
-    .avatar-popup { width: min(220px, 70vw); }
-  }
 </style>
 </head>
 <body>
@@ -1276,12 +1304,12 @@
     <img src="images/profile.jpg" alt="Nevin Prabhakar" class="nav-logo-img">
   </a>
   <div class="nav-links">
-    <a href="#graphic-design" class="nav-link-extra">Graphic Design</a>
-    <a href="#visualization" class="nav-link-extra">3D Visualization</a>
-    <a href="#photography" class="nav-link-extra">Photography</a>
-    <a href="#projects" class="nav-link-extra">Projects</a>
-    <a href="#about" class="nav-link-core">About</a>
-    <a href="#contact" class="nav-contact nav-link-core">Contact</a>
+    <a href="#graphic-design">Graphic Design</a>
+    <a href="#visualization">3D Visualization</a>
+    <a href="#photography">Photography</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-contact">Contact</a>
     
     <!-- Theme Toggle Switch -->
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
@@ -3118,25 +3146,58 @@
     }
   }
 
-  // --- Progression Bar scroll visibility ---
-  // (The top nav used to morph into a small collapsing "pill" on scroll.
-  // That state machine was the source of a rendering glitch where the
-  // nav-links could end up invisible while the bar stayed wide, so the
-  // top nav is now simply fixed in place and always fully rendered —
-  // only the right-side progression dots still react to scroll.)
+  // --- Dynamic Nav Scroll, Droplet logic, & Progression Bar ---
+  const nav = document.getElementById('nav');
   const progBar = document.getElementById('progBar');
   const visSection = document.getElementById('visualization');
+  let lastScrollY = window.scrollY;
+  let liquidTimeout;
 
   window.addEventListener('scroll', () => {
     const currentScrollY = window.scrollY;
+    const isAtVisSection = visSection && currentScrollY >= (visSection.offsetTop - window.innerHeight / 2);
     const isNearBottom = (window.innerHeight + currentScrollY) >= (document.documentElement.scrollHeight - 40);
-
+    
     if (currentScrollY > 120 && !isNearBottom) {
-      progBar.classList.remove('hidden-up');
-      progBar.classList.add('active');
+      if (!nav.classList.contains('nav-bottom')) {
+        nav.classList.add('nav-bottom');
+        triggerLiquid('down');
+        progBar.classList.remove('hidden-up');
+        progBar.classList.add('active');
+      }
+
+      if (isAtVisSection) {
+        nav.classList.add('nav-bottom-expanded');
+      } else {
+        nav.classList.remove('nav-bottom-expanded');
+      }
+
     } else {
-      progBar.classList.remove('active');
-      progBar.classList.add('hidden-up');
+      if (nav.classList.contains('nav-bottom')) {
+        nav.classList.remove('nav-bottom');
+        nav.classList.remove('nav-bottom-expanded'); 
+        triggerLiquid('up');
+        progBar.classList.remove('active');
+        progBar.classList.add('hidden-up');
+      }
+    }
+    lastScrollY = currentScrollY;
+  });
+
+  function triggerLiquid(direction) {
+    const liquidClass = direction === 'down' ? 'nav-liquid-down' : 'nav-liquid-up';
+    nav.classList.add(liquidClass);
+    clearTimeout(liquidTimeout);
+    liquidTimeout = setTimeout(() => {
+      nav.classList.remove('nav-liquid-down', 'nav-liquid-up');
+    }, 500); 
+  }
+
+  const navLogo = document.querySelector('.nav-logo');
+  navLogo.addEventListener('click', (e) => {
+    if (nav.classList.contains('nav-bottom') && !nav.classList.contains('nav-bottom-expanded')) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
 
@@ -3211,25 +3272,6 @@
       widths[minIdx] += estWidth;
     });
   }
-
-  // --- Shuffle image order (fresh on every load/reload) for the
-  // Graphic Design, 3D Visualization, and Photography galleries ---
-  function shuffleArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  ['graphicTrack', 'visualizationTrack', 'photographyTrack'].forEach(id => {
-    const track = document.getElementById(id);
-    if (!track) return;
-    const items = shuffleArray(Array.from(track.querySelectorAll(':scope > .carousel-item')));
-    const frag = document.createDocumentFragment();
-    items.forEach(item => frag.appendChild(item));
-    track.appendChild(frag);
-  });
 
   document.querySelectorAll('.masonry-track').forEach(track => {
     if (track.id === 'featuredTrack') return; 
