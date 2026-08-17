@@ -86,7 +86,7 @@
   body.light-mode .contact-card h2 { color: var(--ink); }
 
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
   
   body{
     font-family:'Inter',sans-serif;
@@ -115,8 +115,9 @@
   }
 
   .wrap{
-    max-width:1240px;
-    margin:0 auto;
+    max-width:min(1800px, 96vw);
+    margin-left: auto;
+    margin-right: auto;
     padding-left: 32px;
     padding-right: 32px;
   }
@@ -269,7 +270,98 @@
   body.light-mode .sun-icon { display: none; }
   body.light-mode .moon-icon { display: block; }
 
-  @media (max-width:960px){ .nav{ display:none; } }
+  /* ---------- Mobile Nav: Hamburger + Dropdown Panel ---------- */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .nav-hamburger span {
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ink);
+    transition: transform 0.3s var(--ease), opacity 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile-panel {
+    position: fixed;
+    z-index: 49;
+    top: 90px;
+    left: 50%;
+    width: min(90vw, 340px);
+    max-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0 22px;
+    border-radius: 20px;
+    background: var(--surface-strong);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform: translateX(-50%) translateY(-10px);
+    transition: max-height 0.5s var(--ease-fluid), opacity 0.35s ease,
+                transform 0.4s var(--ease-fluid), padding 0.5s ease;
+  }
+  .nav-mobile-panel.open {
+    max-height: 460px;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 14px 22px;
+    transform: translateX(-50%) translateY(0);
+  }
+  .nav-mobile-panel a {
+    padding: 13px 2px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    transition: color 0.25s var(--ease);
+  }
+  .nav-mobile-panel a:last-child { border-bottom: none; }
+  .nav-mobile-panel a:hover { color: var(--ink); }
+  .nav-mobile-panel a.nav-contact {
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    border-bottom: none;
+  }
+
+  @media (max-width: 960px) {
+    .nav { gap: 8px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    /* Keep the compact mobile pill (logo + toggle + hamburger) always visible,
+       never collapsing down to a lone avatar-only bubble. */
+    .nav.nav-bottom {
+      top: 20px;
+      max-width: 220px;
+      padding: 0 10px;
+      gap: 8px;
+      border-radius: 100px;
+      background: var(--surface-strong);
+      box-shadow: none;
+    }
+    .nav.nav-bottom .nav-logo { width: 40px; height: 40px; color: var(--ink); }
+  }
+  @media (min-width: 961px) {
+    .nav-mobile-panel { display: none; }
+  }
 
   /* ---------- Progression Hotbar (Right) ---------- */
   .progression-bar {
@@ -277,7 +369,7 @@
     z-index: 45;
     right: 24px;
     top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(-50%) scale(0.85);
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -289,42 +381,20 @@
     border: 1px solid var(--surface-border);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease, background 0.5s ease, border-color 0.5s ease;
+    will-change: opacity, transform;
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), background 0.5s ease, border-color 0.5s ease;
   }
 
   .progression-bar.active {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
     pointer-events: auto;
-    animation: liquidSplitRight 0.8s cubic-bezier(0.68, -0.2, 0.265, 1.2) forwards;
   }
 
   .progression-bar.hidden-up {
     opacity: 0;
-    transform: translateY(-50%) scale(0.8);
-    transition: all 0.4s var(--ease);
-  }
-
-  @keyframes liquidSplitRight {
-    0% {
-      right: 50%;
-      top: calc(100vh - 84px);
-      transform: translate(50%, 0) scale(2, 0.1);
-      opacity: 0;
-      background: var(--primary-glow);
-    }
-    30% { opacity: 1; }
-    50% {
-      right: 24px;
-      top: calc(100vh - 84px);
-      transform: translate(0, 0) scale(0.2, 1.5);
-      background: var(--surface-strong);
-    }
-    100% {
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%) scale(1);
-      opacity: 1;
-      background: var(--surface-strong);
-    }
+    transform: translateY(-50%) scale(0.85);
+    pointer-events: none;
   }
 
   .prog-dot {
@@ -598,19 +668,78 @@
     z-index: 10;
   }
 
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    color: var(--ink-soft);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+  .scroll-cue:hover { opacity: 1; color: var(--ink); }
+  .scroll-cue span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .scroll-cue svg {
+    animation: scrollCueBounce 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollCueBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(7px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue svg { animation: none; }
+  }
+  @media (max-width: 767.98px) {
+    .scroll-cue { bottom: 20px; }
+  }
+
   /* ---------- Sections ---------- */
   section { 
     padding-top: clamp(60px, 8vh, 100px);
     padding-bottom: clamp(60px, 8vh, 100px);
-    position: relative; 
+    position: relative;
     z-index: 10; 
-    background: var(--bg); 
+    background:
+      radial-gradient(60% 55% at 15% -10%, rgba(139, 92, 246, 0.05), transparent 60%),
+      radial-gradient(55% 50% at 100% 110%, rgba(217, 70, 239, 0.035), transparent 60%),
+      var(--bg);
     border-top: 1px solid var(--line); 
     transition: background 0.5s ease, border-color 0.5s ease;
+  }
+  section:nth-of-type(even) {
+    background:
+      radial-gradient(60% 55% at 100% -10%, rgba(59, 130, 246, 0.045), transparent 60%),
+      radial-gradient(55% 50% at 0% 110%, rgba(139, 92, 246, 0.04), transparent 60%),
+      var(--bg);
   }
   section:first-of-type { 
     border-top: none; 
     padding-top: clamp(40px, 6vh, 80px); 
+  }
+
+  /* Section entrance transition: each section eases up + fades in as it scrolls into view */
+  section.reveal-section {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  section.reveal-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    section.reveal-section { opacity: 1; transform: none; transition: none; }
   }
   
   .section-head{
@@ -664,12 +793,31 @@
 
   /* ---------- Carousel Base ---------- */
   .carousel-wrapper { position: relative; max-width: 100%; }
+  .carousel-wrapper::before,
+  .carousel-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 40px;
+    width: clamp(24px, 6vw, 90px);
+    z-index: 3;
+    pointer-events: none;
+    transition: background 0.5s ease;
+  }
+  .carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+  }
+  .carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
+  }
 
   .carousel-track {
     display: flex;
     overflow-x: auto;
     gap: 24px; 
-    padding: 10px 0 40px; 
+    padding: 26px 0 40px; 
     scroll-snap-type: x mandatory;
     scrollbar-width: none; 
     -ms-overflow-style: none; 
@@ -684,7 +832,30 @@
     overflow: hidden;
     background: var(--carousel-bg);
     border: 1px solid var(--line);
-    transition: transform 0.6s var(--ease-fluid), border-color 0.4s, box-shadow 0.6s var(--ease-fluid), background 0.5s ease;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.10),
+      inset 0 0 0 1px rgba(255,255,255,0.03),
+      0 6px 18px rgba(0,0,0,0.22);
+    transition: border-color 0.4s, box-shadow 0.5s var(--ease-fluid), background 0.5s ease;
+  }
+
+  /* Glassy diagonal reflection sweep */
+  .carousel-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,0.22) 46%, rgba(255,255,255,0.05) 52%, transparent 66%);
+    background-size: 220% 220%;
+    background-position: 130% -30%;
+    opacity: 0;
+    mix-blend-mode: overlay;
+    transition: opacity 0.5s ease, background-position 0.9s var(--ease-fluid);
+  }
+  .carousel-item:hover::before {
+    opacity: 1;
+    background-position: -30% 130%;
   }
 
   .carousel-item img, .g-item img { cursor: zoom-in; }
@@ -693,18 +864,36 @@
   .carousel-item img {
     width: 100%; height: 100%;
     object-fit: cover;
-    opacity: 0.8;
+    opacity: 0.85;
     transition: opacity 0.6s var(--ease-fluid), transform 0.8s var(--ease-fluid);
   }
   
   .carousel-item:hover { 
     border-color: rgba(255,255,255,0.4); 
-    transform: translateY(-8px); 
-    box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 30px rgba(139, 92, 246, 0.15);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.16),
+      inset 0 0 0 1px rgba(255,255,255,0.06),
+      0 14px 32px rgba(0,0,0,0.4),
+      0 0 30px rgba(139, 92, 246, 0.18);
   }
   .carousel-item:hover img { 
     opacity: 1; 
-    transform: scale(1.08); 
+    transform: scale(1.06); 
+  }
+
+  body.light-mode .carousel-item {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      inset 0 0 0 1px rgba(0,0,0,0.03),
+      0 4px 14px rgba(20,20,30,0.08);
+  }
+  body.light-mode .carousel-item:hover {
+    border-color: rgba(0,0,0,0.16);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.8),
+      inset 0 0 0 1px rgba(0,0,0,0.05),
+      0 12px 28px rgba(20,20,30,0.14),
+      0 0 24px rgba(139, 92, 246, 0.14);
   }
 
   /* ---------- DYNAMIC MULTI-ROW MASONRY TRACK ---------- */
@@ -717,18 +906,19 @@
   .masonry-row {
     display: flex;
     gap: 24px;
-    height: clamp(220px, 35vh, 320px);
+    height: clamp(244px, 35vh, 344px);
+    padding: 20px 0 4px;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   .masonry-row::-webkit-scrollbar { display: none; }
 
-  #featuredTrack.masonry-track { flex-direction: row; height: clamp(280px, 45vh, 450px); }
+  #featuredTrack.masonry-track { flex-direction: row; height: clamp(304px, 45vh, 474px); }
 
   @media (max-width: 768px) {
-    .masonry-row { height: 220px; }
-    #featuredTrack.masonry-track { height: 280px; }
+    .masonry-row { height: 244px; }
+    #featuredTrack.masonry-track { height: 304px; }
   }
 
   .masonry-track .carousel-item {
@@ -749,6 +939,7 @@
   .carousel-item.hide {
     display: none !important;
   }
+
 
   /* Special Logo Backgrounds */
   .transparent-logo {
@@ -833,6 +1024,7 @@
     background:linear-gradient(180deg, transparent, rgba(0,0,0,0.9));
     color:#fff;
     pointer-events: none;
+    z-index: 3;
   }
   .g-overlay .g-title{ font-size:18px; font-weight:500; margin-bottom:4px; font-family: 'Playfair Display', serif; }
   .g-overlay .g-tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; color: var(--primary-glow); }
@@ -908,28 +1100,56 @@
   }
 
   .gear-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(130% 130% at 12% -10%, rgba(139, 92, 246, 0.22), transparent 55%),
+      radial-gradient(130% 130% at 100% 115%, rgba(217, 70, 239, 0.14), transparent 55%),
+      rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-md);
     padding: 32px 24px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    backdrop-filter: blur(12px);
-    transition: transform .4s var(--ease), border-color .4s, background .4s;
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      inset 0 0 24px rgba(255, 255, 255, 0.02),
+      0 20px 40px -24px rgba(0, 0, 0, 0.6);
+    transition: transform .4s var(--ease), border-color .4s ease, background .5s ease, box-shadow .4s ease;
   }
+  .gear-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 30%, transparent 55%);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .gear-card > * { position: relative; z-index: 1; }
   .gear-card.wide { grid-column: span 2; }
   @media (max-width: 560px) { .gear-card.wide { grid-column: span 1; } }
 
   .gear-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-6px);
+    border-color: rgba(139, 92, 246, 0.4);
+    background:
+      radial-gradient(130% 130% at 12% -10%, rgba(139, 92, 246, 0.32), transparent 58%),
+      radial-gradient(130% 130% at 100% 115%, rgba(217, 70, 239, 0.22), transparent 58%),
+      rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      0 30px 60px -24px rgba(139, 92, 246, 0.35),
+      0 0 0 1px rgba(139, 92, 246, 0.12);
   }
   .gear-icon {
     width: 32px; height: 32px;
     color: var(--primary-glow);
     margin-bottom: 8px;
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.45));
   }
   .gear-title {
     font-size: 18px; font-weight: 500;
@@ -947,10 +1167,11 @@
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10.5px;
     color: var(--ink-mute);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.06);
     padding: 6px 10px;
     border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
     transition: background 0.5s ease, border-color 0.5s ease;
   }
 
@@ -959,6 +1180,7 @@
     overflow: hidden;
     cursor: zoom-in;
   }
+  .gear-card-image::before { display: none; }
   .gear-setup-img {
     display: block;
     width: 100%;
@@ -1091,9 +1313,14 @@
   .contact-link svg {
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
+  }
+  .contact-link[aria-label^="Call"] {
+    padding: 12px;
+    border-radius: 50%;
   }
 
-  footer{ padding:40px 0; text-align:center; font-size:12px; color:var(--ink-mute); border-top: 1px solid var(--line); margin-top: 40px; background: var(--bg); transition: background 0.5s ease; }
+  footer{ position: relative; z-index: 1; padding:40px 0; text-align:center; font-size:12px; color:var(--ink-mute); border-top: 1px solid var(--line); margin-top: 40px; background: var(--bg); transition: background 0.5s ease; }
 
   /* ---------- Lightbox ---------- */
   .lightbox {
@@ -1294,30 +1521,213 @@
   @media (prefers-reduced-motion: reduce) {
     .hero-reveal, .liquid-ripple { transition: none; }
   }
+
+  /* ============ Splash / Intro Screen ============ */
+  body.splash-active { overflow: hidden; height: 100vh; }
+
+  .splash {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 42%, #100a1c 0%, #030305 72%);
+    transition: opacity 0.7s var(--ease-fluid), visibility 0.7s;
+  }
+  .splash.splash-hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .splash-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .splash-icon-stage {
+    position: relative;
+    width: clamp(84px, 16vw, 130px);
+    height: clamp(84px, 16vw, 130px);
+  }
+
+  .splash-icon {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.9);
+    filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.35)) blur(6px);
+    transition: opacity 0.65s var(--ease-fluid),
+                transform 0.75s var(--ease-fluid),
+                filter 0.65s var(--ease-fluid);
+    will-change: opacity, transform, filter;
+  }
+  .splash-icon.icon-design { color: #D946EF; }
+  .splash-icon.icon-axis { color: #3B82F6; }
+  .splash-icon.icon-aperture { color: #8B5CF6; }
+
+  .splash-icon.is-active {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.35)) blur(0px);
+    transition-delay: 0.12s;
+  }
+  .splash-icon.is-leaving {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.35)) blur(6px);
+    transition-delay: 0s;
+  }
+
+  /* Aperture blades: each blade pivots at its outer edge so the
+     whole ring reads as an iris opening and closing. */
+  .icon-aperture .aperture-blade {
+    transform-box: fill-box;
+    transform-origin: 50% 4%;
+    animation: apertureBreathe 2.4s var(--ease) infinite;
+  }
+  .icon-aperture .aperture-core {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: apertureCore 2.4s var(--ease) infinite;
+  }
+  .icon-aperture .aperture-blades > g:nth-child(1) .aperture-blade { animation-delay: 0s; }
+  .icon-aperture .aperture-blades > g:nth-child(2) .aperture-blade { animation-delay: 0.03s; }
+  .icon-aperture .aperture-blades > g:nth-child(3) .aperture-blade { animation-delay: 0.06s; }
+  .icon-aperture .aperture-blades > g:nth-child(4) .aperture-blade { animation-delay: 0.09s; }
+  .icon-aperture .aperture-blades > g:nth-child(5) .aperture-blade { animation-delay: 0.12s; }
+  .icon-aperture .aperture-blades > g:nth-child(6) .aperture-blade { animation-delay: 0.15s; }
+  @keyframes apertureBreathe {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(30deg); }
+  }
+  @keyframes apertureCore {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.55); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .icon-aperture .aperture-blade, .icon-aperture .aperture-core { animation: none; }
+  }
+
+  .splash-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    min-height: 14px;
+  }
+  .splash-label.is-active { opacity: 1; }
+
+  .splash-progress {
+    width: 130px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  .splash-progress span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8B5CF6, #D946EF);
+    transition: width 0.5s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .splash-icon { transition: opacity 0.25s ease; transform: none !important; filter: none !important; }
+    .splash { transition: opacity 0.25s ease, visibility 0.25s; }
+  }
 </style>
 </head>
-<body>
+<body class="splash-active">
+
+<!-- ============ Splash / Intro Screen ============ -->
+<div class="splash" id="splashScreen" aria-hidden="true">
+  <div class="splash-inner">
+    <div class="splash-icon-stage">
+      <svg class="splash-icon icon-design" data-icon="0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 80 C 26 46, 56 30, 84 18"/>
+        <circle cx="18" cy="80" r="4.2" fill="currentColor" stroke="none"/>
+        <circle cx="84" cy="18" r="4.2" fill="currentColor" stroke="none"/>
+        <line x1="18" y1="80" x2="34" y2="58" stroke-width="1.6" stroke-dasharray="1 5" stroke-opacity="0.7"/>
+        <line x1="84" y1="18" x2="66" y2="40" stroke-width="1.6" stroke-dasharray="1 5" stroke-opacity="0.7"/>
+        <circle cx="34" cy="58" r="2.6" fill="currentColor" stroke="none"/>
+        <circle cx="66" cy="40" r="2.6" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="splash-icon icon-axis" data-icon="1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="50" y1="46" x2="50" y2="17" stroke-opacity="0.55"/>
+        <path d="M50 47 L68 36 L68 58 L50 69 L32 58 L32 36 Z"/>
+        <line x1="50" y1="47" x2="50" y2="69"/>
+        <line x1="50" y1="47" x2="32" y2="36"/>
+        <line x1="50" y1="47" x2="68" y2="36"/>
+        <line x1="32" y1="58" x2="15" y2="77" stroke-opacity="0.55"/>
+        <line x1="68" y1="58" x2="85" y2="77" stroke-opacity="0.55"/>
+        <text x="50" y="12" font-size="11" fill="currentColor" stroke="none" font-family="IBM Plex Mono, monospace" text-anchor="middle">Z</text>
+        <text x="10" y="88" font-size="11" fill="currentColor" stroke="none" font-family="IBM Plex Mono, monospace" text-anchor="middle">X</text>
+        <text x="90" y="88" font-size="11" fill="currentColor" stroke="none" font-family="IBM Plex Mono, monospace" text-anchor="middle">Y</text>
+      </svg>
+      <svg class="splash-icon icon-aperture" data-icon="2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+        <circle cx="50" cy="50" r="45" stroke-opacity="0.25"/>
+        <g class="aperture-blades" stroke-opacity="0.95" fill="currentColor" fill-opacity="0.06">
+          <g transform="rotate(0 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(60 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(120 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(180 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(240 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(300 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+        </g>
+        <circle class="aperture-core" cx="50" cy="50" r="9" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+    <div class="splash-label" id="splashLabel">Graphic Design</div>
+    <div class="splash-progress"><span id="splashProgressBar"></span></div>
+  </div>
+</div>
 
 <!-- Main Nav Bar -->
 <nav class="nav" id="nav">
   <a href="#" class="nav-logo" aria-label="Nevin Prabhakar - back to top">
     <img src="images/profile.jpg" alt="Nevin Prabhakar" class="nav-logo-img">
   </a>
-  <div class="nav-links">
+  <div class="nav-links" id="navLinks">
     <a href="#graphic-design">Graphic Design</a>
     <a href="#visualization">3D Visualization</a>
     <a href="#photography">Photography</a>
     <a href="#projects">Projects</a>
     <a href="#about">About</a>
     <a href="#contact" class="nav-contact">Contact</a>
-    
-    <!-- Theme Toggle Switch -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
-      <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
-      <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-    </button>
   </div>
+
+  <!-- Theme Toggle Switch -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </button>
+
+  <!-- Mobile Hamburger Toggle -->
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobilePanel">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Dropdown Panel -->
+<div class="nav-mobile-panel" id="navMobilePanel">
+  <a href="#graphic-design">Graphic Design</a>
+  <a href="#visualization">3D Visualization</a>
+  <a href="#photography">Photography</a>
+  <a href="#projects">Projects</a>
+  <a href="#about">About</a>
+  <a href="#gear">Gear</a>
+  <a href="#contact" class="nav-contact">Contact</a>
+</div>
 
 <!-- Right Side Progression Hotbar -->
 <div class="progression-bar hidden-up" id="progBar">
@@ -1355,11 +1765,18 @@
       </div>
       <span class="eyebrow">Thiruvananthapuram, Kerala</span>
       <h1 class="display">Nevin Prabhakar S.</h1>
-      <p class="lede">A multidisciplinary designer crafting high-impact digital experiences through graphic design, 3D visualization, tactile print production, and cinematic photography.</p>
+      <p class="lede">A multidisciplinary designer blending graphic design, 3D visualization, print production, branding, and cinematic photography to create impactful visual experiences.</p>
       <a href="#quick-look" class="btn-primary">View Quick Look</a>
     </div>
 
     <div class="focus-label">move to focus</div>
+
+    <a href="#quick-look" class="scroll-cue" aria-label="Scroll down for more">
+      <span>Scroll</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 5L8 11L14 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
   </header>
 
   <!-- 0. QUICK LOOK (1 ROW DYNAMIC CAROUSEL) -->
@@ -2666,18 +3083,6 @@
           <img src="images/IMG_20260627_194608.jpg" alt="Live at the Show III" loading="lazy">
           <div class="g-overlay"><div class="g-title">Live at the Show III</div><div class="g-tag">Concert</div></div>
         </div>
-        <div class="carousel-item" data-category="concert">
-          <img src="images/JoyThomas_ElectionWork (1).jpg" alt="Campaign gathering" loading="lazy">
-          <div class="g-overlay"><div class="g-title">Campaign Gathering</div><div class="g-tag">Concert</div></div>
-        </div>
-        <div class="carousel-item" data-category="concert">
-          <img src="images/JoyThomas_ElectionWork (2).jpg" alt="Evening audience" loading="lazy">
-          <div class="g-overlay"><div class="g-title">Evening Audience</div><div class="g-tag">Concert</div></div>
-        </div>
-        <div class="carousel-item" data-category="concert">
-          <img src="images/JoyThomas_ElectionWork (3).jpg" alt="Live event detail" loading="lazy">
-          <div class="g-overlay"><div class="g-title">Live Event Detail</div><div class="g-tag">Concert</div></div>
-        </div>
       </div>
 
       <button class="carousel-btn next" aria-label="Scroll Right">
@@ -2924,7 +3329,13 @@
         <a class="contact-link" href="mailto:nevinprabhakars@gmail.com">nevinprabhakars@gmail.com</a>
         <a class="contact-link" href="https://instagram.com/_nvphotography" target="_blank" rel="noopener">@_nvphotography</a>
         <a class="contact-link" href="https://instagram.com/__n.vii" target="_blank" rel="noopener">@__n.vii</a>
-        <a class="contact-link" href="https://linkedin.com/in/Nevin-Prabhakar-S" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/nevin-prabhakar-s-b7052a414/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+          LinkedIn
+        </a>
+        <a class="contact-link" href="tel:+917012067660" aria-label="Call +91 7012067660" title="+91 7012067660">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -2942,6 +3353,67 @@
 </div>
 
 <script>
+  // --- Splash / Intro Screen ---
+  (function initSplash() {
+    const splash = document.getElementById('splashScreen');
+    if (!splash) return;
+    const icons = Array.from(splash.querySelectorAll('.splash-icon'));
+    const label = document.getElementById('splashLabel');
+    const progressBar = document.getElementById('splashProgressBar');
+    const labels = ['Graphic Design', '3D Visualization', 'Photography'];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stepDuration = reduceMotion ? 300 : 950;
+    let step = 0;
+
+    function showStep(i) {
+      icons.forEach((icon, idx) => {
+        icon.classList.remove('is-active', 'is-leaving');
+        if (idx === i) icon.classList.add('is-active');
+        else if (idx === i - 1) icon.classList.add('is-leaving');
+      });
+      if (label) {
+        label.classList.remove('is-active');
+        requestAnimationFrame(() => {
+          label.textContent = labels[i];
+          label.classList.add('is-active');
+        });
+      }
+    }
+
+    function finishSplash() {
+      splash.classList.add('splash-hide');
+      document.body.classList.remove('splash-active');
+      setTimeout(() => { splash.remove(); }, 750);
+    }
+
+    showStep(0);
+
+    // Progress bar glides smoothly across the entire splash duration,
+    // independent of the icon-change steps, instead of jumping at each one.
+    const totalRunTime = stepDuration * (icons.length - 1) + stepDuration * 0.7;
+    if (progressBar) {
+      progressBar.style.transition = `width ${totalRunTime}ms linear`;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          progressBar.style.width = '100%';
+        });
+      });
+    }
+
+    const cycle = setInterval(() => {
+      step++;
+      if (step >= icons.length) {
+        clearInterval(cycle);
+        setTimeout(finishSplash, stepDuration * 0.7);
+      } else {
+        showStep(step);
+      }
+    }, stepDuration);
+
+    // Safety net: never block the site for more than ~5.5s
+    setTimeout(finishSplash, 5500);
+  })();
+
   // --- Theme Toggle Setup ---
   const themeToggle = document.getElementById('themeToggle');
   const body = document.body;
@@ -3201,10 +3673,46 @@
     }
   });
 
-  // --- Scroll Spy for Progression Dots ---
+  // --- Mobile Hamburger Menu ---
+  const navHamburger = document.getElementById('navHamburger');
+  const navMobilePanel = document.getElementById('navMobilePanel');
+  if (navHamburger && navMobilePanel) {
+    const closeMobileNav = () => {
+      navMobilePanel.classList.remove('open');
+      navHamburger.classList.remove('open');
+      navHamburger.setAttribute('aria-expanded', 'false');
+    };
+    navHamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willOpen = !navMobilePanel.classList.contains('open');
+      navMobilePanel.classList.toggle('open', willOpen);
+      navHamburger.classList.toggle('open', willOpen);
+      navHamburger.setAttribute('aria-expanded', String(willOpen));
+    });
+    navMobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+    document.addEventListener('click', (e) => {
+      if (!navHamburger.contains(e.target) && !navMobilePanel.contains(e.target)) closeMobileNav();
+    });
+    window.addEventListener('resize', () => { if (window.innerWidth > 960) closeMobileNav(); });
+  }
+
+  // --- Scroll Spy for Progression Dots + Section Reveal Transition ---
   const sections = document.querySelectorAll('section');
   const progDots = document.querySelectorAll('.prog-dot');
   const observerOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
+
+  // Mark every section except the first for the fade/slide-up entrance transition
+  sections.forEach((sec, idx) => {
+    if (idx > 0) sec.classList.add('reveal-section');
+  });
+
+  const revealObserverOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 };
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('is-visible', entry.isIntersecting);
+    });
+  }, revealObserverOptions);
+  sections.forEach(sec => { if (sec.classList.contains('reveal-section')) revealObserver.observe(sec); });
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
