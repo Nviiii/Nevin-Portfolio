@@ -32,6 +32,14 @@
     --hero-gradient-end: #A09EAB;
     --carousel-bg: #111111;
     --lens-bg: rgba(255, 255, 255, 0.02);
+
+    /* ---------- Liquid Glass System ----------
+       Shared across hotbar, filter pills, carousel tiles & arrows:
+       a barely-there flat tint + heavy backdrop-blur for real see-
+       through glass, with the "refraction" read as a bright specular
+       rim (bottom inset highlight) rather than a colored border. */
+    --glass-fill: rgba(255, 255, 255, 0.02);
+    --glass-fill-strong: rgba(255, 255, 255, 0.05);
     
     /* Hero Overlay Variables */
     --hero-bg-layer: linear-gradient(115deg, rgba(3,3,5,.92) 0%, rgba(3,3,5,.72) 48%, rgba(3,3,5,.86) 100%);
@@ -62,6 +70,9 @@
     --carousel-bg: #EAEAEA;
     --lens-bg: rgba(0, 0, 0, 0.03);
 
+    --glass-fill: rgba(255, 255, 255, 0.04);
+    --glass-fill-strong: rgba(255, 255, 255, 0.09);
+
     /* Light Mode Hero Fixes */
     --hero-bg-layer: linear-gradient(115deg, rgba(248,249,250,.85) 0%, rgba(248,249,250,.7) 48%, rgba(248,249,250,.9) 100%);
     --hero-grid-filter: blur(4px) brightness(1.05) saturate(.9); /* REDUCED BLUR TO 4px */
@@ -75,10 +86,9 @@
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 0 20px rgba(139, 92, 246, 0.1);
   }
-  body.light-mode .filter-btn:hover { background: rgba(0, 0, 0, 0.05); color: var(--ink); }
+  body.light-mode .filter-btn:hover { color: var(--ink); }
   body.light-mode .filter-btn.active { color: #fff; }
-  body.light-mode .carousel-btn { background: rgba(255, 255, 255, 0.9); color: #111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
-  body.light-mode .carousel-btn:hover { background: #fff; border-color: rgba(0,0,0,0.2); }
+  body.light-mode .carousel-btn { color: #111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
   body.light-mode .prog-dot { background: rgba(0, 0, 0, 0.15); }
   body.light-mode .prog-dot:hover { background: rgba(0, 0, 0, 0.3); }
   body.light-mode .prog-dot.active { background: var(--primary-glow); }
@@ -139,19 +149,42 @@
     height: 56px;
     max-width: 900px;
     border-radius: 100px;
-    background: var(--surface-strong);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--surface-border);
+    border: 1px solid rgba(255,255,255,0.10);
+    background:
+      radial-gradient(130% 200% at 25% -60%, rgba(255,255,255,0.10), rgba(255,255,255,0) 55%),
+      var(--glass-fill);
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
     transform-origin: center center;
-    overflow: hidden;
+    overflow: visible;
+    box-shadow:
+      inset 0 -2px 3px rgba(255,255,255,0.4),
+      inset 0 1px 1px rgba(255,255,255,0.15),
+      inset 0 -10px 16px -10px rgba(139,92,246,0.2),
+      0 12px 32px rgba(0,0,0,0.3);
     transition: top 0.8s cubic-bezier(0.68, -0.2, 0.265, 1.2), 
                 max-width 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2),
                 padding 0.7s ease,
                 border-radius 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2), 
                 background 0.5s ease,
                 transform 0.5s ease,
-                box-shadow 0.5s ease;
+                box-shadow 0.5s ease,
+                border-color 0.5s ease,
+                backdrop-filter 0.4s ease;
+  }
+
+  .nav:hover {
+    background:
+      radial-gradient(130% 200% at 25% -60%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%),
+      var(--glass-fill-strong);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
+    box-shadow:
+      inset 0 -2px 3px rgba(255,255,255,0.55),
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 -12px 20px -10px rgba(139,92,246,0.32),
+      0 16px 40px rgba(0,0,0,0.4),
+      0 0 24px rgba(139, 92, 246, 0.18);
   }
   
   .nav.nav-bottom {
@@ -159,9 +192,27 @@
     max-width: 56px;
     padding: 0;
     gap: 0;
-    background: rgba(15, 10, 25, 0.95);
+    background:
+      radial-gradient(140% 220% at 30% -60%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%),
+      var(--glass-fill-strong);
     border-radius: 50% 50% 8px 50%; 
-    box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px rgba(139, 92, 246, 0.3);
+    box-shadow:
+      inset 0 -2px 3px rgba(255,255,255,0.45),
+      inset 0 1px 1px rgba(255,255,255,0.18),
+      inset 0 -10px 18px -10px rgba(139,92,246,0.3),
+      0 10px 40px rgba(0,0,0,0.8),
+      0 0 24px rgba(139, 92, 246, 0.35);
+  }
+
+  .nav.nav-bottom:hover {
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    box-shadow:
+      inset 0 -2px 3px rgba(255,255,255,0.6),
+      inset 0 1px 1px rgba(255,255,255,0.22),
+      inset 0 -12px 22px -10px rgba(139,92,246,0.45),
+      0 14px 50px rgba(0,0,0,0.85),
+      0 0 32px rgba(139, 92, 246, 0.5);
   }
 
   .nav.nav-bottom.nav-bottom-expanded {
@@ -224,12 +275,34 @@
   }
 
   .nav-links a { 
+    position: relative;
     font-size: 13px; 
     color: var(--ink-soft); 
-    transition: all .25s var(--ease); 
+    padding: 8px 14px;
+    border-radius: 100px;
+    transition: color .25s var(--ease), background .3s var(--ease), border-color .3s var(--ease); 
+    border: 1px solid transparent;
   }
   .nav-links a:not(.nav-contact):hover { 
     color: var(--ink); 
+    background: rgba(255,255,255,0.08);
+  }
+  .nav-links a.active:not(.nav-contact) {
+    color: #fff;
+    background:
+      radial-gradient(120% 200% at 30% -60%, rgba(255,255,255,0.3), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, rgba(139,92,246,0.35), rgba(217,70,239,0.2));
+    border-color: rgba(255,255,255,0.3);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.4),
+      0 4px 12px rgba(139,92,246,0.25);
+  }
+  body.light-mode .nav-links a.active:not(.nav-contact) {
+    color: var(--ink);
+    background:
+      radial-gradient(120% 200% at 30% -60%, rgba(255,255,255,0.8), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, rgba(139,92,246,0.18), rgba(217,70,239,0.1));
+    border-color: rgba(0,0,0,0.1);
   }
   
   .nav-contact {
@@ -372,17 +445,97 @@
     transform: translateY(-50%) scale(0.85);
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 16px;
     padding: 20px 12px;
     border-radius: 100px;
-    background: var(--surface-strong);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid var(--surface-border);
+    border: 1px solid rgba(255,255,255,0.10);
+    background: var(--glass-fill);
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    box-shadow:
+      inset 0 -2px 3px rgba(255,255,255,0.4),
+      inset 0 1px 1px rgba(255,255,255,0.15),
+      inset 0 -8px 14px -8px rgba(139,92,246,0.15),
+      0 10px 26px rgba(0,0,0,0.3);
     opacity: 0;
     pointer-events: none;
+    overflow: visible;
     will-change: opacity, transform;
-    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), background 0.5s ease, border-color 0.5s ease;
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), background 0.5s ease, border-color 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .progression-bar.active:hover {
+    background: var(--glass-fill-strong);
+    backdrop-filter: blur(28px) saturate(220%);
+    -webkit-backdrop-filter: blur(28px) saturate(220%);
+    box-shadow:
+      inset 0 -2px 3px rgba(255,255,255,0.55),
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 -10px 18px -8px rgba(139,92,246,0.4),
+      0 14px 36px rgba(0,0,0,0.4),
+      0 0 24px rgba(139, 92, 246, 0.28);
+  }
+
+  .prog-popup {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translate(-50%, -100%) scale(0.85);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.14);
+    background:
+      radial-gradient(120% 200% at 30% -40%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%),
+      var(--glass-fill-strong);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow:
+      inset 0 -2px 3px rgba(255,255,255,0.5),
+      inset 0 1px 1px rgba(255,255,255,0.2),
+      0 8px 20px rgba(0,0,0,0.35),
+      0 0 16px rgba(139, 92, 246, 0.25);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #fff;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .prog-popup.show {
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+  }
+  .prog-popup::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    background: var(--glass-fill-strong);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+    box-shadow: inset -1px -1px 2px rgba(255,255,255,0.4);
+    transform: translateX(-50%) rotate(45deg);
+    z-index: -1;
+  }
+  body.light-mode .prog-popup {
+    background:
+      radial-gradient(120% 200% at 30% -40%, rgba(255,255,255,0.6), rgba(255,255,255,0) 55%),
+      var(--glass-fill-strong);
+    color: var(--ink);
+  }
+  body.light-mode .prog-popup::after {
+    background: var(--glass-fill-strong);
+    box-shadow: inset -1px -1px 2px rgba(0,0,0,0.1);
   }
 
   .progression-bar.active {
@@ -422,8 +575,13 @@
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    background: var(--surface-strong);
-    border: 1px solid var(--surface-border);
+    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--glass-fill-strong);
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.4),
+      inset 0 1px 1px rgba(255,255,255,0.15);
     padding: 6px 12px;
     border-radius: 6px;
     font-size: 11px;
@@ -637,22 +795,89 @@
   }
 
   .btn-primary{
+    position: relative;
     padding:16px 36px;
     border-radius:100px;
-    background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+    background:
+      radial-gradient(120% 180% at 30% -40%, rgba(255,255,255,0.16), rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.005) 55%, rgba(255,255,255,0.02) 100%);
     color:#fff;
     font-size:15px;
     font-weight:600;
-    border:none;
+    letter-spacing: 0.2px;
+    border: 1px solid rgba(255,255,255,0.28);
     cursor: pointer;
-    transition:transform .25s var(--ease), filter .25s, box-shadow .25s;
+    transition:transform .3s var(--ease), box-shadow .4s, border-color .4s, background .4s, backdrop-filter .4s;
     display: inline-block;
-    box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+    isolation: isolate;
+    backdrop-filter: blur(6px) saturate(140%);
+    -webkit-backdrop-filter: blur(6px) saturate(140%);
+    box-shadow:
+      inset 0 1.5px 1px rgba(255,255,255,0.7),
+      inset 0 -1px 1px rgba(255,255,255,0.1),
+      inset 0 -14px 20px -10px rgba(139,92,246,0.22),
+      inset 0 10px 16px -8px rgba(255,255,255,0.18),
+      0 10px 30px rgba(139, 92, 246, 0.2),
+      0 2px 8px rgba(217, 70, 239, 0.12);
   }
-  .btn-primary:hover{ 
-    transform:translateY(-2px); 
-    filter: brightness(1.1); 
-    box-shadow: 0 14px 28px rgba(139, 92, 246, 0.4);
+  .btn-primary::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    padding:1.2px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.85), rgba(139,92,246,0.4) 35%, rgba(217,70,239,0.28) 65%, rgba(255,255,255,0.6) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.75;
+    transition: opacity .4s;
+    z-index: 1;
+  }
+  .btn-primary::after{
+    content:"";
+    position:absolute;
+    left: 10%; right: 10%; top: 3px;
+    height: 40%;
+    border-radius: 100px 100px 60% 60% / 100px 100px 30% 30%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.4), rgba(255,255,255,0));
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(0.5px);
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    border-color: rgba(255,255,255,0.5);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background:
+      radial-gradient(120% 180% at 30% -40%, rgba(255,255,255,0.3), rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02) 55%, rgba(255,255,255,0.06) 100%);
+    box-shadow:
+      inset 0 1.5px 1px rgba(255,255,255,0.95),
+      inset 0 -1px 1px rgba(255,255,255,0.25),
+      inset 0 -16px 24px -10px rgba(139,92,246,0.5),
+      inset 0 10px 18px -8px rgba(255,255,255,0.4),
+      0 18px 44px rgba(139, 92, 246, 0.42),
+      0 4px 18px rgba(217, 70, 239, 0.3);
+  }
+  .btn-primary:hover::before{ opacity: 1; }
+  body.light-mode .btn-primary{
+    background:
+      radial-gradient(120% 180% at 30% -40%, rgba(255,255,255,0.55), rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.02));
+    border: 1px solid rgba(0,0,0,0.08);
+    color: var(--ink);
+    box-shadow:
+      inset 0 1.5px 1px rgba(255,255,255,0.8),
+      inset 0 -14px 20px -10px rgba(139,92,246,0.15),
+      0 10px 24px rgba(139, 92, 246, 0.14);
+  }
+  body.light-mode .btn-primary:hover{
+    background:
+      radial-gradient(120% 180% at 30% -40%, rgba(255,255,255,0.75), rgba(255,255,255,0) 55%),
+      linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.04));
   }
 
   .focus-label {
@@ -766,8 +991,10 @@
     margin-bottom: 32px;
   }
   .filter-btn {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid var(--surface-border);
+    border: 1px solid rgba(255,255,255,0.10);
+    background: var(--glass-fill);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
     color: var(--ink-soft);
     padding: 8px 24px;
     border-radius: 100px;
@@ -775,20 +1002,55 @@
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s var(--ease);
+    box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.25),
+      inset 0 1px 1px rgba(255,255,255,0.1);
+    transition: all 0.3s var(--ease), background 0.4s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
   .filter-btn:hover {
     color: var(--ink);
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.08);
+    background: var(--glass-fill-strong);
+    box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.4),
+      inset 0 1px 1px rgba(255,255,255,0.15);
   }
   .filter-btn.active {
-    background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+    background: linear-gradient(135deg, rgba(139,92,246,0.5), rgba(217,70,239,0.5));
+    border-color: rgba(255,255,255,0.2);
     color: #fff;
-    border-color: transparent;
-    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+    box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.4),
+      inset 0 1px 1px rgba(255,255,255,0.3),
+      0 4px 14px rgba(139, 92, 246, 0.3);
+  }
+
+  /* ---------- Site-wide Photography Background ----------
+     A faint, randomized scatter of landscape/animal shots from the
+     Photography section, sitting behind every section except the
+     hero. Populated by JS (see siteBgImages), each tile gets a
+     random opacity between 0.02 and 0.10 so it reads as texture,
+     never as competing imagery. */
+  .site-bg-wrap { position: relative; }
+  .site-bg-layer {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .site-bg-layer img {
+    position: absolute;
+    display: block;
+    object-fit: cover;
+    height: auto;
+    border-radius: 18px;
+    filter: grayscale(1) contrast(1.05) brightness(0.85);
+    will-change: opacity;
+  }
+  body.light-mode .site-bg-layer img {
+    filter: grayscale(1) contrast(1.05) brightness(1.35);
   }
 
   /* ---------- Carousel Base ---------- */
@@ -830,32 +1092,49 @@
     position: relative;
     border-radius: var(--radius-md);
     overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.08);
     background: var(--carousel-bg);
-    border: 1px solid var(--line);
     box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.14),
       inset 0 1px 0 rgba(255,255,255,0.10),
       inset 0 0 0 1px rgba(255,255,255,0.03),
       0 6px 18px rgba(0,0,0,0.22);
-    transition: border-color 0.4s, box-shadow 0.5s var(--ease-fluid), background 0.5s ease;
+    transition: box-shadow 0.5s var(--ease-fluid), background 0.5s ease;
   }
 
-  /* Glassy diagonal reflection sweep */
+  /* Permanent glassy sheen — visible on every tile, all devices */
   .carousel-item::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 2;
     pointer-events: none;
-    background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,0.22) 46%, rgba(255,255,255,0.05) 52%, transparent 66%);
-    background-size: 220% 220%;
-    background-position: 130% -30%;
-    opacity: 0;
+    background:
+      linear-gradient(125deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.03) 22%, transparent 40%),
+      linear-gradient(180deg, rgba(255,255,255,0.07), transparent 45%);
     mix-blend-mode: overlay;
-    transition: opacity 0.5s ease, background-position 0.9s var(--ease-fluid);
   }
-  .carousel-item:hover::before {
-    opacity: 1;
-    background-position: -30% 130%;
+
+  /* Extra animated reflection sweep — mouse/trackpad devices only,
+     so it can't get stuck mid-animation on touch (no hover-release there) */
+  @media (hover: hover) and (pointer: fine) {
+    .carousel-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,0.24) 46%, rgba(255,255,255,0.06) 52%, transparent 66%);
+      background-size: 220% 220%;
+      background-position: 130% -30%;
+      opacity: 0;
+      mix-blend-mode: overlay;
+      transition: opacity 0.5s ease, background-position 0.9s var(--ease-fluid);
+    }
+    .carousel-item:hover::after {
+      opacity: 1;
+      background-position: -30% 130%;
+    }
   }
 
   .carousel-item img, .g-item img { cursor: zoom-in; }
@@ -869,7 +1148,6 @@
   }
   
   .carousel-item:hover { 
-    border-color: rgba(255,255,255,0.4); 
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.16),
       inset 0 0 0 1px rgba(255,255,255,0.06),
@@ -888,7 +1166,6 @@
       0 4px 14px rgba(20,20,30,0.08);
   }
   body.light-mode .carousel-item:hover {
-    border-color: rgba(0,0,0,0.16);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.8),
       inset 0 0 0 1px rgba(0,0,0,0.05),
@@ -995,22 +1272,28 @@
     width: 48px; 
     height: 48px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255,255,255,0.12);
+    background: var(--glass-fill);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
     color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 20;
-    transition: all .3s var(--ease);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    transition: all .3s var(--ease), background 0.4s ease;
+    box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.3),
+      inset 0 1px 1px rgba(255,255,255,0.12),
+      0 4px 16px rgba(0,0,0,0.3);
   }
   .carousel-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: var(--glass-fill-strong);
     transform: translateY(-50%) scale(1.05);
+    box-shadow:
+      inset 0 -1px 2px rgba(255,255,255,0.45),
+      inset 0 1px 1px rgba(255,255,255,0.18),
+      0 4px 16px rgba(0,0,0,0.3);
   }
   .carousel-btn.prev { left: -24px; }
   .carousel-btn.next { right: -24px; }
@@ -1731,6 +2014,7 @@
 
 <!-- Right Side Progression Hotbar -->
 <div class="progression-bar hidden-up" id="progBar">
+  <div class="prog-popup" id="progPopup"><span id="progPopupLabel">Quick Look</span></div>
   <a href="#quick-look" class="prog-dot" data-target="quick-look" data-tooltip="Quick Look"></a>
   <a href="#graphic-design" class="prog-dot" data-target="graphic-design" data-tooltip="Graphic Design"></a>
   <a href="#visualization" class="prog-dot" data-target="visualization" data-tooltip="3D Visualization"></a>
@@ -1778,6 +2062,9 @@
       </svg>
     </a>
   </header>
+
+  <div class="site-bg-wrap">
+  <div class="site-bg-layer" id="siteBgLayer" aria-hidden="true"></div>
 
   <!-- 0. QUICK LOOK (1 ROW DYNAMIC CAROUSEL) -->
   <section id="quick-look" class="wrap">
@@ -3340,6 +3627,8 @@
     </div>
   </section>
 
+  </div>
+
 </main>
 
 <footer>
@@ -3636,6 +3925,7 @@
         triggerLiquid('down');
         progBar.classList.remove('hidden-up');
         progBar.classList.add('active');
+        document.getElementById('progPopup')?.classList.add('show');
       }
 
       if (isAtVisSection) {
@@ -3651,6 +3941,7 @@
         triggerLiquid('up');
         progBar.classList.remove('active');
         progBar.classList.add('hidden-up');
+        document.getElementById('progPopup')?.classList.remove('show');
       }
     }
     lastScrollY = currentScrollY;
@@ -3699,6 +3990,8 @@
   // --- Scroll Spy for Progression Dots + Section Reveal Transition ---
   const sections = document.querySelectorAll('section');
   const progDots = document.querySelectorAll('.prog-dot');
+  const progPopupLabel = document.getElementById('progPopupLabel');
+  const navLinkEls = document.querySelectorAll('.nav-links a:not(.nav-contact)');
   const observerOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
 
   // Mark every section except the first for the fade/slide-up entrance transition
@@ -3721,7 +4014,13 @@
           dot.classList.remove('active');
           if (dot.getAttribute('data-target') === entry.target.id) {
             dot.classList.add('active');
+            const label = dot.getAttribute('data-tooltip');
+            if (progPopupLabel && label) progPopupLabel.textContent = label;
           }
+        });
+        navLinkEls.forEach(link => {
+          const href = link.getAttribute('href') || '';
+          link.classList.toggle('active', href === '#' + entry.target.id);
         });
       }
     });
@@ -4027,6 +4326,60 @@
       closeLightbox();
     }
   });
+
+  // ---------- Site-wide Photography Background Scatter ----------
+  // Landscape / animal shots pulled from the Photography → Nature set.
+  (function initSiteBgLayer() {
+    const layer = document.getElementById('siteBgLayer');
+    if (!layer) return;
+
+    const bgImages = [
+      'images/NVI09083.jpg',                  // Paddy Field Egrets
+      'images/NVI09045.jpg',                  // Open Sky
+      'images/IMG_20250609_163444081.jpg',    // Palm Fronds
+      'images/New_Nature_1.jpg',              // Macro Fly
+      'images/New_Nature_2.jpg',              // Ant on the Edge
+      'images/New_Nature_3.jpg',              // Garden Lizard Macro
+      'images/New_Nature_4.jpg',              // Watchful Macaque
+      'images/New_Nature_5.jpg',              // Leopard in the Enclosure
+      'images/New_Nature_6.jpg',              // White Tiger Gaze
+      'images/New_Nature_7.jpg',              // Feline Eye Macro
+      'images/New_Nature_8.jpg',              // Squirrel on the Palm
+      'images/New_Nature_9.jpg',              // Alley Cat
+      'images/New_Nature_10.jpg',             // Rooftop Watch
+      'images/IMG_0697.jpg',                  // Macaque and Young
+      'images/IMG_0850.jpg',                  // Mid-Grooming
+      'images/IMG_3586.jpg'                   // Garden Prowl
+    ];
+
+    const shuffled = [...bgImages].sort(() => Math.random() - 0.5);
+    const count = 22;
+    const frag = document.createDocumentFragment();
+
+    for (let i = 0; i < count; i++) {
+      const src = shuffled[i % shuffled.length];
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = '';
+      img.loading = 'lazy';
+
+      const width = 200 + Math.random() * 220;      // 200–420px
+      const top = Math.random() * 97;                // 0–97%
+      const left = Math.random() * 90;                // 0–90%
+      const opacity = (0.02 + Math.random() * 0.08).toFixed(3); // 0.02–0.10
+      const rotate = (Math.random() * 10 - 5).toFixed(1);
+
+      img.style.width = `${width}px`;
+      img.style.top = `${top}%`;
+      img.style.left = `${left}%`;
+      img.style.opacity = opacity;
+      img.style.transform = `rotate(${rotate}deg)`;
+
+      frag.appendChild(img);
+    }
+
+    layer.appendChild(frag);
+  })();
 </script>
 </body>
 </html>
