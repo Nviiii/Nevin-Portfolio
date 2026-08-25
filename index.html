@@ -3745,7 +3745,24 @@
     src: img.currentSrc || img.src,
     alt: img.alt || 'Portfolio photograph'
   }));
-  
+
+  // Use a smaller, evenly-spread pool for the cursor reveal effect and
+  // preload it up front — otherwise the reveal image can't keep up with
+  // fast cursor movement because the browser is still downloading the
+  // previous photo when the next swap is requested.
+  const HERO_REVEAL_POOL_SIZE = 24;
+  let heroRevealPool = heroPhotoSources;
+  if (heroPhotoSources.length > HERO_REVEAL_POOL_SIZE) {
+    const step = heroPhotoSources.length / HERO_REVEAL_POOL_SIZE;
+    heroRevealPool = Array.from({ length: HERO_REVEAL_POOL_SIZE }, (_, i) =>
+      heroPhotoSources[Math.floor(i * step)]
+    );
+  }
+  heroRevealPool.forEach(photo => {
+    const preload = new Image();
+    preload.src = photo.src;
+  });
+
   let lastHeroPhoto = -1;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -3836,9 +3853,9 @@
   }
 
   function revealHeroPhoto() {
-    if (!heroPhotoSources.length || !heroReveal || !heroRevealImg) return;
-    lastHeroPhoto = (lastHeroPhoto + 1) % heroPhotoSources.length;
-    const photo = heroPhotoSources[lastHeroPhoto];
+    if (!heroRevealPool.length || !heroReveal || !heroRevealImg) return;
+    lastHeroPhoto = (lastHeroPhoto + 1) % heroRevealPool.length;
+    const photo = heroRevealPool[lastHeroPhoto];
     heroRevealImg.src = photo.src;
     heroRevealImg.alt = photo.alt;
   }
@@ -4088,6 +4105,22 @@
       widths[minIdx] += estWidth;
     });
   }
+
+  // --- Shuffle Graphic Design & Photography sections (independently, on every load) ---
+  function shuffleArray(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+  ['graphicTrack', 'photographyTrack'].forEach(trackId => {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+    const items = Array.from(track.querySelectorAll(':scope > .carousel-item'));
+    shuffleArray(items).forEach(item => track.appendChild(item));
+  });
 
   document.querySelectorAll('.masonry-track').forEach(track => {
     if (track.id === 'featuredTrack') return; 
