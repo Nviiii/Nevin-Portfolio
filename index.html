@@ -1,0 +1,4302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nevin Prabhakar S — Graphic Design & Cinematic Visuals</title>
+<meta name="description" content="Portfolio of Nevin Prabhakar S — Graphic design, 3D interior visualization, print shop fabrication, and cinematic photography.">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<style>
+  :root {
+    /* Dark Mode Defaults */
+    --bg: #030305;
+    --surface: rgba(20, 15, 30, 0.4);
+    --surface-strong: rgba(25, 18, 38, 0.65);
+    --surface-border: rgba(255, 255, 255, 0.08);
+    --ink: #FFFFFF;
+    --ink-soft: #A09EAB;
+    --ink-mute: #6B687A;
+    --line: rgba(255, 255, 255, 0.05);
+    --primary-glow: #8B5CF6; 
+    --secondary-glow: #D946EF; 
+    --accent-blue: #3B82F6;
+    --hero-gradient-start: #FFFFFF;
+    --hero-gradient-end: #A09EAB;
+    --carousel-bg: #111111;
+    --lens-bg: rgba(255, 255, 255, 0.02);
+    
+    /* Hero Overlay Variables */
+    --hero-bg-layer: linear-gradient(115deg, rgba(3,3,5,.92) 0%, rgba(3,3,5,.72) 48%, rgba(3,3,5,.86) 100%);
+    --hero-grid-filter: blur(4px) brightness(.42) saturate(.72); /* REDUCED BLUR TO 4px */
+    --hero-radial-mask: radial-gradient(circle at 50% 45%, transparent 5%, rgba(3,3,5,.28) 52%, rgba(3,3,5,.76) 100%);
+    --hero-grid-opacity: 0.56;
+    --hero-reveal-shadow: 0 22px 70px rgba(0,0,0,.68), 0 0 0 1px rgba(139,92,246,.16);
+
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+    --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease: cubic-bezier(.16,.8,.24,1);
+  }
+
+  /* Light Mode Overrides */
+  body.light-mode {
+    --bg: #F8F9FA;
+    --surface: rgba(230, 230, 240, 0.5);
+    --surface-strong: rgba(255, 255, 255, 0.85);
+    --surface-border: rgba(0, 0, 0, 0.08);
+    --ink: #111111;
+    --ink-soft: #555555;
+    --ink-mute: #888888;
+    --line: rgba(0, 0, 0, 0.08);
+    --hero-gradient-start: #111111;
+    --hero-gradient-end: #555555;
+    --carousel-bg: #EAEAEA;
+    --lens-bg: rgba(0, 0, 0, 0.03);
+
+    /* Light Mode Hero Fixes */
+    --hero-bg-layer: linear-gradient(115deg, rgba(248,249,250,.85) 0%, rgba(248,249,250,.7) 48%, rgba(248,249,250,.9) 100%);
+    --hero-grid-filter: blur(4px) brightness(1.05) saturate(.9); /* REDUCED BLUR TO 4px */
+    --hero-radial-mask: radial-gradient(circle at 50% 45%, transparent 5%, rgba(248,249,250,.1) 52%, rgba(248,249,250,.8) 100%);
+    --hero-grid-opacity: 0.8;
+    --hero-reveal-shadow: 0 22px 70px rgba(0,0,0,.15), 0 0 0 1px rgba(139,92,246,.3);
+  }
+
+  /* Light Mode Specific Element Adjustments */
+  body.light-mode .nav.nav-bottom {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+  body.light-mode .filter-btn:hover { background: rgba(0, 0, 0, 0.05); color: var(--ink); }
+  body.light-mode .filter-btn.active { color: #fff; }
+  body.light-mode .carousel-btn { background: rgba(255, 255, 255, 0.9); color: #111; box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+  body.light-mode .carousel-btn:hover { background: #fff; border-color: rgba(0,0,0,0.2); }
+  body.light-mode .prog-dot { background: rgba(0, 0, 0, 0.15); }
+  body.light-mode .prog-dot:hover { background: rgba(0, 0, 0, 0.3); }
+  body.light-mode .prog-dot.active { background: var(--primary-glow); }
+  body.light-mode .prog-dot::after { color: var(--ink); }
+  body.light-mode .contact-card h2 { color: var(--ink); }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth; overflow-x:hidden; max-width:100%;}
+  
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+    transition: background 0.5s ease, color 0.5s ease;
+  }
+
+  ::selection{ background: var(--primary-glow); color:#fff; }
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* Typography */
+  .display{
+    font-family:'Playfair Display', serif;
+    font-weight:500;
+    letter-spacing: -0.01em;
+    line-height:1.1;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.02em;
+  }
+
+  .wrap{
+    max-width:min(1800px, 96vw);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  main, header, footer{ position:relative; z-index:1; }
+
+  /* ---------- Fluid Nav Bar ---------- */
+  .nav {
+    position: fixed;
+    top: 24px; 
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 0 8px;
+    height: 56px;
+    max-width: 900px;
+    border-radius: 100px;
+    background:
+      radial-gradient(130% 200% at 25% -60%, rgba(255,255,255,0.18), rgba(255,255,255,0) 55%),
+      rgba(20, 15, 30, 0.32);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.22);
+    transform-origin: center center;
+    overflow: visible;
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.35),
+      inset 0 -8px 16px -8px rgba(139,92,246,0.2),
+      0 12px 32px rgba(0,0,0,0.3);
+    transition: top 0.8s cubic-bezier(0.68, -0.2, 0.265, 1.2), 
+                max-width 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2),
+                padding 0.7s ease,
+                border-radius 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2), 
+                background 0.5s ease,
+                transform 0.5s ease,
+                box-shadow 0.5s ease,
+                border-color 0.5s ease;
+  }
+  
+  .nav.nav-bottom {
+    top: calc(100vh - 84px);
+    max-width: 56px;
+    padding: 0;
+    gap: 0;
+    background:
+      radial-gradient(140% 220% at 30% -60%, rgba(255,255,255,0.22), rgba(255,255,255,0) 55%),
+      rgba(15, 10, 25, 0.4);
+    border-radius: 50% 50% 8px 50%; 
+    border-color: rgba(255,255,255,0.25);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.4),
+      inset 0 -10px 18px -8px rgba(139,92,246,0.3),
+      0 10px 40px rgba(0,0,0,0.8),
+      0 0 24px rgba(139, 92, 246, 0.35);
+  }
+
+  .nav.nav-bottom.nav-bottom-expanded {
+    max-width: 900px;
+    padding: 0 8px;
+    gap: 18px;
+    border-radius: 100px; 
+  }
+
+  .nav.nav-liquid-down { transform: translateX(-50%) scale(0.8, 1.4); border-radius: 100px; }
+  .nav.nav-liquid-up { transform: translateX(-50%) scale(0.8, 1.4); border-radius: 100px; }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink);
+    letter-spacing: 0.5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: width 0.7s ease, height 0.7s ease, color 0.5s ease;
+    cursor: pointer;
+  }
+  .nav-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .nav.nav-bottom .nav-logo { width: 56px; height: 56px; color: #fff; }
+  .nav.nav-bottom.nav-bottom-expanded .nav-logo { width: 40px; height: 40px; color: var(--ink); }
+
+  .nav-links { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    max-width: 800px;
+    opacity: 1;
+    white-space: nowrap;
+    transition: opacity 0.4s ease, max-width 0.7s cubic-bezier(0.68, -0.2, 0.265, 1.2);
+  }
+
+  .nav.nav-bottom .nav-links {
+    max-width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .nav.nav-bottom.nav-bottom-expanded .nav-links {
+    max-width: 800px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a { 
+    position: relative;
+    font-size: 13px; 
+    color: var(--ink-soft); 
+    padding: 8px 14px;
+    border-radius: 100px;
+    transition: color .25s var(--ease), background .3s var(--ease), border-color .3s var(--ease); 
+    border: 1px solid transparent;
+  }
+  .nav-links a:not(.nav-contact):hover { 
+    color: var(--ink); 
+    background: rgba(255,255,255,0.08);
+  }
+  .nav-links a.active:not(.nav-contact) {
+    color: #fff;
+    background:
+      radial-gradient(120% 200% at 30% -60%, rgba(255,255,255,0.3), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, rgba(139,92,246,0.35), rgba(217,70,239,0.2));
+    border-color: rgba(255,255,255,0.3);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.4),
+      0 4px 12px rgba(139,92,246,0.25);
+  }
+  body.light-mode .nav-links a.active:not(.nav-contact) {
+    color: var(--ink);
+    background:
+      radial-gradient(120% 200% at 30% -60%, rgba(255,255,255,0.8), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, rgba(139,92,246,0.18), rgba(217,70,239,0.1));
+    border-color: rgba(0,0,0,0.1);
+  }
+  
+  .nav-contact {
+    background: linear-gradient(135deg, #81A3FF, #8BE1C2);
+    color: #030305 !important;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(129, 163, 255, 0.2);
+  }
+  .nav-contact:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(129, 163, 255, 0.4);
+    filter: brightness(1.05);
+  }
+
+  /* Theme Toggle Button */
+  .theme-toggle {
+    background: transparent;
+    border: none;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.3s var(--ease);
+  }
+  .theme-toggle:hover {
+    color: var(--ink);
+    background: rgba(128, 128, 128, 0.15);
+  }
+  .theme-toggle svg { width: 16px; height: 16px; }
+  .moon-icon { display: none; }
+  body.light-mode .sun-icon { display: none; }
+  body.light-mode .moon-icon { display: block; }
+
+  /* ---------- Mobile Nav: Hamburger + Dropdown Panel ---------- */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .nav-hamburger span {
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ink);
+    transition: transform 0.3s var(--ease), opacity 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile-panel {
+    position: fixed;
+    z-index: 49;
+    top: 90px;
+    left: 50%;
+    width: min(90vw, 340px);
+    max-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0 22px;
+    border-radius: 20px;
+    background: var(--surface-strong);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    transform: translateX(-50%) translateY(-10px);
+    transition: max-height 0.5s var(--ease-fluid), opacity 0.35s ease,
+                transform 0.4s var(--ease-fluid), padding 0.5s ease;
+  }
+  .nav-mobile-panel.open {
+    max-height: 460px;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 14px 22px;
+    transform: translateX(-50%) translateY(0);
+  }
+  .nav-mobile-panel a {
+    padding: 13px 2px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--line);
+    transition: color 0.25s var(--ease);
+  }
+  .nav-mobile-panel a:last-child { border-bottom: none; }
+  .nav-mobile-panel a:hover { color: var(--ink); }
+  .nav-mobile-panel a.nav-contact {
+    text-align: center;
+    margin-top: 4px;
+    margin-bottom: 2px;
+    border-bottom: none;
+  }
+
+  @media (max-width: 991.98px) {
+    .nav { gap: 8px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    /* Keep the compact mobile pill (logo + toggle + hamburger) always visible,
+       never collapsing down to a lone avatar-only bubble. */
+    .nav.nav-bottom {
+      top: 20px;
+      max-width: 220px;
+      padding: 0 10px;
+      gap: 8px;
+      border-radius: 100px;
+      background: var(--surface-strong);
+      box-shadow: none;
+    }
+    .nav.nav-bottom .nav-logo { width: 40px; height: 40px; color: var(--ink); }
+  }
+  @media (min-width: 992px) {
+    .nav-mobile-panel { display: none; }
+  }
+
+  /* ---------- Progression Hotbar (Right) ---------- */
+  .progression-bar {
+    position: fixed;
+    z-index: 45;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%) scale(0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 12px;
+    border-radius: 100px;
+    background: rgba(20, 15, 30, 0.32);
+    backdrop-filter: blur(10px) saturate(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.2);
+    opacity: 0;
+    pointer-events: none;
+    overflow: visible;
+    will-change: opacity, transform;
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), background 0.5s ease, border-color 0.5s ease;
+  }
+
+  .prog-popup {
+    position: absolute;
+    top: -14px;
+    right: 0;
+    left: auto;
+    max-width: min(220px, calc(100vw - 48px));
+    transform-origin: right bottom;
+    transform: translateY(-100%) scale(0.85);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 100px;
+    background:
+      radial-gradient(130% 220% at 30% -50%, rgba(255,255,255,0.4), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, rgba(139,92,246,0.4), rgba(217,70,239,0.22));
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.55),
+      0 8px 20px rgba(76, 29, 149, 0.28),
+      0 0 16px rgba(139, 92, 246, 0.2);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: #fff;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+  }
+  .prog-popup.show {
+    opacity: 1;
+    transform: translateY(-100%) scale(1);
+  }
+  .prog-popup::after {
+    content: "";
+    position: absolute;
+    right: 16px;
+    bottom: -5px;
+    width: 9px;
+    height: 9px;
+    background: rgba(139, 92, 246, 0.32);
+    border-right: 1px solid rgba(255,255,255,0.4);
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    transform: rotate(45deg);
+  }
+  body.light-mode .prog-popup {
+    background:
+      radial-gradient(120% 200% at 30% -40%, rgba(255,255,255,0.8), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, rgba(139,92,246,0.18), rgba(217,70,239,0.12));
+    border-color: rgba(0,0,0,0.12);
+    color: var(--ink);
+  }
+  body.light-mode .prog-popup::after {
+    background: rgba(139, 92, 246, 0.18);
+    border-color: rgba(0,0,0,0.12);
+  }
+
+  .progression-bar.active {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .progression-bar.hidden-up {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.85);
+    pointer-events: none;
+  }
+
+  .prog-dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s var(--ease);
+    cursor: pointer;
+    display: block;
+  }
+  .prog-dot:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.2);
+  }
+  .prog-dot.active {
+    background: var(--primary-glow);
+    transform: scale(1.5);
+    box-shadow: 0 0 10px var(--primary-glow);
+  }
+  .prog-dot::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background:
+      radial-gradient(130% 220% at 30% -50%, rgba(255,255,255,0.35), rgba(255,255,255,0) 55%),
+      linear-gradient(135deg, rgba(139,92,246,0.38), rgba(217,70,239,0.2));
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.38);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.5),
+      0 6px 16px rgba(76, 29, 149, 0.25);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  .prog-dot:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(-4px);
+  }
+
+  @media (max-width:960px){ .progression-bar{ display:none; } }
+
+  /* ---------- Hero & Fluid Mechanism ---------- */
+  .hero {
+    position: relative;
+    width: 100vw;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden; 
+    padding-top: 120px; 
+    padding-bottom: 60px;
+  }
+
+  .fluid-bg {
+    position: absolute;
+    inset: -20%; 
+    z-index: 1;
+    filter: blur(90px) saturate(150%);
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%);
+    mask-image: radial-gradient(ellipse at 50% 50%, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 75%);
+  }
+
+  @keyframes liquidMorph {
+    0%   { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+    33%  { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+    66%  { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+    100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+  }
+
+  .color-blob {
+    position: absolute;
+    will-change: transform, left, top, border-radius;
+  }
+  .cb-1 {
+    width: 60vw; height: 60vw;
+    background: var(--primary-glow);
+    top: 0%; left: 20%;
+    opacity: 0.5;
+    animation: driftFluid1 20s infinite alternate ease-in-out, liquidMorph 12s infinite linear;
+  }
+  .cb-2 {
+    width: 50vw; height: 50vw;
+    background: var(--secondary-glow);
+    bottom: 0%; right: 10%;
+    opacity: 0.4;
+    animation: driftFluid2 25s infinite alternate ease-in-out, liquidMorph 15s infinite reverse linear;
+  }
+  .cb-cursor {
+    width: 450px; height: 450px;
+    background: var(--accent-blue);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+    animation: liquidMorph 8s infinite linear;
+  }
+
+  .liquid-lens {
+    position: absolute;
+    z-index: 2; 
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--lens-bg);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 65%);
+    mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 35%, rgba(0,0,0,0) 65%);
+    pointer-events: none;
+    will-change: left, top;
+    transition: background 0.5s ease;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10; 
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    pointer-events: none; 
+  }
+  .hero-content * { pointer-events: auto; }
+
+  .avatar-container {
+    position: relative;
+    width: clamp(150px, 18vw, 230px);
+    height: clamp(150px, 18vw, 230px);
+    border-radius: 50%;
+    margin-bottom: 28px;
+    cursor: pointer;
+  }
+  .avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #111;
+    background-size: cover;
+    background-position: center top;
+    -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 52%, rgba(0,0,0,0.85) 66%, rgba(0,0,0,0) 92%);
+    mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 52%, rgba(0,0,0,0.85) 66%, rgba(0,0,0,0) 92%);
+    transition: transform 0.5s ease;
+  }
+  .avatar-container:hover .avatar {
+    transform: scale(1.04);
+  }
+
+  /* Hover-reveal "About" preview popup */
+  .avatar-popup {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 18px);
+    transform: translateX(-50%) translateY(10px) scale(0.92);
+    width: 220px;
+    background: var(--surface, rgba(20,20,20,0.9));
+    border: 1px solid var(--border-soft, rgba(255,255,255,0.12));
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+    z-index: 20;
+  }
+  .avatar-popup.is-visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+  .avatar-popup::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-top-color: var(--border-soft, rgba(255,255,255,0.12));
+  }
+  .avatar-popup-image {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: 12px;
+    background-image: url('images/About.png');
+    background-size: cover;
+    background-position: top center;
+    border: 1px solid rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-popup-image::after {
+    content: 'Click to view';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 8px 0 7px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(0deg, rgba(0,0,0,0.65), rgba(0,0,0,0));
+  }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-mute);
+    text-transform:uppercase;
+    letter-spacing: 2px;
+    margin-bottom:16px;
+  }
+
+  .hero h1{
+    font-size:clamp(42px, 6vw, 76px);
+    margin-bottom:20px;
+    background: linear-gradient(180deg, var(--hero-gradient-start) 0%, var(--hero-gradient-end) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: background 0.5s ease;
+  }
+  
+  .hero p.lede{
+    font-size:clamp(16px, 2vw, 18px);
+    color:var(--ink-soft);
+    line-height:1.7;
+    margin-bottom:40px;
+  }
+
+  .btn-primary{
+    position: relative;
+    padding:14px 32px;
+    border-radius:100px;
+    background:
+      radial-gradient(120% 180% at 30% -40%, rgba(255,255,255,0.14), rgba(255,255,255,0) 55%),
+      rgba(255,255,255,0.06);
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing: 0.2px;
+    border: 1px solid rgba(255,255,255,0.18);
+    cursor: pointer;
+    transition:transform .3s var(--ease), box-shadow .4s, border-color .4s, background .4s;
+    display: inline-block;
+    isolation: isolate;
+    backdrop-filter: blur(10px) saturate(160%);
+    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.25),
+      0 6px 18px rgba(139,92,246,0.14);
+  }
+  .btn-primary::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    padding:1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.35), rgba(139,92,246,0.25) 50%, rgba(255,255,255,0.15) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.7;
+    transition: opacity .4s;
+    z-index: 1;
+  }
+  .btn-primary::after{
+    content:"";
+    position:absolute;
+    left: 10%; right: 10%; top: 3px;
+    height: 40%;
+    border-radius: 100px 100px 60% 60% / 100px 100px 30% 30%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+    pointer-events: none;
+    z-index: 1;
+    filter: blur(0.5px);
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    border-color: rgba(255,255,255,0.3);
+    background:
+      radial-gradient(120% 180% at 30% -40%, rgba(255,255,255,0.2), rgba(255,255,255,0) 55%),
+      rgba(255,255,255,0.1);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.3),
+      0 10px 24px rgba(139,92,246,0.22);
+  }
+  .btn-primary:hover::before{ opacity: 1; }
+  body.light-mode .btn-primary{
+    background:
+      radial-gradient(120% 180% at 30% -40%, rgba(255,255,255,0.7), rgba(255,255,255,0) 55%),
+      rgba(255,255,255,0.4);
+    border: 1px solid rgba(0,0,0,0.08);
+    color: var(--ink);
+    box-shadow:
+      inset 0 1px 1px rgba(255,255,255,0.7),
+      0 6px 18px rgba(139, 92, 246, 0.12);
+  }
+
+  .hero-cta-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .btn-contact-hero{
+    position: relative;
+    padding:14px 32px;
+    border-radius:100px;
+    background: linear-gradient(135deg, #81A3FF, #8BE1C2);
+    color:#030305;
+    font-size:15px;
+    font-weight:600;
+    letter-spacing: 0.2px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    box-shadow: 0 8px 20px rgba(129, 163, 255, 0.25);
+    transition: transform .3s var(--ease), box-shadow .4s, filter .3s;
+  }
+  .btn-contact-hero:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(129, 163, 255, 0.4);
+    filter: brightness(1.05);
+  }
+
+  .focus-label {
+    position: absolute;
+    bottom: 32px;
+    left: 32px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+    color: var(--ink-soft);
+    text-decoration: none;
+    opacity: 0.75;
+    transition: opacity 0.3s ease, color 0.3s ease;
+  }
+  .scroll-cue:hover { opacity: 1; color: var(--ink); }
+  .scroll-cue span {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .scroll-cue svg {
+    animation: scrollCueBounce 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollCueBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(7px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue svg { animation: none; }
+  }
+  @media (max-width: 767.98px) {
+    .scroll-cue { bottom: 20px; }
+  }
+
+  /* ---------- Sections ---------- */
+  section { 
+    padding-top: clamp(60px, 8vh, 100px);
+    padding-bottom: clamp(60px, 8vh, 100px);
+    position: relative;
+    z-index: 10; 
+    background:
+      radial-gradient(60% 55% at 15% -10%, rgba(139, 92, 246, 0.05), transparent 60%),
+      radial-gradient(55% 50% at 100% 110%, rgba(217, 70, 239, 0.035), transparent 60%),
+      var(--bg);
+    border-top: 1px solid var(--line); 
+    transition: background 0.5s ease, border-color 0.5s ease;
+  }
+  section:nth-of-type(even) {
+    background:
+      radial-gradient(60% 55% at 100% -10%, rgba(59, 130, 246, 0.045), transparent 60%),
+      radial-gradient(55% 50% at 0% 110%, rgba(139, 92, 246, 0.04), transparent 60%),
+      var(--bg);
+  }
+  section:first-of-type { 
+    border-top: none; 
+    padding-top: clamp(40px, 6vh, 80px); 
+  }
+
+  /* Section entrance transition: each section eases up + fades in as it scrolls into view */
+  section.reveal-section {
+    opacity: 0;
+    transform: translateY(48px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  section.reveal-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    section.reveal-section { opacity: 1; transform: none; transition: none; }
+  }
+  
+  .section-head{
+    text-align: center;
+    margin-bottom: clamp(32px, 5vh, 48px);
+  }
+  .section-head h2{
+    font-size:clamp(36px, 4vw, 54px);
+    margin-bottom: 12px;
+  }
+  .section-head p{
+    color:var(--ink-soft);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ---------- Filter Buttons ---------- */
+  .filter-group {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .filter-btn {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--surface-border);
+    color: var(--ink-soft);
+    padding: 8px 24px;
+    border-radius: 100px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s var(--ease);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .filter-btn:hover {
+    color: var(--ink);
+    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .filter-btn.active {
+    background: linear-gradient(135deg, var(--primary-glow), var(--secondary-glow));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+  }
+
+  /* ---------- Carousel Base ---------- */
+  .carousel-wrapper { position: relative; max-width: 100%; }
+  .carousel-wrapper::before,
+  .carousel-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 40px;
+    width: clamp(24px, 6vw, 90px);
+    z-index: 3;
+    pointer-events: none;
+    transition: background 0.5s ease;
+  }
+  .carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg), transparent);
+  }
+  .carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg), transparent);
+  }
+
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    gap: 24px; 
+    padding: 26px 0 40px; 
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    scroll-behavior: smooth;
+  }
+  .carousel-track::-webkit-scrollbar { display: none; } 
+  
+  .carousel-item {
+    scroll-snap-align: start;
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--carousel-bg);
+    border: 1px solid var(--line);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.10),
+      inset 0 0 0 1px rgba(255,255,255,0.03),
+      0 6px 18px rgba(0,0,0,0.22);
+    transition: border-color 0.4s, box-shadow 0.5s var(--ease-fluid), background 0.5s ease;
+  }
+
+  /* Permanent glassy sheen — visible on every tile, all devices */
+  .carousel-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      linear-gradient(125deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.04) 22%, transparent 40%),
+      linear-gradient(180deg, rgba(255,255,255,0.10), transparent 45%);
+    mix-blend-mode: overlay;
+  }
+
+  /* Extra animated reflection sweep — mouse/trackpad devices only,
+     so it can't get stuck mid-animation on touch (no hover-release there) */
+  @media (hover: hover) and (pointer: fine) {
+    .carousel-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,0.24) 46%, rgba(255,255,255,0.06) 52%, transparent 66%);
+      background-size: 220% 220%;
+      background-position: 130% -30%;
+      opacity: 0;
+      mix-blend-mode: overlay;
+      transition: opacity 0.5s ease, background-position 0.9s var(--ease-fluid);
+    }
+    .carousel-item:hover::after {
+      opacity: 1;
+      background-position: -30% 130%;
+    }
+  }
+
+  .carousel-item img, .g-item img { cursor: zoom-in; }
+  a.video-link img { cursor: pointer; } 
+
+  .carousel-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    transition: opacity 0.6s var(--ease-fluid), transform 0.8s var(--ease-fluid);
+  }
+  
+  .carousel-item:hover { 
+    border-color: rgba(255,255,255,0.4); 
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.16),
+      inset 0 0 0 1px rgba(255,255,255,0.06),
+      0 14px 32px rgba(0,0,0,0.4),
+      0 0 30px rgba(139, 92, 246, 0.18);
+  }
+  .carousel-item:hover img { 
+    opacity: 1; 
+    transform: scale(1.06); 
+  }
+
+  body.light-mode .carousel-item {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.7),
+      inset 0 0 0 1px rgba(0,0,0,0.03),
+      0 4px 14px rgba(20,20,30,0.08);
+  }
+  body.light-mode .carousel-item:hover {
+    border-color: rgba(0,0,0,0.16);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.8),
+      inset 0 0 0 1px rgba(0,0,0,0.05),
+      0 12px 28px rgba(20,20,30,0.14),
+      0 0 24px rgba(139, 92, 246, 0.14);
+  }
+
+  /* ---------- DYNAMIC MULTI-ROW MASONRY TRACK ---------- */
+  .masonry-track {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .masonry-row {
+    display: flex;
+    gap: 24px;
+    height: clamp(244px, 35vh, 344px);
+    padding: 20px 0 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .masonry-row::-webkit-scrollbar { display: none; }
+
+  #featuredTrack.masonry-track { flex-direction: row; height: clamp(304px, 45vh, 474px); }
+
+  @media (max-width: 768px) {
+    .masonry-row { height: 244px; }
+    #featuredTrack.masonry-track { height: 304px; }
+  }
+
+  .masonry-track .carousel-item {
+    flex: none; 
+    width: fit-content; 
+    height: 100%; 
+    max-width: none;
+    min-width: 0;
+  }
+
+  .masonry-track .carousel-item img {
+    width: auto; 
+    height: 100%;
+    object-fit: contain; 
+    display: block;
+  }
+
+  .carousel-item.hide {
+    display: none !important;
+  }
+
+
+  /* Special Logo Backgrounds */
+  .transparent-logo {
+    background: #ffffff !important;
+    padding: 30px;
+  }
+  body.light-mode .transparent-logo {
+    background: #f0f0f0 !important;
+    border-color: rgba(0,0,0,0.1);
+  }
+  .dark-logo {
+    background: #111111 !important;
+    padding: 30px;
+  }
+
+  /* Video Play Button Overlay */
+  .play-btn-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 64px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    transition: all 0.3s var(--ease);
+    pointer-events: none; 
+  }
+  .carousel-item:hover .play-btn-overlay {
+    background: var(--primary-glow);
+    border-color: transparent;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  .play-btn-overlay svg {
+    width: 24px;
+    height: 24px;
+    fill: #fff;
+    margin-left: 4px;
+  }
+
+  /* Carousel Navigation Buttons */
+  .carousel-btn {
+    position: absolute;
+    top: calc(50% - 20px); 
+    transform: translateY(-50%);
+    width: 48px; 
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    transition: all .3s var(--ease);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  }
+  .carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.05);
+  }
+  .carousel-btn.prev { left: -24px; }
+  .carousel-btn.next { right: -24px; }
+  
+  @media (max-width: 768px) { .carousel-btn { display: none; } }
+
+  /* Overlays */
+  .g-overlay{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:24px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.9));
+    color:#fff;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .g-overlay .g-title{ font-size:18px; font-weight:500; margin-bottom:4px; font-family: 'Playfair Display', serif; }
+  .g-overlay .g-tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; color: var(--primary-glow); }
+
+  /* ---------- About & Timeline ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    transition: background 0.5s ease, border-color 0.5s ease;
+  }
+  @media (max-width:900px){ .about-grid{ grid-template-columns:1fr; padding: 32px; } }
+
+  .about-text p{ color:var(--ink-soft); font-size:15px; line-height:1.8; margin-bottom:20px; transition: color 0.5s ease; }
+  .about-text strong{ color:var(--ink); font-weight:500; transition: color 0.5s ease; }
+
+  .timeline{ position:relative; padding-left:28px; border-left: 1px solid rgba(139, 92, 246, 0.3); }
+  .t-item{ position:relative; padding-bottom:40px; }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{
+    content:"";
+    position:absolute; left:-33px; top:4px;
+    width:10px; height:10px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--primary-glow);
+    transition: background 0.5s ease;
+  }
+  .t-role{ font-size:18px; font-weight:500; margin-bottom:4px; font-family: 'Playfair Display', serif; }
+  .t-meta{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--primary-glow); margin-bottom:12px; display:block; }
+  .t-desc{ color:var(--ink-soft); font-size:14px; line-height:1.6; }
+  
+  /* ---------- Gear & Arsenal ---------- */
+  .gear-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) { .gear-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .gear-grid { grid-template-columns: 1fr; } }
+
+  .about-poster-wrap {
+    margin-top: 40px;
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+  }
+  .about-poster-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    cursor: zoom-in;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .about-poster-img:hover {
+    transform: scale(1.005);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.45);
+  }
+  .about-poster-hint {
+    display: block;
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+  }
+
+  .gear-card {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(130% 130% at 12% -10%, rgba(139, 92, 246, 0.22), transparent 55%),
+      radial-gradient(130% 130% at 100% 115%, rgba(217, 70, 239, 0.14), transparent 55%),
+      rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.09),
+      inset 0 0 24px rgba(255, 255, 255, 0.02),
+      0 20px 40px -24px rgba(0, 0, 0, 0.6);
+    transition: transform .4s var(--ease), border-color .4s ease, background .5s ease, box-shadow .4s ease;
+  }
+  .gear-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 30%, transparent 55%);
+    opacity: 0.8;
+    pointer-events: none;
+  }
+  .gear-card > * { position: relative; z-index: 1; }
+  .gear-card.wide { grid-column: span 2; }
+  @media (max-width: 560px) { .gear-card.wide { grid-column: span 1; } }
+
+  .gear-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(139, 92, 246, 0.4);
+    background:
+      radial-gradient(130% 130% at 12% -10%, rgba(139, 92, 246, 0.32), transparent 58%),
+      radial-gradient(130% 130% at 100% 115%, rgba(217, 70, 239, 0.22), transparent 58%),
+      rgba(255, 255, 255, 0.05);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.14),
+      0 30px 60px -24px rgba(139, 92, 246, 0.35),
+      0 0 0 1px rgba(139, 92, 246, 0.12);
+  }
+  .gear-icon {
+    width: 32px; height: 32px;
+    color: var(--primary-glow);
+    margin-bottom: 8px;
+    filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.45));
+  }
+  .gear-title {
+    font-size: 18px; font-weight: 500;
+    font-family: 'Playfair Display', serif;
+  }
+  .gear-desc {
+    color: var(--ink-soft);
+    font-size: 14px; line-height: 1.6;
+  }
+  .gear-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: auto;
+  }
+  .gear-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    background: rgba(255, 255, 255, 0.06);
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(6px);
+    transition: background 0.5s ease, border-color 0.5s ease;
+  }
+
+  .gear-card-image {
+    padding: 0;
+    overflow: hidden;
+    cursor: zoom-in;
+  }
+  .gear-card-image::before { display: none; }
+  .gear-setup-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .gear-card-image:hover .gear-setup-img {
+    transform: scale(1.03);
+  }
+
+  /* ---------- YouTube Channels ---------- */
+  .channel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 720px) { .channel-grid { grid-template-columns: 1fr; } }
+
+  .channel-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    backdrop-filter: blur(12px);
+    transition: transform .4s var(--ease), border-color .4s, background .4s;
+  }
+  .channel-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .channel-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .channel-info { flex: 1; min-width: 0; }
+  .channel-name {
+    font-size: 18px; font-weight: 500;
+    font-family: 'Playfair Display', serif;
+  }
+  .channel-handle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
+  }
+  .channel-desc {
+    color: var(--ink-soft);
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+  .channel-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .channel-stats strong { color: var(--ink); font-weight: 600; }
+  .channel-cta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: var(--primary-glow);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  @media (max-width: 480px) {
+    .channel-card { flex-wrap: wrap; }
+    .channel-cta { margin-left: 92px; }
+  }
+
+  /* ---------- Contact Block ---------- */
+  .contact-card {
+    padding: clamp(40px, 8vh, 80px) clamp(20px, 4vw, 40px);
+    border-radius: 40px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--surface-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transition: border-color 0.5s ease;
+  }
+  .contact-card h2 {
+    font-size: clamp(32px, 5vw, 56px);
+    margin-bottom: 20px;
+  }
+  .contact-card p {
+    color: var(--ink-soft);
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.6;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--surface-border);
+    font-size: 14px;
+    color: var(--ink);
+    transition: all .3s var(--ease);
+  }
+  .contact-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+  .contact-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .contact-link[aria-label^="Call"] {
+    padding: 12px;
+    border-radius: 50%;
+  }
+
+  footer{ position: relative; z-index: 1; padding:40px 0; text-align:center; font-size:12px; color:var(--ink-mute); border-top: 1px solid var(--line); margin-top: 40px; background: var(--bg); transition: background 0.5s ease; }
+
+  /* ---------- Lightbox ---------- */
+  .lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .lightbox.active {
+    display: flex;
+    opacity: 1;
+  }
+  .lightbox-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    cursor: zoom-in;
+    transition: transform 0.12s ease-out;
+    will-change: transform;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.2s var(--ease), transform 0.2s var(--ease);
+  }
+  .lightbox-close:hover {
+    color: var(--primary-glow);
+    transform: scale(1.1);
+  }
+
+  /* ---------- Water-reveal hero & responsive refinements ---------- */
+  .hero {
+    isolation: isolate;
+    padding-inline: 1rem;
+    background: #030305;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: var(--hero-bg-layer);
+    transition: background 0.5s ease;
+  }
+  .fluid-bg {
+    inset: 0;
+    z-index: 1;
+    filter: blur(34px) saturate(120%);
+    -webkit-mask-image: none;
+    mask-image: none;
+    background: radial-gradient(ellipse at 25% 15%, rgba(139,92,246,.32), transparent 46%), radial-gradient(ellipse at 78% 74%, rgba(217,70,239,.22), transparent 45%);
+  }
+  .hero-photo-field {
+    position: absolute;
+    inset: -6%;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+    grid-template-rows: repeat(10, minmax(0, 1fr));
+    gap: 5px;
+    overflow: hidden;
+    opacity: var(--hero-grid-opacity);
+    pointer-events: none;
+    filter: var(--hero-grid-filter);
+    transform: translate3d(var(--field-x, 0px), var(--field-y, 0px), 0) scale(1.08);
+    transition: transform .52s cubic-bezier(.16,1,.3,1), filter 0.5s ease, opacity 0.5s ease;
+    will-change: transform;
+  }
+  .hero-photo-field::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--hero-radial-mask);
+    transition: background 0.5s ease;
+  }
+  .hero-photo-field img {
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    object-fit: cover;
+    opacity: .82;
+    /* This makes the grid photos morph/spring back smoothly */
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+    will-change: transform, opacity;
+  }
+  .cb-1, .cb-2 { animation: none; opacity: .22; }
+  .cb-1 { transform: translate(-10%, -16%); }
+  .cb-2 { transform: translate(12%, 16%); }
+  .cb-cursor {
+    width: clamp(150px, 19vw, 290px);
+    height: clamp(150px, 19vw, 290px);
+    opacity: .48;
+    animation: none;
+    border-radius: 48% 52% 45% 55% / 55% 42% 58% 45%;
+    background: radial-gradient(circle, rgba(130,185,255,.52) 0%, rgba(103,89,246,.24) 44%, transparent 72%);
+    filter: blur(5px);
+  }
+  .liquid-lens { display: none; }
+  
+  .hero-reveal {
+    position: absolute;
+    z-index: 4;
+    width: max-content; /* Dynamic width hug */
+    height: max-content;
+    max-width: min(34vw, 390px);
+    max-height: min(48vh, 440px);
+    overflow: hidden;
+    border: none;
+    border-radius: 18px;
+    background: transparent;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(var(--reveal-scale, .72));
+    box-shadow: var(--hero-reveal-shadow);
+    transition: opacity .12s ease, transform .42s cubic-bezier(.16,1,.3,1), box-shadow 0.5s ease;
+  }
+  .hero-reveal.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(var(--reveal-scale, .72)); }
+  .hero-reveal img { 
+    display: block; 
+    width: auto; 
+    height: auto; 
+    max-width: min(34vw, 390px); 
+    max-height: min(48vh, 440px); 
+    object-fit: contain; /* Exact aspect ratio hug */
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,.24);
+  }
+  .hero-reveal::after { 
+    content: ""; 
+    position:absolute; 
+    inset:0; 
+    background: linear-gradient(to top, rgba(0,0,0,.48), transparent 44%); 
+    border-radius: 18px; 
+    pointer-events: none;
+  }
+  
+  .liquid-ripple {
+    display: none; /* Hide ripple circle as requested */
+    position: absolute;
+    z-index: 5;
+    width: clamp(150px, 18vw, 270px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(192,220,255,.3);
+    border-radius: 48% 52% 45% 55% / 55% 42% 58% 45%;
+    opacity: .78;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(.62);
+    transition: left .08s linear, top .08s linear, opacity .45s ease, transform .5s cubic-bezier(.16,1,.3,1), border-radius .7s ease;
+    box-shadow: inset 0 0 28px rgba(125,175,255,.15), 0 0 42px rgba(124,100,255,.20);
+  }
+  .liquid-ripple.is-resting { transform: translate(-50%, -50%) scale(1.16); opacity: .32; border-radius: 58% 42% 62% 38% / 42% 58% 38% 62%; }
+  
+  .hero-content { z-index: 10; }
+  .hero-content .lede { text-shadow: 0 2px 18px rgba(0,0,0,.9); }
+  /* Bootstrap's carousel component hides .carousel-item by default; these
+     galleries use that class for independent portfolio tiles. */
+  .carousel-item { display: block; float: none; margin-right: 0; }
+  .carousel-wrapper { padding-inline: 34px; }
+  .carousel-btn { z-index: 20; pointer-events: auto; }
+  .carousel-btn.prev { left: 0; }
+  .carousel-btn.next { right: 0; }
+  @media (max-width: 991.98px) {
+    .wrap { padding-left: 24px; padding-right: 24px; }
+    .nav { max-width: calc(100vw - 32px); }
+    .carousel-wrapper { padding-inline: 0; }
+  }
+  @media (max-width: 767.98px) {
+    .hero { min-height: 100svh; padding-top: 96px; }
+    .hero-reveal { width: min(72vw, 320px); max-height: 38vh; }
+    .hero-reveal img { max-height: 38vh; }
+    .wrap { padding-left: 16px; padding-right: 16px; }
+    .section-head { margin-bottom: 28px; }
+    .filter-group { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 6px; }
+    .filter-btn { flex: 0 0 auto; }
+  }
+  @media (max-width: 767.98px) {
+    .hero-photo-field { grid-template-columns: repeat(10, minmax(0, 1fr)); grid-template-rows: repeat(15, minmax(0, 1fr)); gap: 3px; filter: blur(3px) brightness(.36) saturate(.66); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-reveal, .liquid-ripple { transition: none; }
+  }
+
+  /* ============ Splash / Intro Screen ============ */
+  body.splash-active { overflow: hidden; height: 100vh; }
+
+  .splash {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at 50% 42%, #100a1c 0%, #030305 72%);
+    transition: opacity 0.7s var(--ease-fluid), visibility 0.7s;
+  }
+  .splash.splash-hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .splash-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+  }
+
+  .splash-icon-stage {
+    position: relative;
+    width: clamp(84px, 16vw, 130px);
+    height: clamp(84px, 16vw, 130px);
+  }
+
+  .splash-icon {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transform: scale(0.9);
+    filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.35)) blur(6px);
+    transition: opacity 0.65s var(--ease-fluid),
+                transform 0.75s var(--ease-fluid),
+                filter 0.65s var(--ease-fluid);
+    will-change: opacity, transform, filter;
+  }
+  .splash-icon.icon-design { color: #D946EF; }
+  .splash-icon.icon-axis { color: #3B82F6; }
+  .splash-icon.icon-aperture { color: #8B5CF6; }
+
+  .splash-icon.is-active {
+    opacity: 1;
+    transform: scale(1);
+    filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.35)) blur(0px);
+    transition-delay: 0.12s;
+  }
+  .splash-icon.is-leaving {
+    opacity: 0;
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.35)) blur(6px);
+    transition-delay: 0s;
+  }
+
+  /* Aperture blades: each blade pivots at its outer edge so the
+     whole ring reads as an iris opening and closing. */
+  .icon-aperture .aperture-blade {
+    transform-box: fill-box;
+    transform-origin: 50% 4%;
+    animation: apertureBreathe 2.4s var(--ease) infinite;
+  }
+  .icon-aperture .aperture-core {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: apertureCore 2.4s var(--ease) infinite;
+  }
+  .icon-aperture .aperture-blades > g:nth-child(1) .aperture-blade { animation-delay: 0s; }
+  .icon-aperture .aperture-blades > g:nth-child(2) .aperture-blade { animation-delay: 0.03s; }
+  .icon-aperture .aperture-blades > g:nth-child(3) .aperture-blade { animation-delay: 0.06s; }
+  .icon-aperture .aperture-blades > g:nth-child(4) .aperture-blade { animation-delay: 0.09s; }
+  .icon-aperture .aperture-blades > g:nth-child(5) .aperture-blade { animation-delay: 0.12s; }
+  .icon-aperture .aperture-blades > g:nth-child(6) .aperture-blade { animation-delay: 0.15s; }
+  @keyframes apertureBreathe {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(30deg); }
+  }
+  @keyframes apertureCore {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(0.55); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .icon-aperture .aperture-blade, .icon-aperture .aperture-core { animation: none; }
+  }
+
+  .splash-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    min-height: 14px;
+  }
+  .splash-label.is-active { opacity: 1; }
+
+  .splash-progress {
+    width: 130px;
+    height: 2px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  .splash-progress span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #8B5CF6, #D946EF);
+    transition: width 0.5s linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .splash-icon { transition: opacity 0.25s ease; transform: none !important; filter: none !important; }
+    .splash { transition: opacity 0.25s ease, visibility 0.25s; }
+  }
+</style>
+</head>
+<body class="splash-active">
+
+<!-- ============ Splash / Intro Screen ============ -->
+<div class="splash" id="splashScreen" aria-hidden="true">
+  <div class="splash-inner">
+    <div class="splash-icon-stage">
+      <svg class="splash-icon icon-design" data-icon="0" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 80 C 26 46, 56 30, 84 18"/>
+        <circle cx="18" cy="80" r="4.2" fill="currentColor" stroke="none"/>
+        <circle cx="84" cy="18" r="4.2" fill="currentColor" stroke="none"/>
+        <line x1="18" y1="80" x2="34" y2="58" stroke-width="1.6" stroke-dasharray="1 5" stroke-opacity="0.7"/>
+        <line x1="84" y1="18" x2="66" y2="40" stroke-width="1.6" stroke-dasharray="1 5" stroke-opacity="0.7"/>
+        <circle cx="34" cy="58" r="2.6" fill="currentColor" stroke="none"/>
+        <circle cx="66" cy="40" r="2.6" fill="currentColor" stroke="none"/>
+      </svg>
+      <svg class="splash-icon icon-axis" data-icon="1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="50" y1="46" x2="50" y2="17" stroke-opacity="0.55"/>
+        <path d="M50 47 L68 36 L68 58 L50 69 L32 58 L32 36 Z"/>
+        <line x1="50" y1="47" x2="50" y2="69"/>
+        <line x1="50" y1="47" x2="32" y2="36"/>
+        <line x1="50" y1="47" x2="68" y2="36"/>
+        <line x1="32" y1="58" x2="15" y2="77" stroke-opacity="0.55"/>
+        <line x1="68" y1="58" x2="85" y2="77" stroke-opacity="0.55"/>
+        <text x="50" y="12" font-size="11" fill="currentColor" stroke="none" font-family="IBM Plex Mono, monospace" text-anchor="middle">Z</text>
+        <text x="10" y="88" font-size="11" fill="currentColor" stroke="none" font-family="IBM Plex Mono, monospace" text-anchor="middle">X</text>
+        <text x="90" y="88" font-size="11" fill="currentColor" stroke="none" font-family="IBM Plex Mono, monospace" text-anchor="middle">Y</text>
+      </svg>
+      <svg class="splash-icon icon-aperture" data-icon="2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+        <circle cx="50" cy="50" r="45" stroke-opacity="0.25"/>
+        <g class="aperture-blades" stroke-opacity="0.95" fill="currentColor" fill-opacity="0.06">
+          <g transform="rotate(0 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(60 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(120 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(180 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(240 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+          <g transform="rotate(300 50 50)"><path class="aperture-blade" d="M50 13 L65 24 L59 43 L50 43 Z"/></g>
+        </g>
+        <circle class="aperture-core" cx="50" cy="50" r="9" fill="currentColor" stroke="none"/>
+      </svg>
+    </div>
+    <div class="splash-label" id="splashLabel">Graphic Design</div>
+    <div class="splash-progress"><span id="splashProgressBar"></span></div>
+  </div>
+</div>
+
+<!-- Main Nav Bar -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo" aria-label="Nevin Prabhakar - back to top">
+    <img src="images/profile.jpg" alt="Nevin Prabhakar" class="nav-logo-img">
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="#graphic-design">Graphic Design</a>
+    <a href="#visualization">3D Visualization</a>
+    <a href="#photography">Photography</a>
+    <a href="#projects">Projects</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-contact">Contact</a>
+  </div>
+
+  <!-- Theme Toggle Switch -->
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle Theme">
+    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+  </button>
+
+  <!-- Mobile Hamburger Toggle -->
+  <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navMobilePanel">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Dropdown Panel -->
+<div class="nav-mobile-panel" id="navMobilePanel">
+  <a href="#graphic-design">Graphic Design</a>
+  <a href="#visualization">3D Visualization</a>
+  <a href="#photography">Photography</a>
+  <a href="#projects">Projects</a>
+  <a href="#about">About</a>
+  <a href="#gear">Gear</a>
+  <a href="#contact" class="nav-contact">Contact</a>
+</div>
+
+<!-- Right Side Progression Hotbar -->
+<div class="progression-bar hidden-up" id="progBar">
+  <div class="prog-popup" id="progPopup"><span id="progPopupLabel">Quick Look</span></div>
+  <a href="#quick-look" class="prog-dot" data-target="quick-look" data-tooltip="Quick Look"></a>
+  <a href="#graphic-design" class="prog-dot" data-target="graphic-design" data-tooltip="Graphic Design"></a>
+  <a href="#visualization" class="prog-dot" data-target="visualization" data-tooltip="3D Visualization"></a>
+  <a href="#photography" class="prog-dot" data-target="photography" data-tooltip="Photography"></a>
+  <a href="#projects" class="prog-dot" data-target="projects" data-tooltip="Projects"></a>
+  <a href="#about" class="prog-dot" data-target="about" data-tooltip="About"></a>
+  <a href="#gear" class="prog-dot" data-target="gear" data-tooltip="Gear"></a>
+  <a href="#contact" class="prog-dot" data-target="contact" data-tooltip="Contact"></a>
+</div>
+
+<main>
+
+  <!-- FULL SCREEN FLUID HERO -->
+  <header class="hero container-fluid" id="heroStage">
+    <div class="fluid-bg">
+      <div class="color-blob cb-1"></div>
+      <div class="color-blob cb-2"></div>
+      <div class="color-blob cb-cursor" id="fluidCursor"></div>
+    </div>
+    <div class="hero-photo-field" id="heroPhotoField" aria-hidden="true"></div>
+    
+    <div class="liquid-lens" id="liquidLens"></div>
+    <div class="hero-reveal" id="heroReveal" aria-hidden="true"><img id="heroRevealImg" src="" alt=""></div>
+    <div class="liquid-ripple" id="liquidRipple" aria-hidden="true"></div>
+
+    <div class="hero-content px-3">
+      <div class="avatar-container" id="avatarTrigger">
+        <div class="avatar" style="background-image: url('images/profile.jpg');"></div>
+        <div class="avatar-popup" id="avatarPopup">
+          <div class="avatar-popup-image"></div>
+        </div>
+      </div>
+      <span class="eyebrow">Thiruvananthapuram, Kerala</span>
+      <h1 class="display">Nevin Prabhakar S.</h1>
+      <p class="lede">A multidisciplinary designer blending graphic design, 3D visualization, print production, branding, and cinematic photography to create impactful visual experiences.</p>
+      <div class="hero-cta-row">
+        <a href="#quick-look" class="btn-primary">View Quick Look</a>
+        <a href="#contact" class="btn-contact-hero">Contact</a>
+      </div>
+    </div>
+
+    <div class="focus-label">move to focus</div>
+
+    <a href="#quick-look" class="scroll-cue" aria-label="Scroll down for more">
+      <span>Scroll</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 5L8 11L14 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </header>
+
+  <!-- 0. QUICK LOOK (1 ROW DYNAMIC CAROUSEL) -->
+  <section id="quick-look" class="wrap">
+    <div class="section-head">
+      <h2 class="display">Quick Look</h2>
+      <p>The best of the best across digital art, 3D interior visualization, and cinematic photography. Click any image to expand.</p>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" aria-label="Scroll Left">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <!-- 1 ROW FLEX (Overrides Masonry Grid) -->
+      <div class="carousel-track masonry-track" id="featuredTrack">
+        <div class="carousel-item">
+          <a href="https://youtu.be/tPMgbUsqpF0?si=wnPiWeH-j8aP_6Kc" target="_blank" rel="noopener" class="video-link" style="display: block; width: 100%; height: 100%;">
+            <img src="images/tPMgbUsqpF0-HD (1).jpg" alt="Dhurandhar Recreation" class="no-lightbox">
+            <div class="play-btn-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+            <div class="g-overlay">
+              <div class="g-title">Dhurandhar Recreation</div>
+              <div class="g-tag">Video Editing · YouTube</div>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="https://youtu.be/YHS00-hFd98?si=f-E3kspS7MOoAu1H" target="_blank" rel="noopener" class="video-link" style="display: block; width: 100%; height: 100%;">
+            <img src="images/YHS00-hFd98-SD.jpg" alt="Background Recreation" class="no-lightbox">
+            <div class="play-btn-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+            <div class="g-overlay">
+              <div class="g-title">Background Recreation</div>
+              <div class="g-tag">BSc Animation Project · YouTube</div>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-item">
+          <a href="https://youtu.be/tEQ8sPGw-0w?si=jM_fJLXIuje9_tjm" target="_blank" rel="noopener" class="video-link" style="display: block; width: 100%; height: 100%;">
+            <img src="images/tEQ8sPGw-0w-HD.jpg" alt="Typography Project" class="no-lightbox">
+            <div class="play-btn-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+            <div class="g-overlay">
+              <div class="g-title">Typography — Airfield</div>
+              <div class="g-tag">Project 4 · YouTube</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <button class="carousel-btn next" aria-label="Scroll Right">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 1. GRAPHIC DESIGN SECTION (FILTERABLE 2-ROW MASONRY CAROUSEL) -->
+  <section id="graphic-design" class="wrap">
+    <div class="section-head">
+      <h2 class="display">Graphic Design</h2>
+      <p>Digital art, branding, and high-energy layouts. Filter by category, swipe to explore, and click to expand.</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="logo">Logos</button>
+      <button class="filter-btn" data-filter="label">Labels</button>
+      <button class="filter-btn" data-filter="poster">Posters</button>
+      <button class="filter-btn" data-filter="card">Cards</button>
+      <button class="filter-btn" data-filter="stationery">Stationery</button>
+      <button class="filter-btn" data-filter="editorial">Editorial</button>
+      <button class="filter-btn" data-filter="illustration">Illustration</button>
+      <button class="filter-btn" data-filter="product">Products</button>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" aria-label="Scroll Left">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="carousel-track masonry-track" id="graphicTrack">
+        
+        <!-- LOGOS -->
+        <div class="carousel-item transparent-logo" data-category="logo">
+          <img src="images/Nvsk_logo.png" alt="Nvsk Logo">
+          <div class="g-overlay"><div class="g-title">Nvsk Logo</div><div class="g-tag">Logo</div></div>
+        </div>
+        <div class="carousel-item" data-category="product">
+          <img src="images/Zeemaz_Herbs_Product.png" alt="Zeemaz Herbs Product Shot">
+          <div class="g-overlay"><div class="g-title">Zeemaz Herbs Product Shot</div><div class="g-tag">Product</div></div>
+        </div>
+        <div class="carousel-item transparent-logo" data-category="logo">
+          <img src="images/LumeonFrames_Logo.png" alt="Lumeon Frames Logo">
+          <div class="g-overlay"><div class="g-title">Lumeon Frames Logo</div><div class="g-tag">Logo</div></div>
+        </div>
+        <div class="carousel-item" data-category="logo">
+          <img src="images/Prartha_Logo_Design.png" alt="Prartha Logo Design">
+          <div class="g-overlay"><div class="g-title">Prartha Logo Design</div><div class="g-tag">Logo</div></div>
+        </div>
+        <div class="carousel-item" data-category="product">
+          <img src="images/MotionX_Product.png" alt="Motion X Product Shot">
+          <div class="g-overlay"><div class="g-title">Motion X Product Shot</div><div class="g-tag">Product</div></div>
+        </div>
+        <div class="carousel-item" data-category="logo">
+          <img src="images/Zeemaz Herbal Hair Oil_ Logo.png" alt="Zeemaz Herbal Hair Oil Logo">
+          <div class="g-overlay"><div class="g-title">Zeemaz Herbal Hair Oil Logo</div><div class="g-tag">Logo</div></div>
+        </div>
+        <div class="carousel-item dark-logo" data-category="logo">
+          <img src="images/Akash Enterprises Logo Design.png" alt="Akash Enterprises Logo Design">
+          <div class="g-overlay"><div class="g-title">Akash Enterprises Logo Design</div><div class="g-tag">Logo</div></div>
+        </div>
+        <div class="carousel-item" data-category="product">
+          <img src="images/Zeemaz_Herbs_Ad.png" alt="Zeemaz Herbs Ad">
+          <div class="g-overlay"><div class="g-title">Zeemaz Herbs Ad</div><div class="g-tag">Product</div></div>
+        </div>
+        <div class="carousel-item" data-category="logo">
+          <img src="images/Rang_LogoDesign.png" alt="Rang Logo Design">
+          <div class="g-overlay"><div class="g-title">Rang Logo Design</div><div class="g-tag">Logo</div></div>
+        </div>
+        <div class="carousel-item transparent-logo" data-category="logo">
+          <img src="images/Fevicol_rebrandLOGO.png" alt="Fevicol Rebrand Logo">
+          <div class="g-overlay"><div class="g-title">Fevicol Rebrand Logo</div><div class="g-tag">Logo</div></div>
+        </div>
+        <div class="carousel-item" data-category="product">
+          <img src="images/Fevicol_Rebrand_Lineup.png" alt="Fevicol Rebrand Product Lineup">
+          <div class="g-overlay"><div class="g-title">Fevicol Rebrand Product Lineup</div><div class="g-tag">Product</div></div>
+        </div>
+        <div class="carousel-item transparent-logo" data-category="logo">
+          <img src="images/Akathalam_Logo.png" alt="Akathalam Interiors Logo">
+          <div class="g-overlay"><div class="g-title">Akathalam Interiors Logo</div><div class="g-tag">Logo</div></div>
+        </div>
+
+        <!-- LABELS -->
+        <div class="carousel-item" data-category="label" style="background: #23354b; padding: 20px;">
+          <img src="images/CB_Guava_Label.png" alt="CB Guava Label">
+          <div class="g-overlay"><div class="g-title">CB Guava Label</div><div class="g-tag">Label</div></div>
+        </div>
+        <div class="carousel-item" data-category="label" style="background: #104423; padding: 20px;">
+          <img src="images/CB_pinappleJuice_Label_Work.png" alt="CB Pineapple Juice Label Work">
+          <div class="g-overlay"><div class="g-title">CB Pineapple Juice Label Work</div><div class="g-tag">Label</div></div>
+        </div>
+        <div class="carousel-item" data-category="label" style="background: #223c13; padding: 20px;">
+          <img src="images/Zeemaz Herbal Hair Oil_ Label.png" alt="Zeemaz Herbal Hair Oil Label">
+          <div class="g-overlay"><div class="g-title">Zeemaz Herbal Hair Oil Label</div><div class="g-tag">Label</div></div>
+        </div>
+        <div class="carousel-item" data-category="label">
+          <img src="images/Proteeen_Logo.png" alt="Proteeen Logo">
+          <div class="g-overlay"><div class="g-title">Proteeen Logo</div><div class="g-tag">Label</div></div>
+        </div>
+        <div class="carousel-item" data-category="product">
+          <img src="images/Proteen_Ad.png" alt="Pro-teen Quail Egg Ad">
+          <div class="g-overlay"><div class="g-title">Pro-teen Quail Egg Ad</div><div class="g-tag">Product</div></div>
+        </div>
+        <div class="carousel-item" data-category="label">
+          <img src="images/Rosemarey_Label.png" alt="Rosemarey Label">
+          <div class="g-overlay"><div class="g-title">Rosemarey Label</div><div class="g-tag">Label</div></div>
+        </div>
+        <div class="carousel-item" data-category="label">
+          <img src="images/Motion X_Label.png" alt="Motion X Label">
+          <div class="g-overlay"><div class="g-title">Motion X Label</div><div class="g-tag">Label</div></div>
+        </div>
+        <div class="carousel-item" data-category="product">
+          <img src="images/MotionX_Ad.png" alt="Motion X Ad">
+          <div class="g-overlay"><div class="g-title">Motion X Ad</div><div class="g-tag">Product</div></div>
+        </div>
+        <div class="carousel-item" data-category="label">
+          <img src="images/AmisKitchen_PaperStickerLabel.png" alt="Amis Kitchen Paper Sticker Label">
+          <div class="g-overlay"><div class="g-title">Amis Kitchen Paper Sticker Label</div><div class="g-tag">Label</div></div>
+        </div>
+        <!-- CARDS -->
+        <div class="carousel-item" data-category="card">
+          <img src="images/Reghu_Visitingcard_Back.png" alt="Reghu Visitingcard Back">
+          <div class="g-overlay"><div class="g-title">Reghu Visitingcard Back</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Reghu_Visitingcard_front.png" alt="Reghu Visitingcard Front">
+          <div class="g-overlay"><div class="g-title">Reghu Visitingcard Front</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Venkita_VisitingCardBack.png" alt="Venkita Visiting Card Back">
+          <div class="g-overlay"><div class="g-title">Venkita Visiting Card Back</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Venkita_VisitingCardFront.png" alt="Venkita Visiting Card Front">
+          <div class="g-overlay"><div class="g-title">Venkita Visiting Card Front</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/weddingcard_.png" alt="Weddingcard">
+          <div class="g-overlay"><div class="g-title">Weddingcard</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Alagappan_VisitingCardFront.png" alt="Alagappan Visiting Card Front">
+          <div class="g-overlay"><div class="g-title">Alagappan Visiting Card Front</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Krishnaswamy Associates_Visiting Card_Front.png" alt="Krishnaswamy Associates Visiting Card Front">
+          <div class="g-overlay"><div class="g-title">Krishnaswamy Associates Visiting Card Front</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Brewblissvisitingcard.png" alt="Brewblissvisitingcard">
+          <div class="g-overlay"><div class="g-title">Brewblissvisitingcard</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Floral Style Wedding Card.png" alt="Floral Style Wedding Card">
+          <div class="g-overlay"><div class="g-title">Floral Style Wedding Card</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Gold Simple Wedding Invitation.png" alt="Gold Simple Wedding Invitation">
+          <div class="g-overlay"><div class="g-title">Gold Simple Wedding Invitation</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/Housewarming_Invitation.png" alt="Housewarming Invitation">
+          <div class="g-overlay"><div class="g-title">Housewarming Invitation</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/AiswaryaWeddingCard_Digital.png" alt="Aiswarya Wedding Card Digital">
+          <div class="g-overlay"><div class="g-title">Aiswarya Wedding Card Digital</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/FevicolREbrand_Visitingcard (1).png" alt="Fevicol Rebrand Visitingcard (1)">
+          <div class="g-overlay"><div class="g-title">Fevicol Rebrand Visitingcard (1)</div><div class="g-tag">Card</div></div>
+        </div>
+        <div class="carousel-item" data-category="card">
+          <img src="images/FevicolREbrand_Visitingcard (2).png" alt="Fevicol Rebrand Visitingcard (2)">
+          <div class="g-overlay"><div class="g-title">Fevicol Rebrand Visitingcard (2)</div><div class="g-tag">Card</div></div>
+        </div>
+
+        <!-- POSTERS -->
+        <div class="carousel-item" data-category="poster">
+          <img src="images/JoyThomas_ElectionWork (3).jpg" alt="Joy Thomas Election Work (3)">
+          <div class="g-overlay"><div class="g-title">Joy Thomas Election Work (3)</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/JoyThomas_ElectionWork (4).jpg" alt="Joy Thomas Election Work (4)">
+          <div class="g-overlay"><div class="g-title">Joy Thomas Election Work (4)</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/JoyThomas_ElectionWork (5).jpg" alt="Joy Thomas Election Work (5)">
+          <div class="g-overlay"><div class="g-title">Joy Thomas Election Work (5)</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/Nvsk Gaming Channel Banner.png" alt="Nvsk Gaming Channel Banner">
+          <div class="g-overlay"><div class="g-title">Nvsk Gaming Channel Banner</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/NvskChannel Banner.jpg" alt="Nvsk Channel Banner">
+          <div class="g-overlay"><div class="g-title">Nvsk Channel Banner</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/JoyThomas_ElectionWork (1).jpg" alt="Joy Thomas Election Work (1)">
+          <div class="g-overlay"><div class="g-title">Joy Thomas Election Work (1)</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/JoyThomas_ElectionWork (2).jpg" alt="Joy Thomas Election Work (2)">
+          <div class="g-overlay"><div class="g-title">Joy Thomas Election Work (2)</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/ForzaHorizon5.png" alt="Forza Horizon 5 Poster">
+          <div class="g-overlay"><div class="g-title">Forza Horizon 5 Poster</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/Blackmyth.png" alt="Black Myth Wukong Poster">
+          <div class="g-overlay"><div class="g-title">Black Myth Wukong Poster</div><div class="g-tag">Poster</div></div>
+        </div>
+        <div class="carousel-item" data-category="poster">
+          <img src="images/Forza_Poster.png" alt="Forza Horizon 6 Poster">
+          <div class="g-overlay"><div class="g-title">Forza Horizon 6 Poster</div><div class="g-tag">Poster</div></div>
+        </div>
+
+        <!-- EDITORIAL -->
+        <div class="carousel-item" data-category="editorial">
+          <img src="images/MagazineRedesign.png" alt="Magazine Redesign">
+          <div class="g-overlay"><div class="g-title">Magazine Redesign</div><div class="g-tag">Editorial</div></div>
+        </div>
+
+        <!-- STATIONERY -->
+        <div class="carousel-item transparent-logo" data-category="stationery">
+          <img src="images/FevicC1.png" alt="Fevic C1">
+          <div class="g-overlay"><div class="g-title">Fevic C1</div><div class="g-tag">Stationery</div></div>
+        </div>
+        <div class="carousel-item transparent-logo" data-category="stationery">
+          <img src="images/FevicolREBRAND_envolpe.png" alt="Fevicol Rebrand Envelope">
+          <div class="g-overlay"><div class="g-title">Fevicol Rebrand Envelope</div><div class="g-tag">Stationery</div></div>
+        </div>
+        <div class="carousel-item transparent-logo" data-category="stationery">
+          <img src="images/Akathalam_Letterpad.png" alt="Akathalam Interiors Letterpad">
+          <div class="g-overlay"><div class="g-title">Akathalam Interiors Letterpad</div><div class="g-tag">Stationery</div></div>
+        </div>
+
+        <!-- ILLUSTRATION -->
+        <div class="carousel-item" data-category="illustration" style="background: #190c0a;">
+          <img src="images/JK_Rowling_Illustration.png" alt="JK Rowling Illustration">
+          <div class="g-overlay"><div class="g-title">JK Rowling Illustration</div><div class="g-tag">Illustration</div></div>
+        </div>
+
+      </div>
+
+      <button class="carousel-btn next" aria-label="Scroll Right">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 2. 3D VISUALIZATION SECTION (FILTERABLE 2-ROW MASONRY CAROUSEL) -->
+  <section id="visualization" class="wrap">
+    <div class="section-head">
+      <h2 class="display">3D Visualisation</h2>
+      <p>Four years of interior visualization at Akatham Interiors. SketchUp models, lit and finished in V-Ray. Swipe & click to expand.</p>
+    </div>
+    
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="living">Living & Dining</button>
+      <button class="filter-btn" data-filter="bedroom">Bedrooms</button>
+      <button class="filter-btn" data-filter="kitchen">Kitchens</button>
+      <button class="filter-btn" data-filter="bathroom">Bathrooms</button>
+      <button class="filter-btn" data-filter="commercial">Commercial</button>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" aria-label="Scroll Left">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="carousel-track masonry-track" id="visualizationTrack" data-rows="2">
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-1.jpg" alt="Modular Kitchen – Overview" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Modular Kitchen – Overview</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-2.jpg" alt="Modular Kitchen – Parallel Layout" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Modular Kitchen – Parallel Layout</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-3.jpg" alt="Kitchen Hob & Chimney" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Kitchen Hob & Chimney</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-4.jpg" alt="Kitchen Loft & Glass Cabinet" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Kitchen Loft & Glass Cabinet</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="kitchen">
+          <img src="images/viz/akulam-kitchen-5.jpg" alt="Kitchen Hob Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Kitchen Hob Detail</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/akulam-living-1.jpg" alt="Living Room with Dining Nook" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room with Dining Nook</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/akulam-living-2.jpg" alt="Living Room – Sofa & Display Shelving" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room – Sofa & Display Shelving</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/akulam-living-3.jpg" alt="Dining Area – Crockery Unit" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Dining Area – Crockery Unit</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/akulam-living-4.jpg" alt="Living Room – TV Unit" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room – TV Unit</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/akulam-living-5.jpg" alt="Living & Dining Layout" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living & Dining Layout</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom1-1.jpg" alt="Bedroom One – Bed Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom One – Bed Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom1-2.jpg" alt="Bedroom One – TV & Wardrobe Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom One – TV & Wardrobe Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom2-1.jpg" alt="Bedroom Two – Bed Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom Two – Bed Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom2-2.jpg" alt="Bedroom Two – Wardrobe & Dresser" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom Two – Wardrobe & Dresser</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bedroom">
+          <img src="images/viz/akulam-bedroom2-3.jpg" alt="Bedroom Two – Dressing Corridor" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bedroom Two – Dressing Corridor</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-1.jpg" alt="Dining Area & Staircase" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Dining Area & Staircase</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-2.jpg" alt="Dining & Powder Nook" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Dining & Powder Nook</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-3.jpg" alt="Living Room TV Wall" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room TV Wall</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-4.jpg" alt="Living Room TV Wall – Alt View" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room TV Wall – Alt View</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-living-5.jpg" alt="Living Room with Staircase" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Living Room with Staircase</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-pooja-1.jpg" alt="Pooja Unit" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Pooja Unit</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-pooja-2.jpg" alt="Pooja Unit – Close Up" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Pooja Unit – Close Up</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-staircase.jpg" alt="Floating Staircase" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Floating Staircase</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="living">
+          <img src="images/viz/jagathy-study.jpg" alt="Home Office / Study Nook" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Home Office / Study Nook</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-1.jpg" alt="Bathroom – Shower Niche" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Shower Niche</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-2.jpg" alt="Bathroom – Patterned Floor Shower" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Patterned Floor Shower</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-3.jpg" alt="Bathroom – Toilet & Mosaic Floor" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Toilet & Mosaic Floor</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-a-4.jpg" alt="Bathroom – Shower Fitting Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Shower Fitting Detail</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-b-1.jpg" alt="Bathroom – Vanity & Wood Niche" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Vanity & Wood Niche</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-b-2.jpg" alt="Bathroom – Vanity Close Up" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Vanity Close Up</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-b-3.jpg" alt="Bathroom – Shower Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Shower Detail</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-c-1.jpg" alt="Bathroom – Seafoam Tile Vanity" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Seafoam Tile Vanity</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-c-2.jpg" alt="Bathroom – Seafoam Toilet Area" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Seafoam Toilet Area</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="bathroom">
+          <img src="images/viz/jagathy-bath-c-3.jpg" alt="Bathroom – Seafoam Shower Detail" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Bathroom – Seafoam Shower Detail</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-1.jpg" alt="Reception Desk" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Reception Desk</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-2.jpg" alt="Wash Station" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Wash Station</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-3.jpg" alt="Pedicure Station" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Pedicure Station</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-4.jpg" alt="Waiting Lounge" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Waiting Lounge</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-5.jpg" alt="Styling Chairs & Reception" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Styling Chairs & Reception</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+        <div class="carousel-item" data-category="commercial">
+          <img src="images/viz/parlour-6.jpg" alt="Salon Styling Row" loading="lazy">
+          <div class="g-overlay">
+            <div class="g-title">Salon Styling Row</div>
+            <div class="g-tag">SketchUp · V-Ray</div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-btn next" aria-label="Scroll Right">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 3. PHOTOGRAPHY SECTION (FILTERABLE 6-ROW MASONRY CAROUSEL) -->
+  <section id="photography" class="wrap">
+    <div class="section-head">
+      <h2 class="display">Photography</h2>
+      <p>Ten years behind the camera. Driven by a passion for high-budget cinema aesthetics and professional grading. Swipe & click to expand.</p>
+    </div>
+    
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="wedding">Wedding</button>
+      <button class="filter-btn" data-filter="portrait">Portraits</button>
+      <button class="filter-btn" data-filter="fashion">Fashion</button>
+      <button class="filter-btn" data-filter="street">Street</button>
+      <button class="filter-btn" data-filter="architecture">Architecture</button>
+      <button class="filter-btn" data-filter="nature">Nature</button>
+      <button class="filter-btn" data-filter="auto">Automotive</button>
+      <button class="filter-btn" data-filter="travel">Travel</button>
+      <button class="filter-btn" data-filter="concert">Concert</button>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" aria-label="Scroll Left">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="carousel-track masonry-track" id="photographyTrack" data-rows="3">
+
+        <!-- WEDDING -->
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Wedding__1_.jpg" alt="Temple Blessing" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Temple Blessing</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Wedding__2_.jpg" alt="Family Ritual" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Family Ritual</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Wedding__3_.jpg" alt="Garland Ceremony" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garland Ceremony</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Wedding__4_.jpg" alt="Golden Hour Vows" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Golden Hour Vows</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Wedding__5_.jpg" alt="Riverside Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Riverside Portrait</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Wedding__6_.jpg" alt="Bamboo Grove Embrace" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Bamboo Grove Embrace</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Save_the_date__1_.jpg" alt="Save the Date - Olive" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Save the Date - Olive</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Save_the_date__2_.jpg" alt="Save the Date - Teal" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Save the Date - Teal</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Save_the_date__3_.jpg" alt="Save the Date - Rose" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Save the Date - Rose</div><div class="g-tag">Wedding</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/New_Wedding_1.jpg" alt="Bridal Smile" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Bridal Smile</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/New_Wedding_2.jpg" alt="Roses for Her" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Roses for Her</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/New_Wedding_3.jpg" alt="A Quiet Moment" loading="lazy">
+          <div class="g-overlay"><div class="g-title">A Quiet Moment</div><div class="g-tag">Wedding</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Diya__2_.jpg" alt="Stone Stairway, Pink Silk" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Stone Stairway, Pink Silk</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Diya__5_.jpg" alt="Marble Hall Smile" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Marble Hall Smile</div><div class="g-tag">Wedding</div></div>
+        </div>
+        <div class="carousel-item" data-category="wedding">
+          <img src="images/Diya__6_.jpg" alt="Dance Mural Reflection" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Dance Mural Reflection</div><div class="g-tag">Wedding</div></div>
+        </div>
+
+        <!-- PORTRAIT -->
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Vaishnav__1_.jpg" alt="Golden Hour Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Golden Hour Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Vaishnav__2_.jpg" alt="Rooftop Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Rooftop Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Kannan2__1_.jpg" alt="String Light Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">String Light Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Nithin__1_.jpg" alt="Studio Low-Key I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Studio Low-Key I</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Nithin__2_.jpg" alt="Studio Low-Key II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Studio Low-Key II</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Swe-10.jpg" alt="Monochrome Study I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Monochrome Study I</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/sw1.png" alt="Monochrome Study II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Monochrome Study II</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/IMG_20200608_194251_563.jpg" alt="Eye Detail" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Eye Detail</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Nvii-405.jpg" alt="Backlit Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Backlit Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Nvii__58_.jpg" alt="Garden Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garden Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/New_Portrait_1.jpg" alt="Garden Arch Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garden Arch Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/New_Portrait_2.jpg" alt="Iris Close-Up" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Iris Close-Up</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/New_Portrait_3.jpg" alt="Golden Hour Silhouette" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Golden Hour Silhouette</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/New_Portrait_4.jpg" alt="Through the Leaves" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Through the Leaves</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/New_Portrait_5.jpg" alt="Studio Low-Key III" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Studio Low-Key III</div><div class="g-tag">Portrait</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Aiswarya__1_.jpg" alt="Rose at the Shore" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Rose at the Shore</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Aiswarya__2_.jpg" alt="Roses for You" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Roses for You</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Arun.jpg" alt="Golden Light" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Golden Light</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Arushi__1_.jpg" alt="Bath Time Bunny I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Bath Time Bunny I</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Arushi__2_.jpg" alt="Bath Time Bunny II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Bath Time Bunny II</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Arushi__3_.jpg" alt="Bath Time Bunny III" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Bath Time Bunny III</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/DSC01822-Enhanced-NR.jpg" alt="Celebration Smile" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Celebration Smile</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Diya__1_.jpg" alt="Windowsill in Pink" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Windowsill in Pink</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Diya__4_.jpg" alt="Glass Railing" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Glass Railing</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Gayathri__2_.jpg" alt="Windswept Walk" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Windswept Walk</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Gayathri__3_.jpg" alt="Beach Contemplation" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Beach Contemplation</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Gayathri__4_.jpg" alt="Driftwood Perch" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Driftwood Perch</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Gayathri__6_.jpg" alt="Green Fence Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Green Fence Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Gayathri__7_.jpg" alt="Waterside Smile" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Waterside Smile</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Gayathri__8_.jpg" alt="Lakeside in Yellow Silk" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Lakeside in Yellow Silk</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Gayathri__10_.jpg" alt="Maroon Sweater" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Maroon Sweater</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Honey__2_.jpg" alt="Neon Nights" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Neon Nights</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Honey__3_.jpg" alt="Stone Wall Gaze" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Stone Wall Gaze</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Honey__4_.jpg" alt="Bench Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Bench Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/Honey__5_.jpg" alt="Through the Branches" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Through the Branches</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/IMG_6807-2.jpg" alt="Garden Glance" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garden Glance</div><div class="g-tag">Portrait</div></div>
+        </div>
+        <div class="carousel-item" data-category="portrait">
+          <img src="images/IMG_6912.jpg" alt="Ivy Wall Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Ivy Wall Portrait</div><div class="g-tag">Portrait</div></div>
+        </div>
+
+        <!-- FASHION -->
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__1_.jpg" alt="Palace Balcony" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Palace Balcony</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__1_.png" alt="Coastal Details I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Coastal Details I</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__2_.jpg" alt="Cliffside Gold" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Cliffside Gold</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__2_.png" alt="Coastal Details II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Coastal Details II</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__3_.jpg" alt="Driftwood Rest" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Driftwood Rest</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__3_.png" alt="Coastal Details III" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Coastal Details III</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__4_.jpg" alt="Beach Bench" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Beach Bench</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__5_.jpg" alt="Shoreline Walk" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Shoreline Walk</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__6_.jpg" alt="Tide Line" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Tide Line</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__7_.jpg" alt="Path Through Trees" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Path Through Trees</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__8_.jpg" alt="Sunhat Silhouette" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Sunhat Silhouette</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Swetha__9_.jpg" alt="Foam and Sand" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Foam and Sand</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Remya__1_.jpg" alt="Forest Path Lehenga" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Forest Path Lehenga</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Remya__2_.jpg" alt="Blue Saree Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Blue Saree Portrait</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Liza__8_.jpg" alt="Palm Shadow Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Palm Shadow Portrait</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/LRM_EXPORT_20034050215165_20190920_004620744.jpeg" alt="Sunlit Garden" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Sunlit Garden</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Lianne__20_.jpg" alt="Crimson Coast I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Crimson Coast I</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Lianne__17_.jpg" alt="Crimson Coast II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Crimson Coast II</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Lianne__11_.jpg" alt="Crimson Coast III" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Crimson Coast III</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Lianne__7_.jpg" alt="Crimson Coast IV" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Crimson Coast IV</div><div class="g-tag">Fashion</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/New_Fashion_1.jpg" alt="Crimson Tide" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Crimson Tide</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/New_Fashion_2.jpg" alt="Red Sneakers" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Red Sneakers</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/New_Fashion_3.jpg" alt="Barefoot on Sand" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Barefoot on Sand</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/New_Fashion_4.jpg" alt="Details in Gold" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Details in Gold</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/New_Fashion_5.jpg" alt="Sunset Walk" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Sunset Walk</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/New_Fashion_6.jpg" alt="Seated on Stone" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Seated on Stone</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/New_Fashion_7.jpg" alt="Glance Back" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Glance Back</div><div class="g-tag">Fashion</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Arjun.jpg" alt="Mural Wall Stance" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Mural Wall Stance</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Arya__1_.jpg" alt="Tartan &amp; Leather" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Tartan &amp; Leather</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Arya__2_.jpg" alt="Sidewalk Stride" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Sidewalk Stride</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Arya__3_.jpg" alt="Railing Lean" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Railing Lean</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Arya_alt.jpg" alt="Brick Wall Glance" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Brick Wall Glance</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Diya__3_.jpg" alt="Traffic Cone Casual" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Traffic Cone Casual</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Gayathri__1_.jpg" alt="Earring Detail I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Earring Detail I</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Gayathri__5_.jpg" alt="Yellow Wall" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Yellow Wall</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Gayathri__9_.jpg" alt="Earring Detail II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Earring Detail II</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/Honey__1_.jpg" alt="Layered Silver" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Layered Silver</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/IMG_6220.jpg" alt="Rooftop Rail I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Rooftop Rail I</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/IMG_6238.jpg" alt="Rooftop Rail II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Rooftop Rail II</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/IMG_6266.jpg" alt="Brick Backdrop" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Brick Backdrop</div><div class="g-tag">Fashion</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04093.jpg" alt="Garden Path Glance" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garden Path Glance</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04100.jpg" alt="Hedgerow Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Hedgerow Portrait</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04147-Edit.jpg" alt="Wooden Doorway Rest" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Wooden Doorway Rest</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04005.jpg" alt="Twirl on the Path" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Twirl on the Path</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04010.jpg" alt="Golden Hour Twirl" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Golden Hour Twirl</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04020-Edit.jpg" alt="Garden Shadows" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garden Shadows</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04049-Edit.jpg" alt="Heritage Doorway" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Heritage Doorway</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04062.jpg" alt="Wooden Wall Portrait" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Wooden Wall Portrait</div><div class="g-tag">Fashion</div></div>
+        </div>
+        <div class="carousel-item" data-category="fashion">
+          <img src="images/NVI04082-Edit.jpg" alt="Under the Tiled Roof" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Under the Tiled Roof</div><div class="g-tag">Fashion</div></div>
+        </div>
+
+        <!-- STREET -->
+        <div class="carousel-item" data-category="street">
+          <img src="images/NVI09068__1_.jpg" alt="Sarees on the Street" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Sarees on the Street</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/NVI07214-2.jpg" alt="Cart and Bicycle" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Cart and Bicycle</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/IMG_20200229_103914.jpg" alt="Backstreet Ride" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Backstreet Ride</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/SW.png" alt="Red Dress, Grey Alley" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Red Dress, Grey Alley</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/Nandita.jpg" alt="Alleyway Red" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Alleyway Red</div><div class="g-tag">Street</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="street">
+          <img src="images/New_Street_1.jpg" alt="Curious Glance" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Curious Glance</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/New_Street_2.jpg" alt="Crossing the Street" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Crossing the Street</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/New_Street_3.jpg" alt="Masked Riders" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Masked Riders</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/New_Street_4.jpg" alt="Saree &amp; Shadows" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Saree &amp; Shadows</div><div class="g-tag">Street</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="street">
+          <img src="images/IMG_0184.jpg" alt="Dusk Market" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Dusk Market</div><div class="g-tag">Street</div></div>
+        </div>
+        <div class="carousel-item" data-category="street">
+          <img src="images/DSC_0357.jpg" alt="Cotton Candy Vendor" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Cotton Candy Vendor</div><div class="g-tag">Street</div></div>
+        </div>
+
+        <!-- ARCHITECTURE -->
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/NVI07130.jpg" alt="Temple Pillars &amp; Sun Halo" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Temple Pillars &amp; Sun Halo</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/NVI03209__1_.jpg" alt="Reflecting Pool" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Reflecting Pool</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/IMG_20191119_115617.jpg" alt="Stone Colonnade" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Stone Colonnade</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/IMG_20191105_164746_795.jpg" alt="Palace Waters" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Palace Waters</div><div class="g-tag">Architecture</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/New_Architecture_1.jpg" alt="Shore Temple Detail I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Shore Temple Detail I</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/New_Architecture_2.jpg" alt="Shore Temple, Wide" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Shore Temple, Wide</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/New_Architecture_3.jpg" alt="Shore Temple Crowd" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Shore Temple Crowd</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/New_Architecture_4.jpg" alt="Twin Spires" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Twin Spires</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/New_Architecture_5.jpg" alt="Shore Temple, Full Frame" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Shore Temple, Full Frame</div><div class="g-tag">Architecture</div></div>
+        </div>
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/New_Architecture_6.jpg" alt="Spire Against Sky" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Spire Against Sky</div><div class="g-tag">Architecture</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="architecture">
+          <img src="images/IMG_0181__1_.jpg" alt="Reflecting Palace Pool" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Reflecting Palace Pool</div><div class="g-tag">Architecture</div></div>
+        </div>
+
+        <!-- NATURE -->
+        <div class="carousel-item" data-category="nature">
+          <img src="images/NVI09083.jpg" alt="Paddy Field Egrets" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Paddy Field Egrets</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/NVI09045.jpg" alt="Open Sky" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Open Sky</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/IMG_20250609_163444081.jpg" alt="Palm Fronds" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Palm Fronds</div><div class="g-tag">Nature</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_1.jpg" alt="Macro Fly" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Macro Fly</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_2.jpg" alt="Ant on the Edge" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Ant on the Edge</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_3.jpg" alt="Garden Lizard Macro" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garden Lizard Macro</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_4.jpg" alt="Watchful Macaque" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Watchful Macaque</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_5.jpg" alt="Leopard in the Enclosure" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Leopard in the Enclosure</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_6.jpg" alt="White Tiger Gaze" loading="lazy">
+          <div class="g-overlay"><div class="g-title">White Tiger Gaze</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_7.jpg" alt="Feline Eye Macro" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Feline Eye Macro</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_8.jpg" alt="Squirrel on the Palm" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Squirrel on the Palm</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_9.jpg" alt="Alley Cat" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Alley Cat</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/New_Nature_10.jpg" alt="Rooftop Watch" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Rooftop Watch</div><div class="g-tag">Nature</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="nature">
+          <img src="images/IMG_0697.jpg" alt="Macaque and Young" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Macaque and Young</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/IMG_0850.jpg" alt="Mid-Grooming" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Mid-Grooming</div><div class="g-tag">Nature</div></div>
+        </div>
+        <div class="carousel-item" data-category="nature">
+          <img src="images/IMG_3586.jpg" alt="Garden Prowl" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Garden Prowl</div><div class="g-tag">Nature</div></div>
+        </div>
+
+        <!-- AUTOMOTIVE -->
+        <div class="carousel-item" data-category="auto">
+          <img src="images/Nvii__932___1_.jpg" alt="Classic Mercedes Detail" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Classic Mercedes Detail</div><div class="g-tag">Automotive</div></div>
+        </div>
+        <div class="carousel-item" data-category="auto">
+          <img src="images/NVI09730__1_.jpg" alt="Mustang Wheel Detail" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Mustang Wheel Detail</div><div class="g-tag">Automotive</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="auto">
+          <img src="images/New_Auto_1.jpg" alt="Night Prowl, BMW 1M" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Night Prowl, BMW 1M</div><div class="g-tag">Automotive</div></div>
+        </div>
+        <div class="carousel-item" data-category="auto">
+          <img src="images/New_Auto_2.jpg" alt="Creta at Dusk" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Creta at Dusk</div><div class="g-tag">Automotive</div></div>
+        </div>
+        <div class="carousel-item" data-category="auto">
+          <img src="images/New_Auto_3.jpg" alt="Rain on Chrome" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Rain on Chrome</div><div class="g-tag">Automotive</div></div>
+        </div>
+
+        <!-- TRAVEL -->
+        <div class="carousel-item" data-category="travel">
+          <img src="images/Ponmudi-68.jpg" alt="Foggy Ride, Ponmudi" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Foggy Ride, Ponmudi</div><div class="g-tag">Travel</div></div>
+        </div>
+        <div class="carousel-item" data-category="travel">
+          <img src="images/Ponmudi-99.jpg" alt="Blue Hour Ride" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Blue Hour Ride</div><div class="g-tag">Travel</div></div>
+        </div>
+        <div class="carousel-item" data-category="travel">
+          <img src="images/IMG_20210509_143630.jpg" alt="Monochrome Garage" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Monochrome Garage</div><div class="g-tag">Travel</div></div>
+        </div>
+        <div class="carousel-item" data-category="travel">
+          <img src="images/IMG_20210105_133655.jpg" alt="Footprints in the Sand" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Footprints in the Sand</div><div class="g-tag">Travel</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="travel">
+          <img src="images/New_Travel_1.jpg" alt="Harbor at Dusk" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Harbor at Dusk</div><div class="g-tag">Travel</div></div>
+        </div>
+        <div class="carousel-item" data-category="travel">
+          <img src="images/New_Travel_2.jpg" alt="Lighthouse Among Palms" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Lighthouse Among Palms</div><div class="g-tag">Travel</div></div>
+        </div>
+
+        <div class="carousel-item" data-category="travel">
+          <img src="images/IMG_0050.jpg" alt="Toss of the Lens" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Toss of the Lens</div><div class="g-tag">Travel</div></div>
+        </div>
+        <div class="carousel-item" data-category="travel">
+          <img src="images/DSC_0352.jpg" alt="Grandfather's Shoulders" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Grandfather's Shoulders</div><div class="g-tag">Travel</div></div>
+        </div>
+        <div class="carousel-item" data-category="travel">
+          <img src="images/DSC_0370.jpg" alt="Watching the Waves" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Watching the Waves</div><div class="g-tag">Travel</div></div>
+        </div>
+
+        <!-- CONCERT -->
+        <div class="carousel-item" data-category="concert">
+          <img src="images/IMG_20260628_201938.jpg" alt="Live at the Show I" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Live at the Show I</div><div class="g-tag">Concert</div></div>
+        </div>
+        <div class="carousel-item" data-category="concert">
+          <img src="images/IMG_20260628_194644.jpg" alt="Live at the Show II" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Live at the Show II</div><div class="g-tag">Concert</div></div>
+        </div>
+        <div class="carousel-item" data-category="concert">
+          <img src="images/IMG_20260627_194608.jpg" alt="Live at the Show III" loading="lazy">
+          <div class="g-overlay"><div class="g-title">Live at the Show III</div><div class="g-tag">Concert</div></div>
+        </div>
+      </div>
+
+      <button class="carousel-btn next" aria-label="Scroll Right">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 4. PROJECTS SECTION (FILTERABLE 2-ROW MASONRY CAROUSEL) -->
+  <section id="projects" class="wrap">
+    <div class="section-head">
+      <h2 class="display">Academic Projects</h2>
+      <p>Foundational 3D, animation, and media projects developed during my BSc Animation studies at VismayasMax Animation in college.</p>
+    </div>
+    
+    <div class="filter-group">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="video">Video Recreation</button>
+      <button class="filter-btn" data-filter="branding">Rebranding</button>
+    </div>
+
+    <div class="carousel-wrapper">
+      <button class="carousel-btn prev" aria-label="Scroll Left">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+
+      <div class="carousel-track masonry-track">
+        <div class="carousel-item transparent-logo" data-category="branding">
+          <img src="images/Fevicol_rebrandLOGO.png" alt="Fevicol Rebrand Logo">
+          <div class="g-overlay">
+            <div class="g-title">Rebranding</div>
+            <div class="g-tag">Logo</div>
+          </div>
+        </div>
+        <div class="carousel-item" data-category="branding">
+          <img src="images/Fevicol_Rebrand_Lineup.png" alt="Fevicol Rebrand Product Lineup">
+          <div class="g-overlay">
+            <div class="g-title">Rebranding</div>
+            <div class="g-tag">Product Lineup</div>
+          </div>
+        </div>
+        <div class="carousel-item" data-category="branding">
+          <img src="images/FevicolREbrand_Visitingcard (1).png" alt="Fevicol Rebrand Visitingcard (1)">
+          <div class="g-overlay">
+            <div class="g-title">Rebranding</div>
+            <div class="g-tag">Visiting Card</div>
+          </div>
+        </div>
+        <div class="carousel-item" data-category="branding">
+          <img src="images/FevicolREbrand_Visitingcard (2).png" alt="Fevicol Rebrand Visitingcard (2)">
+          <div class="g-overlay">
+            <div class="g-title">Rebranding</div>
+            <div class="g-tag">Visiting Card</div>
+          </div>
+        </div>
+        <div class="carousel-item transparent-logo" data-category="branding">
+          <img src="images/FevicC1.png" alt="Fevic C1">
+          <div class="g-overlay">
+            <div class="g-title">Rebranding</div>
+            <div class="g-tag">Stationery</div>
+          </div>
+        </div>
+        <div class="carousel-item transparent-logo" data-category="branding">
+          <img src="images/FevicolREBRAND_envolpe.png" alt="Fevicol Rebrand Envelope">
+          <div class="g-overlay">
+            <div class="g-title">Rebranding</div>
+            <div class="g-tag">Stationery</div>
+          </div>
+        </div>
+        <div class="carousel-item" data-category="video">
+          <a href="https://youtu.be/YHS00-hFd98?si=f-E3kspS7MOoAu1H" target="_blank" rel="noopener" class="video-link" style="display: block; width: 100%; height: 100%;">
+            <img src="images/YHS00-hFd98-SD.jpg" alt="Background Recreation" class="no-lightbox">
+            <div class="play-btn-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+            <div class="g-overlay">
+              <div class="g-title">Background Recreation</div>
+              <div class="g-tag">BSc Animation Project · YouTube</div>
+            </div>
+          </a>
+        </div>
+        <div class="carousel-item" data-category="video">
+          <a href="https://youtu.be/tEQ8sPGw-0w?si=jM_fJLXIuje9_tjm" target="_blank" rel="noopener" class="video-link" style="display: block; width: 100%; height: 100%;">
+            <img src="images/tEQ8sPGw-0w-HD.jpg" alt="Typography Project" class="no-lightbox">
+            <div class="play-btn-overlay">
+              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </div>
+            <div class="g-overlay">
+              <div class="g-title">Typography — Airfield</div>
+              <div class="g-tag">Project 4 · YouTube</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      
+      <button class="carousel-btn next" aria-label="Scroll Right">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- 5. ABOUT & TIMELINE SECTION -->
+  <section id="about" class="wrap">
+    <div class="section-head">
+      <h2 class="display">About Me</h2>
+    </div>
+
+    <div class="about-poster-wrap">
+      <img src="images/About.png" alt="Nevin Prabhakar S — About Me" class="about-poster-img" id="aboutPosterImg">
+      <span class="about-poster-hint">Click here</span>
+    </div>
+  </section>
+
+  <!-- 6. GEAR & ARSENAL SECTION -->
+  <section id="gear" class="wrap">
+    <div class="section-head">
+      <h2 class="display">Rigs & Gadgets</h2>
+      <p>The hardware and accessories that power my creative workflows, from rendering spaces to cinematic captures.</p>
+    </div>
+    
+    <div class="gear-grid">
+      <div class="gear-card wide">
+        <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+          <line x1="8" y1="21" x2="16" y2="21"></line>
+          <line x1="12" y1="17" x2="12" y2="21"></line>
+        </svg>
+        <div class="gear-title">Primary Workstation</div>
+        <div class="gear-desc">Custom-built editing rig optimized for heavy V-Ray rendering, 3D visualization, and seamless Photoshop compositions.</div>
+        <div class="gear-tags">
+          <span class="gear-tag">Ryzen 7 5800X</span>
+          <span class="gear-tag">16GB DDR4 RAM</span>
+          <span class="gear-tag">RTX 5060</span>
+          <span class="gear-tag">Dell 24" 240Hz Monitor</span>
+        </div>
+      </div>
+      <div class="gear-card">
+        <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <polyline points="6 9 6 2 18 2 18 9"></polyline>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+          <rect x="6" y="14" width="12" height="8"></rect>
+        </svg>
+        <div class="gear-title">Fabrication Lab</div>
+        <div class="gear-desc">The physical production setup for digital printing, cutting, and engraving.</div>
+        <div class="gear-tags">
+          <span class="gear-tag">Canon V700</span>
+          <span class="gear-tag">Laser Cutter</span>
+          <span class="gear-tag">3D Printer</span>
+        </div>
+      </div>
+      <div class="gear-card">
+        <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+        <div class="gear-title">Primary Camera</div>
+        <div class="gear-desc">My main body for personal shoots and client work, paired with fast primes.</div>
+        <div class="gear-tags">
+          <span class="gear-tag">Sony A7III</span>
+          <span class="gear-tag">50mm f/1.8</span>
+          <span class="gear-tag">85mm f/1.8</span>
+        </div>
+      </div>
+      <div class="gear-card">
+        <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+        <div class="gear-title">Secondary Camera</div>
+        <div class="gear-desc">Backup body and long-range coverage for events and telephoto shots.</div>
+        <div class="gear-tags">
+          <span class="gear-tag">Canon 1300D</span>
+          <span class="gear-tag">18-55mm</span>
+          <span class="gear-tag">55-250mm</span>
+        </div>
+      </div>
+      <div class="gear-card wide">
+        <svg class="gear-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="2" y="6" width="20" height="12" rx="4"></rect>
+          <circle cx="17" cy="12" r="1"></circle>
+          <circle cx="14" cy="12" r="1"></circle>
+          <path d="M6 12h4"></path>
+          <path d="M8 10v4"></path>
+        </svg>
+        <div class="gear-title">Leisure & Gaming</div>
+        <div class="gear-desc">My downtime setup for unwinding with racing sims, tactical shooters, and battle royales.</div>
+        <div class="gear-tags">
+          <span class="gear-tag">Forza Horizon 6</span>
+          <span class="gear-tag">Valorant</span>
+          <span class="gear-tag">PUBG PC</span>
+        </div>
+      </div>
+      <div class="gear-card wide gear-card-image" id="setupImageCard">
+        <img src="images/Setup.png" alt="Nevin's rig and gadgets setup" class="gear-setup-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUTUBE CHANNELS -->
+  <section id="youtube" class="wrap">
+    <div class="section-head">
+      <h2 class="display">On YouTube</h2>
+      <p>Two channels I run alongside my design work — one for music/lyrical content, one for gaming.</p>
+    </div>
+
+    <div class="channel-grid">
+      <a href="https://www.youtube.com/@wearenvsk" target="_blank" rel="noopener" class="channel-card">
+        <img src="images/Nvsk_avatar.png" alt="Nvsk channel logo" class="channel-avatar">
+        <div class="channel-info">
+          <div class="channel-name">Nv Sk</div>
+          <div class="channel-handle">@wearenvsk</div>
+          <p class="channel-desc">Community-driven music channel — lyrical videos, podcasts, and playlists.</p>
+          <div class="channel-stats">
+            <span><strong>4.86k</strong> subscribers</span>
+            <span><strong>223</strong> videos</span>
+          </div>
+        </div>
+        <span class="channel-cta">Visit Channel →</span>
+      </a>
+
+      <a href="https://www.youtube.com/@NvskGaming" target="_blank" rel="noopener" class="channel-card">
+        <img src="images/NvskGaming_avatar.png" alt="Nvsk Gaming channel logo" class="channel-avatar">
+        <div class="channel-info">
+          <div class="channel-name">Nvsk Gaming</div>
+          <div class="channel-handle">@NvskGaming</div>
+          <p class="channel-desc">Gaming livestreams and highlights — Valorant, GTA, Forza Horizon, and more.</p>
+          <div class="channel-stats">
+            <span><strong>1k</strong> subscribers</span>
+            <span><strong>281</strong> videos</span>
+          </div>
+        </div>
+        <span class="channel-cta">Visit Channel →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 7. CONTACT SECTION -->
+  <section id="contact" class="wrap" style="border-top: none;">
+    <div class="contact-card">
+      <span class="eyebrow">// GET IN TOUCH</span>
+      <h2 class="display">Let's make something worth looking at.</h2>
+      <p>Available for graphic design, interior visualization, print & fabrication design, and photography — freelance or full-time.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="mailto:nevinprabhakars@gmail.com">nevinprabhakars@gmail.com</a>
+        <a class="contact-link" href="https://instagram.com/_nvphotography" target="_blank" rel="noopener">@_nvphotography</a>
+        <a class="contact-link" href="https://instagram.com/__n.vii" target="_blank" rel="noopener">@__n.vii</a>
+        <a class="contact-link" href="https://www.linkedin.com/in/nevin-prabhakar-s-b7052a414/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg>
+          LinkedIn
+        </a>
+        <a class="contact-link" href="tel:+917012067660" aria-label="Call +91 7012067660" title="+91 7012067660">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 Nevin Prabhakar S — Graphic Design · Visualization · Photography</span>
+</footer>
+
+<!-- Lightbox Modal Container -->
+<div id="lightbox" class="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="Full Resolution">
+</div>
+
+<script>
+  // --- Splash / Intro Screen ---
+  (function initSplash() {
+    const splash = document.getElementById('splashScreen');
+    if (!splash) return;
+    const icons = Array.from(splash.querySelectorAll('.splash-icon'));
+    const label = document.getElementById('splashLabel');
+    const progressBar = document.getElementById('splashProgressBar');
+    const labels = ['Graphic Design', '3D Visualization', 'Photography'];
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const stepDuration = reduceMotion ? 300 : 950;
+    let step = 0;
+
+    function showStep(i) {
+      icons.forEach((icon, idx) => {
+        icon.classList.remove('is-active', 'is-leaving');
+        if (idx === i) icon.classList.add('is-active');
+        else if (idx === i - 1) icon.classList.add('is-leaving');
+      });
+      if (label) {
+        label.classList.remove('is-active');
+        requestAnimationFrame(() => {
+          label.textContent = labels[i];
+          label.classList.add('is-active');
+        });
+      }
+    }
+
+    function finishSplash() {
+      splash.classList.add('splash-hide');
+      document.body.classList.remove('splash-active');
+      setTimeout(() => { splash.remove(); }, 750);
+    }
+
+    showStep(0);
+
+    // Progress bar glides smoothly across the entire splash duration,
+    // independent of the icon-change steps, instead of jumping at each one.
+    const totalRunTime = stepDuration * (icons.length - 1) + stepDuration * 0.7;
+    if (progressBar) {
+      progressBar.style.transition = `width ${totalRunTime}ms linear`;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          progressBar.style.width = '100%';
+        });
+      });
+    }
+
+    const cycle = setInterval(() => {
+      step++;
+      if (step >= icons.length) {
+        clearInterval(cycle);
+        setTimeout(finishSplash, stepDuration * 0.7);
+      } else {
+        showStep(step);
+      }
+    }, stepDuration);
+
+    // Safety net: never block the site for more than ~5.5s
+    setTimeout(finishSplash, 5500);
+  })();
+
+  // --- Theme Toggle Setup ---
+  const themeToggle = document.getElementById('themeToggle');
+  const body = document.body;
+  
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light-mode');
+  }
+
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    if (body.classList.contains('light-mode')) {
+      localStorage.setItem('theme', 'light');
+    } else {
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+
+  // --- Avatar Hover Popup (About preview) ---
+  const avatarTrigger = document.getElementById('avatarTrigger');
+  const avatarPopup = document.getElementById('avatarPopup');
+  if (avatarTrigger && avatarPopup) {
+    let avatarHoverTimer = null;
+    const showAvatarPopup = () => avatarPopup.classList.add('is-visible');
+    const hideAvatarPopup = () => {
+      clearTimeout(avatarHoverTimer);
+      avatarPopup.classList.remove('is-visible');
+    };
+    avatarTrigger.addEventListener('mouseenter', () => {
+      clearTimeout(avatarHoverTimer);
+      avatarHoverTimer = setTimeout(showAvatarPopup, 1100); 
+    });
+    avatarTrigger.addEventListener('mouseleave', hideAvatarPopup);
+    avatarTrigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      hideAvatarPopup();
+      openLightbox('images/About.png');
+    });
+  }
+
+  // --- Water-reveal hero & responsive refinements ---
+  const stage = document.getElementById('heroStage');
+  const fluidBlob = document.getElementById('fluidCursor');
+  const liquidRipple = document.getElementById('liquidRipple');
+  const heroReveal = document.getElementById('heroReveal');
+  const heroRevealImg = document.getElementById('heroRevealImg');
+  
+  document.querySelectorAll('#photographyTrack img[loading="lazy"]').forEach(img => {
+    img.loading = 'eager';
+  });
+  
+  const heroPhotoSources = Array.from(document.querySelectorAll('#photographyTrack .carousel-item img')).map(img => ({
+    src: img.currentSrc || img.src,
+    alt: img.alt || 'Portfolio photograph'
+  }));
+  
+  let lastHeroPhoto = -1;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- 1. Populate the Blurred Background Grid ---
+  const heroPhotoField = document.getElementById('heroPhotoField');
+  let gridItems = []; 
+
+  if (heroPhotoField && heroPhotoSources.length > 0) {
+    let gridContent = '';
+    for (let i = 0; i < 150; i++) {
+      const photo = heroPhotoSources[i % heroPhotoSources.length];
+      gridContent += `<img src="${photo.src}" alt="" loading="lazy">`;
+    }
+    heroPhotoField.innerHTML = gridContent;
+
+    const cacheGridPositions = () => {
+      const stageRect = stage.getBoundingClientRect();
+      gridItems = Array.from(heroPhotoField.querySelectorAll('img')).map(img => {
+        const rect = img.getBoundingClientRect();
+        return {
+          el: img,
+          cx: (rect.left - stageRect.left) + rect.width / 2,
+          cy: (rect.top - stageRect.top) + rect.height / 2
+        };
+      });
+    };
+
+    setTimeout(cacheGridPositions, 150);
+    window.addEventListener('resize', cacheGridPositions);
+  }
+
+  // --- 2. Velocity & Morphing Reveal Logic ---
+  let lastX = -1, lastY = -1;
+  let lastTime = Date.now();
+  let moveDistance = 0;
+  let stopTimer;
+  let heroX = window.innerWidth / 2;
+  let heroY = window.innerHeight / 2;
+
+  function placeHeroEffect(clientX, clientY) {
+    const rect = stage.getBoundingClientRect();
+    heroX = Math.max(0, Math.min(rect.width, clientX - rect.left));
+    heroY = Math.max(0, Math.min(rect.height, clientY - rect.top));
+    
+    [fluidBlob, liquidRipple, heroReveal].forEach(element => {
+      if (element) {
+        element.style.left = `${heroX}px`;
+        element.style.top = `${heroY}px`;
+      }
+    });
+
+    updateGridSqueeze(heroX, heroY);
+  }
+
+  function updateGridSqueeze(mouseX, mouseY) {
+    if (!gridItems.length) return;
+    const maxDist = 350; 
+    
+    gridItems.forEach(item => {
+      const dx = item.cx - mouseX;
+      const dy = item.cy - mouseY;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      
+      if (dist < maxDist) {
+        const intensity = 1 - (dist / maxDist);
+        const ease = 1 - Math.pow(1 - intensity, 3);
+        
+        const scale = 1 - (0.45 * ease); 
+        
+        const pushForce = ease * 70; 
+        const pushX = dist === 0 ? 0 : (dx / dist) * pushForce;
+        const pushY = dist === 0 ? 0 : (dy / dist) * pushForce;
+        
+        item.el.style.transform = `translate3d(${pushX}px, ${pushY}px, 0) scale(${scale})`;
+        item.el.style.opacity = 0.82 - (ease * 0.5); 
+      } else {
+        item.el.style.transform = `translate3d(0, 0, 0) scale(1)`;
+        item.el.style.opacity = 0.82;
+      }
+    });
+  }
+
+  function resetGridSqueeze() {
+    gridItems.forEach(item => {
+      item.el.style.transform = `translate3d(0, 0, 0) scale(1)`;
+      item.el.style.opacity = 0.82;
+    });
+  }
+
+  function revealHeroPhoto() {
+    if (!heroPhotoSources.length || !heroReveal || !heroRevealImg) return;
+    lastHeroPhoto = (lastHeroPhoto + 1) % heroPhotoSources.length;
+    const photo = heroPhotoSources[lastHeroPhoto];
+    heroRevealImg.src = photo.src;
+    heroRevealImg.alt = photo.alt;
+  }
+
+  function glideHero(clientX, clientY) {
+    placeHeroEffect(clientX, clientY);
+
+    const now = Date.now();
+    const dt = Math.max(1, now - lastTime);
+    const dx = lastX === -1 ? 0 : clientX - lastX;
+    const dy = lastY === -1 ? 0 : clientY - lastY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const speed = dist / dt; 
+
+    lastX = clientX;
+    lastY = clientY;
+    lastTime = now;
+
+    moveDistance += dist;
+    if (moveDistance > 100 || !heroRevealImg.src) { 
+      revealHeroPhoto();
+      moveDistance = 0;
+    }
+
+    let dynamicScale = Math.max(0.4, 0.8 - (speed * 0.15));
+
+    heroReveal.classList.add('is-visible');
+    liquidRipple.classList.remove('is-resting');
+    heroReveal.style.setProperty('--reveal-scale', dynamicScale);
+
+    clearTimeout(stopTimer);
+    stopTimer = setTimeout(() => {
+      heroReveal.style.setProperty('--reveal-scale', '1.15'); 
+      liquidRipple.classList.add('is-resting');
+      lastX = -1; lastY = -1; 
+    }, 50); 
+  }
+
+  if (stage && fluidBlob && liquidRipple) {
+    placeHeroEffect(window.innerWidth / 2, window.innerHeight / 2);
+    if (!reduceMotion) {
+      stage.addEventListener('mousemove', e => glideHero(e.clientX, e.clientY));
+      stage.addEventListener('touchmove', e => {
+        const touch = e.touches[0];
+        if (touch) glideHero(touch.clientX, touch.clientY);
+      }, { passive: true });
+      
+      stage.addEventListener('mouseleave', () => {
+        clearTimeout(stopTimer);
+        heroReveal.classList.remove('is-visible');
+        liquidRipple.classList.remove('is-resting');
+        resetGridSqueeze(); 
+      });
+    }
+  }
+
+  // --- Dynamic Nav Scroll, Droplet logic, & Progression Bar ---
+  const nav = document.getElementById('nav');
+  const progBar = document.getElementById('progBar');
+  const visSection = document.getElementById('visualization');
+  let lastScrollY = window.scrollY;
+  let liquidTimeout;
+
+  // --- Prog Popup: show briefly, then auto-dismiss so it doesn't linger ---
+  const progPopupEl = document.getElementById('progPopup');
+  let progPopupTimeout;
+  function showProgPopup() {
+    if (!progPopupEl) return;
+    progPopupEl.classList.add('show');
+    clearTimeout(progPopupTimeout);
+    progPopupTimeout = setTimeout(() => {
+      progPopupEl.classList.remove('show');
+    }, 1800);
+  }
+  function hideProgPopup() {
+    clearTimeout(progPopupTimeout);
+    progPopupEl?.classList.remove('show');
+  }
+
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    const isAtVisSection = visSection && currentScrollY >= (visSection.offsetTop - window.innerHeight / 2);
+    const isNearBottom = (window.innerHeight + currentScrollY) >= (document.documentElement.scrollHeight - 40);
+    
+    if (currentScrollY > 120 && !isNearBottom) {
+      if (!nav.classList.contains('nav-bottom')) {
+        nav.classList.add('nav-bottom');
+        triggerLiquid('down');
+        progBar.classList.remove('hidden-up');
+        progBar.classList.add('active');
+        showProgPopup();
+      }
+
+      if (isAtVisSection) {
+        nav.classList.add('nav-bottom-expanded');
+      } else {
+        nav.classList.remove('nav-bottom-expanded');
+      }
+
+    } else {
+      if (nav.classList.contains('nav-bottom')) {
+        nav.classList.remove('nav-bottom');
+        nav.classList.remove('nav-bottom-expanded'); 
+        triggerLiquid('up');
+        progBar.classList.remove('active');
+        progBar.classList.add('hidden-up');
+        hideProgPopup();
+      }
+    }
+    lastScrollY = currentScrollY;
+  });
+
+  function triggerLiquid(direction) {
+    const liquidClass = direction === 'down' ? 'nav-liquid-down' : 'nav-liquid-up';
+    nav.classList.add(liquidClass);
+    clearTimeout(liquidTimeout);
+    liquidTimeout = setTimeout(() => {
+      nav.classList.remove('nav-liquid-down', 'nav-liquid-up');
+    }, 500); 
+  }
+
+  const navLogo = document.querySelector('.nav-logo');
+  navLogo.addEventListener('click', (e) => {
+    if (nav.classList.contains('nav-bottom') && !nav.classList.contains('nav-bottom-expanded')) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  // --- Mobile Hamburger Menu ---
+  const navHamburger = document.getElementById('navHamburger');
+  const navMobilePanel = document.getElementById('navMobilePanel');
+  if (navHamburger && navMobilePanel) {
+    const closeMobileNav = () => {
+      navMobilePanel.classList.remove('open');
+      navHamburger.classList.remove('open');
+      navHamburger.setAttribute('aria-expanded', 'false');
+    };
+    navHamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const willOpen = !navMobilePanel.classList.contains('open');
+      navMobilePanel.classList.toggle('open', willOpen);
+      navHamburger.classList.toggle('open', willOpen);
+      navHamburger.setAttribute('aria-expanded', String(willOpen));
+    });
+    navMobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+    document.addEventListener('click', (e) => {
+      if (!navHamburger.contains(e.target) && !navMobilePanel.contains(e.target)) closeMobileNav();
+    });
+    window.addEventListener('resize', () => { if (window.innerWidth > 960) closeMobileNav(); });
+  }
+
+  // --- Scroll Spy for Progression Dots + Section Reveal Transition ---
+  const sections = document.querySelectorAll('section');
+  const progDots = document.querySelectorAll('.prog-dot');
+  const progPopupLabel = document.getElementById('progPopupLabel');
+  const navLinkEls = document.querySelectorAll('.nav-links a:not(.nav-contact)');
+  const observerOptions = { root: null, rootMargin: '0px', threshold: 0.4 };
+
+  // Mark every section except the first for the fade/slide-up entrance transition
+  sections.forEach((sec, idx) => {
+    if (idx > 0) sec.classList.add('reveal-section');
+  });
+
+  const revealObserverOptions = { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.12 };
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('is-visible', entry.isIntersecting);
+    });
+  }, revealObserverOptions);
+  sections.forEach(sec => { if (sec.classList.contains('reveal-section')) revealObserver.observe(sec); });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        progDots.forEach(dot => {
+          dot.classList.remove('active');
+          if (dot.getAttribute('data-target') === entry.target.id) {
+            dot.classList.add('active');
+            const label = dot.getAttribute('data-tooltip');
+            if (progPopupLabel && label) {
+              if (progPopupLabel.textContent !== label) {
+                progPopupLabel.textContent = label;
+                if (progBar.classList.contains('active')) showProgPopup();
+              }
+            }
+          }
+        });
+        navLinkEls.forEach(link => {
+          const href = link.getAttribute('href') || '';
+          link.classList.toggle('active', href === '#' + entry.target.id);
+        });
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(sec => observer.observe(sec));
+
+  // --- Generic Filtering Logic for All Categorized Sections ---
+  const LONG_ITEM_RATIO = 2;
+
+  function getAspectRatio(item) {
+    const img = item.querySelector('img');
+    if (!img) return 1;
+    if (img.naturalWidth && img.naturalHeight) {
+      return img.naturalWidth / img.naturalHeight;
+    }
+    return 1.4; 
+  }
+
+  function packMasonryRows(track, originalItems) {
+    const numRows = Math.max(1, parseInt(track.dataset.rows, 10) || 2);
+
+    const rows = [];
+    for (let i = 0; i < numRows; i++) {
+      let row = track.querySelector(`.masonry-row:nth-child(${i + 1})`);
+      if (!row) {
+        row = document.createElement('div');
+        row.className = 'masonry-row';
+        track.appendChild(row);
+      }
+      rows.push(row);
+    }
+    let extra = track.querySelector(`.masonry-row:nth-child(${numRows + 1})`);
+    while (extra) {
+      const next = extra.nextElementSibling;
+      extra.remove();
+      extra = next;
+    }
+
+    const visible = originalItems.filter(item => !item.classList.contains('hide'));
+    const normal = visible.filter(item => getAspectRatio(item) <= LONG_ITEM_RATIO);
+    const long = visible.filter(item => getAspectRatio(item) > LONG_ITEM_RATIO);
+    const orderedItems = normal.concat(long); 
+
+    const REF_HEIGHT = 280; 
+    const GAP = 24;
+    const widths = new Array(numRows).fill(0);
+
+    orderedItems.forEach(item => {
+      const estWidth = getAspectRatio(item) * REF_HEIGHT + GAP;
+      let minIdx = 0;
+      for (let i = 1; i < numRows; i++) {
+        if (widths[i] < widths[minIdx]) minIdx = i;
+      }
+      rows[minIdx].appendChild(item);
+      widths[minIdx] += estWidth;
+    });
+  }
+
+  document.querySelectorAll('.masonry-track').forEach(track => {
+    if (track.id === 'featuredTrack') return; 
+
+    const originalItems = Array.from(track.querySelectorAll('.carousel-item'));
+    const images = originalItems.map(item => item.querySelector('img')).filter(Boolean);
+
+    const repack = () => packMasonryRows(track, originalItems);
+    repack();
+
+    let loaded = 0;
+    const onImgReady = () => {
+      loaded++;
+      repack();
+    };
+    if (images.length === 0) {
+      repack();
+    } else {
+      images.forEach(img => {
+        if (img.complete && img.naturalWidth) {
+          onImgReady();
+        } else {
+          img.addEventListener('load', onImgReady);
+          img.addEventListener('error', onImgReady);
+        }
+      });
+    }
+
+    track._repackMasonry = repack;
+  });
+
+  document.querySelectorAll('section').forEach(sec => {
+    const filterBtns = sec.querySelectorAll('.filter-btn');
+    const track = sec.querySelector('.carousel-track');
+    
+    if(filterBtns.length > 0 && track) {
+      const items = track.querySelectorAll('.carousel-item');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          const filterValue = btn.getAttribute('data-filter');
+          
+          items.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.classList.remove('hide');
+            } else {
+              item.classList.add('hide');
+            }
+          });
+
+          if (track._repackMasonry) track._repackMasonry();
+
+          const resetTargets = track.querySelectorAll(':scope > .masonry-row');
+          if (resetTargets.length) {
+            resetTargets.forEach(row => row.scrollTo({left: 0, behavior: 'smooth'}));
+          } else {
+            track.scrollTo({left: 0, behavior: 'smooth'});
+          }
+        });
+      });
+    }
+  });
+
+  // --- Generic Next/Prev Carousel Navigation ---
+  function getScrollTargets(track) {
+    const rows = track.querySelectorAll(':scope > .masonry-row');
+    return rows.length ? Array.from(rows) : [track];
+  }
+
+  document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+    const track = wrapper.querySelector('.carousel-track');
+    const prevBtn = wrapper.querySelector('.carousel-btn.prev');
+    const nextBtn = wrapper.querySelector('.carousel-btn.next');
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    let syncing = false;
+    getScrollTargets(track).forEach(row => {
+      row.addEventListener('scroll', () => {
+        if (syncing) return;
+        syncing = true;
+        getScrollTargets(track).forEach(other => {
+          if (other !== row) other.scrollLeft = row.scrollLeft;
+        });
+        syncing = false;
+      });
+    });
+
+    const HOVER_SPEED = 2.5; 
+    let rafId = null;
+
+    function autoScroll(direction) {
+      getScrollTargets(track).forEach(row => { row.scrollLeft += direction * HOVER_SPEED; });
+      rafId = requestAnimationFrame(() => autoScroll(direction));
+    }
+    function startAutoScroll(direction) {
+      stopAutoScroll();
+      rafId = requestAnimationFrame(() => autoScroll(direction));
+    }
+    function stopAutoScroll() {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+
+    nextBtn.addEventListener('mouseenter', () => startAutoScroll(1));
+    nextBtn.addEventListener('mouseleave', stopAutoScroll);
+    prevBtn.addEventListener('mouseenter', () => startAutoScroll(-1));
+    prevBtn.addEventListener('mouseleave', stopAutoScroll);
+    nextBtn.addEventListener('focus', () => startAutoScroll(1));
+    nextBtn.addEventListener('blur', stopAutoScroll);
+    prevBtn.addEventListener('focus', () => startAutoScroll(-1));
+    prevBtn.addEventListener('blur', stopAutoScroll);
+    nextBtn.addEventListener('click', () => {
+      const delta = Math.min(window.innerWidth * 0.5, 450);
+      getScrollTargets(track).forEach(row => row.scrollBy({ left: delta, behavior: 'smooth' }));
+    });
+    prevBtn.addEventListener('click', () => {
+      const delta = -Math.min(window.innerWidth * 0.5, 450);
+      getScrollTargets(track).forEach(row => row.scrollBy({ left: delta, behavior: 'smooth' }));
+    });
+  });
+
+  const quickLookTrack = document.getElementById('featuredTrack');
+  const quickLookWrapper = quickLookTrack?.closest('.carousel-wrapper');
+  if (quickLookTrack && quickLookWrapper) {
+    const oldQuickPrev = quickLookWrapper.querySelector('.carousel-btn.prev');
+    const oldQuickNext = quickLookWrapper.querySelector('.carousel-btn.next');
+    const quickPrev = oldQuickPrev?.cloneNode(true);
+    const quickNext = oldQuickNext?.cloneNode(true);
+    if (oldQuickPrev && quickPrev) oldQuickPrev.replaceWith(quickPrev);
+    if (oldQuickNext && quickNext) oldQuickNext.replaceWith(quickNext);
+
+    let quickLookRaf = null;
+    const stopQuickLookScroll = () => {
+      if (quickLookRaf !== null) cancelAnimationFrame(quickLookRaf);
+      quickLookRaf = null;
+      quickLookTrack.style.scrollSnapType = '';
+    };
+    const startQuickLookScroll = direction => {
+      stopQuickLookScroll();
+      quickLookTrack.style.scrollSnapType = 'none';
+      const glide = () => {
+        quickLookTrack.scrollLeft += direction * 4;
+        quickLookRaf = requestAnimationFrame(glide);
+      };
+      quickLookRaf = requestAnimationFrame(glide);
+    };
+    const bindQuickLookButton = (button, direction) => {
+      if (!button) return;
+      button.addEventListener('pointerenter', () => startQuickLookScroll(direction));
+      button.addEventListener('pointerleave', stopQuickLookScroll);
+      button.addEventListener('pointercancel', stopQuickLookScroll);
+      button.addEventListener('focus', () => startQuickLookScroll(direction));
+      button.addEventListener('blur', stopQuickLookScroll);
+      button.addEventListener('click', () => {
+        quickLookTrack.scrollBy({ left: direction * Math.min(window.innerWidth * 0.5, 450), behavior: 'smooth' });
+      });
+    };
+    bindQuickLookButton(quickPrev, -1);
+    bindQuickLookButton(quickNext, 1);
+  }
+
+  // --- Lightbox Mechanism ---
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const closeBtn = document.querySelector('.lightbox-close');
+
+  let lbScale = 1;
+  const LB_MIN_SCALE = 1;
+  const LB_MAX_SCALE = 5;
+
+  function resetLightboxZoom() {
+    lbScale = 1;
+    lightboxImg.style.transform = 'scale(1)';
+    lightboxImg.style.cursor = 'zoom-in';
+  }
+
+  function openLightbox(src) {
+    lightboxImg.src = src;
+    resetLightboxZoom();
+    lightbox.classList.add('active');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    resetLightboxZoom();
+  }
+
+  const clickableImages = document.querySelectorAll('.carousel-item img:not(.no-lightbox), .g-item img:not(.no-lightbox)');
+
+  const HOVER_OPEN_DELAY = 3000; 
+
+  clickableImages.forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src));
+
+    let hoverTimer = null;
+    const tile = img.closest('.carousel-item') || img.closest('.g-item') || img;
+
+    tile.addEventListener('mouseenter', () => {
+      hoverTimer = setTimeout(() => openLightbox(img.src), HOVER_OPEN_DELAY);
+    });
+    tile.addEventListener('mouseleave', () => {
+      if (hoverTimer) {
+        clearTimeout(hoverTimer);
+        hoverTimer = null;
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  const aboutPosterImg = document.getElementById('aboutPosterImg');
+  if (aboutPosterImg) {
+    aboutPosterImg.addEventListener('click', () => openLightbox(aboutPosterImg.src));
+  }
+
+  const gearSetupImg = document.querySelector('#setupImageCard .gear-setup-img');
+  if (gearSetupImg) {
+    gearSetupImg.addEventListener('click', () => openLightbox(gearSetupImg.src));
+  }
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  lightbox.addEventListener('wheel', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    e.preventDefault();
+
+    const delta = e.deltaY < 0 ? 0.18 : -0.18;
+    lbScale = Math.min(LB_MAX_SCALE, Math.max(LB_MIN_SCALE, lbScale + delta));
+    lightboxImg.style.transform = `scale(${lbScale})`;
+    lightboxImg.style.cursor = lbScale > 1 ? 'zoom-out' : 'zoom-in';
+  }, { passive: false });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+</script>
+</body>
+</html>
