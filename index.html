@@ -1216,6 +1216,44 @@
   
   @media (max-width: 768px) { .carousel-btn { display: none; } }
 
+  /* ---------- Carousel Scrubber (scroll-wheel / progress bar) ---------- */
+  .carousel-scrubber {
+    position: relative;
+    max-width: min(1800px, 96vw);
+    margin: 14px auto 0;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    touch-action: none;
+  }
+  .carousel-scrubber-track {
+    position: relative;
+    width: 100%;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .carousel-scrubber-thumb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    min-width: 32px;
+    border-radius: 999px;
+    background: var(--primary-glow);
+    transition: background 0.2s ease, opacity 0.2s ease;
+  }
+  .carousel-scrubber:hover .carousel-scrubber-thumb,
+  .carousel-scrubber.dragging .carousel-scrubber-thumb {
+    background: var(--secondary-glow);
+  }
+  .carousel-scrubber:hover .carousel-scrubber-track {
+    height: 6px;
+  }
+  .carousel-scrubber.hidden { display: none; }
+
   /* Overlays */
   .g-overlay{
     position:absolute; left:0; right:0; bottom:0;
@@ -4111,6 +4149,7 @@
           } else {
             track.scrollTo({left: 0, behavior: 'smooth'});
           }
+          setTimeout(() => track.dispatchEvent(new Event('carousel-refresh')), 350);
         });
       });
     }
@@ -4141,15 +4180,22 @@
       });
     });
 
-    const HOVER_SPEED = 2.5; 
+    const HOVER_SPEED_START = 6;
+    const HOVER_SPEED_MAX = 22;
+    const HOVER_RAMP_MS = 900;
     let rafId = null;
+    let holdStart = null;
 
     function autoScroll(direction) {
-      getScrollTargets(track).forEach(row => { row.scrollLeft += direction * HOVER_SPEED; });
+      const elapsed = performance.now() - holdStart;
+      const ramp = Math.min(elapsed / HOVER_RAMP_MS, 1);
+      const speed = HOVER_SPEED_START + (HOVER_SPEED_MAX - HOVER_SPEED_START) * ramp;
+      getScrollTargets(track).forEach(row => { row.scrollLeft += direction * speed; });
       rafId = requestAnimationFrame(() => autoScroll(direction));
     }
     function startAutoScroll(direction) {
       stopAutoScroll();
+      holdStart = performance.now();
       rafId = requestAnimationFrame(() => autoScroll(direction));
     }
     function stopAutoScroll() {
@@ -4168,14 +4214,99 @@
     prevBtn.addEventListener('focus', () => startAutoScroll(-1));
     prevBtn.addEventListener('blur', stopAutoScroll);
     nextBtn.addEventListener('click', () => {
-      const delta = Math.min(window.innerWidth * 0.5, 450);
+      const delta = Math.min(window.innerWidth * 0.85, 750);
       getScrollTargets(track).forEach(row => row.scrollBy({ left: delta, behavior: 'smooth' }));
     });
     prevBtn.addEventListener('click', () => {
-      const delta = -Math.min(window.innerWidth * 0.5, 450);
+      const delta = -Math.min(window.innerWidth * 0.85, 750);
       getScrollTargets(track).forEach(row => row.scrollBy({ left: delta, behavior: 'smooth' }));
     });
+
+    setupScrubber(wrapper, track);
   });
+
+  // --- Carousel Scrubber (draggable / clickable scroll-wheel indicator) ---
+  function setupScrubber(wrapper, track) {
+    const primaryRow = getScrollTargets(track)[0];
+    if (!primaryRow) return;
+
+    const scrubber = document.createElement('div');
+    scrubber.className = 'carousel-scrubber';
+    scrubber.setAttribute('role', 'slider');
+    scrubber.setAttribute('aria-label', 'Scroll through photos');
+    scrubber.setAttribute('tabindex', '0');
+    scrubber.innerHTML = '<div class="carousel-scrubber-track"><div class="carousel-scrubber-thumb"></div></div>';
+    wrapper.insertAdjacentElement('afterend', scrubber);
+
+    const scrubTrack = scrubber.querySelector('.carousel-scrubber-track');
+    const thumb = scrubber.querySelector('.carousel-scrubber-thumb');
+
+    function maxScroll() {
+      return Math.max(primaryRow.scrollWidth - primaryRow.clientWidth, 0);
+    }
+
+    function updateThumb() {
+      const max = maxScroll();
+      if (max <= 0) {
+        scrubber.classList.add('hidden');
+        return;
+      }
+      scrubber.classList.remove('hidden');
+      const trackWidth = scrubTrack.clientWidth;
+      const thumbWidth = Math.max((primaryRow.clientWidth / primaryRow.scrollWidth) * trackWidth, 32);
+      const ratio = primaryRow.scrollLeft / max;
+      const left = ratio * (trackWidth - thumbWidth);
+      thumb.style.width = thumbWidth + 'px';
+      thumb.style.transform = `translateX(${left}px)`;
+    }
+
+    function scrollToClientX(clientX) {
+      const rect = scrubTrack.getBoundingClientRect();
+      const trackWidth = rect.width;
+      const thumbWidth = Math.max((primaryRow.clientWidth / primaryRow.scrollWidth) * trackWidth, 32);
+      const usable = Math.max(trackWidth - thumbWidth, 1);
+      const x = Math.min(Math.max(clientX - rect.left - thumbWidth / 2, 0), usable);
+      const ratio = x / usable;
+      getScrollTargets(track).forEach(row => { row.scrollLeft = ratio * maxScroll(); });
+    }
+
+    let dragging = false;
+    scrubber.addEventListener('pointerdown', e => {
+      dragging = true;
+      scrubber.classList.add('dragging');
+      scrubber.setPointerCapture(e.pointerId);
+      scrollToClientX(e.clientX);
+    });
+    scrubber.addEventListener('pointermove', e => {
+      if (!dragging) return;
+      scrollToClientX(e.clientX);
+    });
+    scrubber.addEventListener('pointerup', e => {
+      dragging = false;
+      scrubber.classList.remove('dragging');
+      scrubber.releasePointerCapture(e.pointerId);
+    });
+    scrubber.addEventListener('pointercancel', () => {
+      dragging = false;
+      scrubber.classList.remove('dragging');
+    });
+    scrubber.addEventListener('keydown', e => {
+      const step = Math.min(primaryRow.clientWidth * 0.3, 400);
+      if (e.key === 'ArrowRight') {
+        getScrollTargets(track).forEach(row => row.scrollBy({ left: step, behavior: 'smooth' }));
+      } else if (e.key === 'ArrowLeft') {
+        getScrollTargets(track).forEach(row => row.scrollBy({ left: -step, behavior: 'smooth' }));
+      }
+    });
+
+    primaryRow.addEventListener('scroll', updateThumb);
+    window.addEventListener('resize', updateThumb);
+    track.addEventListener('carousel-refresh', updateThumb);
+    updateThumb();
+    // Re-check after images/layout settle (masonry repacks, filters, etc.)
+    setTimeout(updateThumb, 400);
+    setTimeout(updateThumb, 1200);
+  }
 
   const quickLookTrack = document.getElementById('featuredTrack');
   const quickLookWrapper = quickLookTrack?.closest('.carousel-wrapper');
@@ -4188,6 +4319,10 @@
     if (oldQuickNext && quickNext) oldQuickNext.replaceWith(quickNext);
 
     let quickLookRaf = null;
+    let quickLookHoldStart = null;
+    const QL_SPEED_START = 6;
+    const QL_SPEED_MAX = 22;
+    const QL_RAMP_MS = 900;
     const stopQuickLookScroll = () => {
       if (quickLookRaf !== null) cancelAnimationFrame(quickLookRaf);
       quickLookRaf = null;
@@ -4196,8 +4331,12 @@
     const startQuickLookScroll = direction => {
       stopQuickLookScroll();
       quickLookTrack.style.scrollSnapType = 'none';
+      quickLookHoldStart = performance.now();
       const glide = () => {
-        quickLookTrack.scrollLeft += direction * 4;
+        const elapsed = performance.now() - quickLookHoldStart;
+        const ramp = Math.min(elapsed / QL_RAMP_MS, 1);
+        const speed = QL_SPEED_START + (QL_SPEED_MAX - QL_SPEED_START) * ramp;
+        quickLookTrack.scrollLeft += direction * speed;
         quickLookRaf = requestAnimationFrame(glide);
       };
       quickLookRaf = requestAnimationFrame(glide);
@@ -4210,7 +4349,7 @@
       button.addEventListener('focus', () => startQuickLookScroll(direction));
       button.addEventListener('blur', stopQuickLookScroll);
       button.addEventListener('click', () => {
-        quickLookTrack.scrollBy({ left: direction * Math.min(window.innerWidth * 0.5, 450), behavior: 'smooth' });
+        quickLookTrack.scrollBy({ left: direction * Math.min(window.innerWidth * 0.85, 750), behavior: 'smooth' });
       });
     };
     bindQuickLookButton(quickPrev, -1);
