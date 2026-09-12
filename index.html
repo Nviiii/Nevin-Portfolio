@@ -1552,9 +1552,72 @@
     height: 18px;
     flex-shrink: 0;
   }
-  .contact-link[aria-label^="Call"] {
-    padding: 12px;
-    border-radius: 50%;
+  /* ---------- Contact Form ---------- */
+  .contact-form {
+    max-width: 560px;
+    margin: 48px auto 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .contact-form .form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .contact-form .form-row > * { flex: 1 1 220px; }
+  .contact-form label {
+    display: block;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--surface-border);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    transition: border-color .3s var(--ease), background .3s var(--ease);
+  }
+  body.light-mode .contact-form input,
+  body.light-mode .contact-form textarea {
+    background: rgba(0, 0, 0, 0.03);
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  .contact-form button[type="submit"] {
+    align-self: center;
+    padding: 14px 40px;
+    border-radius: 100px;
+    background: var(--accent-blue);
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    transition: transform .3s var(--ease), opacity .3s var(--ease);
+  }
+  .contact-form button[type="submit"]:hover { transform: translateY(-2px); opacity: .92; }
+  .contact-form button[type="submit"]:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+  .contact-form-status {
+    font-size: 13px;
+    color: var(--ink-soft);
+    text-align: center;
+    min-height: 18px;
   }
 
   footer{ position: relative; z-index: 1; padding:40px 0; text-align:center; font-size:12px; color:var(--ink-mute); border-top: 1px solid var(--line); margin-top: 40px; background: var(--bg); transition: background 0.5s ease; }
@@ -3612,8 +3675,37 @@
         </a>
         <a class="contact-link" href="tel:+917012067660" aria-label="Call +91 7012067660" title="+91 7012067660">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          +91 70120 67660
         </a>
       </div>
+
+      <!-- Contact Form -->
+      <!--
+        This form uses Formspree (https://formspree.io) so it works on static
+        hosting (Render) with no backend of your own:
+        1. Create a free account at formspree.io and make a new form.
+        2. Copy the endpoint it gives you, e.g. https://formspree.io/f/abcd1234
+        3. Replace YOUR_FORM_ID below with that ID.
+        Formspree will email every submission straight to your inbox.
+      -->
+      <form id="contactForm" class="contact-form" action="https://formspree.io/f/xrpgvzeq" method="POST">
+        <div class="form-row">
+          <div>
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" name="name" placeholder="Your name" required>
+          </div>
+          <div>
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" name="email" placeholder="you@example.com" required>
+          </div>
+        </div>
+        <div>
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" placeholder="Tell me about your project..." required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+        <p class="contact-form-status" id="cf-status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
 
@@ -4469,6 +4561,54 @@
       closeLightbox();
     }
   });
+
+  /* ---------- Contact Form Submission (Formspree) ---------- */
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const statusEl = document.getElementById('cf-status');
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Sending...';
+      try {
+        const res = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          statusEl.textContent = "Thanks! Your message has been sent — I'll get back to you soon.";
+          contactForm.reset();
+        } else {
+          statusEl.textContent = 'Something went wrong. Please try emailing me directly instead.';
+        }
+      } catch (err) {
+        statusEl.textContent = 'Network error. Please try emailing me directly instead.';
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  }
+
+  /* ---------- Visitor Notification (ntfy.sh) ----------
+     Sends a free push notification to your phone/desktop every time
+     someone loads this page, via ntfy.sh (no account or backend needed).
+     Setup:
+       1. Install the "ntfy" app (iOS/Android) or visit https://ntfy.sh/app on desktop.
+       2. Pick a hard-to-guess topic name (treat it like a secret URL) and
+          subscribe to it in the app, e.g. "nevin-portfolio-visits-x7q2".
+     Topic in use: "Nevin_alerts" — anyone who knows this name can also
+     see/send to it, so keep it private.
+  */
+  (function notifyOnVisit() {
+    const topic = 'Nevin_alerts';
+    fetch(`https://ntfy.sh/${topic}`, {
+      method: 'POST',
+      body: `New visitor on your portfolio\nPage: ${window.location.pathname}\nReferrer: ${document.referrer || 'direct'}\nTime: ${new Date().toLocaleString()}`,
+      headers: { 'Title': 'Portfolio Visit', 'Priority': 'default' }
+    }).catch(() => {});
+  })();
 </script>
 </body>
 </html>
